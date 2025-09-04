@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Accueil</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #007bff;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 3em;
+    }
+
+    a {
+      margin-top: 20px;
+      padding: 15px 30px;
+      background-color: #0056b3;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.2em;
+      transition: background 0.3s;
+    }
+
+    a:hover {
+      background-color: #003d80;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bienvenue sur mon site</h1>
+  <a href="menu.html">Aller au menu</a>
+</body>
+</html>
