@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Menu des Onglets</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
       margin: 0;
@@ -43,6 +44,8 @@
       flex: 1;
       padding: 30px;
       overflow-y: auto;
+      background-color: #f0f4f8;
+      color: black;
     }
 
     .tabcontent {
@@ -76,104 +79,106 @@
       <button onclick="openTab('tab9')">Onglet 9</button>
       <button onclick="openTab('tab10')">Onglet 10</button>
       <button onclick="openTab('tab11')">Onglet 11</button>
-      <div id="tab12" class="tabcontent">
-  <div class="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-    <!-- En-tête -->
-    <div class="bg-blue-700 text-white text-center p-3 font-bold text-lg uppercase">
-      Score de Malinas : NR
+      <button onclick="openTab('tab12')">Onglet 12</button>
     </div>
 
-    <!-- Formulaire -->
-    <form class="p-4 text-sm space-y-3 bg-white text-black">
-      <!-- 1 -->
-      <div>
-        <label class="block font-medium uppercase">Nombre de grossesses</label>
-        <input type="number" class="w-full p-2 border rounded-lg" placeholder="-">
-      </div>
+    <div class="content">
+      <!-- Onglets 1 à 11 -->
+      <div id="tab1" class="tabcontent"><h2>Contenu 1</h2><p>Texte pour l'onglet 1.</p></div>
+      <div id="tab2" class="tabcontent"><h2>Contenu 2</h2><p>Texte pour l'onglet 2.</p></div>
+      <div id="tab3" class="tabcontent"><h2>Contenu 3</h2><p>Texte pour l'onglet 3.</p></div>
+      <div id="tab4" class="tabcontent"><h2>Contenu 4</h2><p>Texte pour l'onglet 4.</p></div>
+      <div id="tab5" class="tabcontent"><h2>Contenu 5</h2><p>Texte pour l'onglet 5.</p></div>
+      <div id="tab6" class="tabcontent"><h2>Contenu 6</h2><p>Texte pour l'onglet 6.</p></div>
+      <div id="tab7" class="tabcontent"><h2>Contenu 7</h2><p>Texte pour l'onglet 7.</p></div>
+      <div id="tab8" class="tabcontent"><h2>Contenu 8</h2><p>Texte pour l'onglet 8.</p></div>
+      <div id="tab9" class="tabcontent"><h2>Contenu 9</h2><p>Texte pour l'onglet 9.</p></div>
+      <div id="tab10" class="tabcontent"><h2>Contenu 10</h2><p>Texte pour l'onglet 10.</p></div>
+      <div id="tab11" class="tabcontent"><h2>Contenu 11</h2><p>Texte pour l'onglet 11.</p></div>
 
-      <!-- 2 -->
-      <div>
-        <label class="block font-medium uppercase">Parité*</label>
-        <input type="text" class="w-full p-2 border rounded-lg" placeholder="-">
-      </div>
+      <!-- Onglet 12 : Bilan Obstétrical -->
+      <div id="tab12" class="tabcontent">
+        <div class="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="bg-blue-700 text-white text-center p-3 font-bold text-lg uppercase">
+            Score de Malinas : NR
+          </div>
 
-      <!-- 3 -->
-      <div>
-        <label class="block font-medium uppercase">Date des dernières règles</label>
-        <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
-      </div>
+          <form class="p-4 text-sm space-y-3 bg-white text-black">
+            <div>
+              <label class="block font-medium uppercase">Nombre de grossesses</label>
+              <input type="number" class="w-full p-2 border rounded-lg" placeholder="-">
+            </div>
 
-      <!-- 4 -->
-      <div>
-        <label class="block font-medium uppercase">Date du terme</label>
-        <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
-      </div>
+            <div>
+              <label class="block font-medium uppercase">Parité*</label>
+              <input type="text" class="w-full p-2 border rounded-lg" placeholder="-">
+            </div>
 
-      <!-- 5 -->
-      <div>
-        <label class="block font-medium uppercase">Durée du travail*</label>
-        <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
-      </div>
+            <div>
+              <label class="block font-medium uppercase">Date des dernières règles</label>
+              <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
+            </div>
 
-      <!-- 6 -->
-      <div>
-        <label class="block font-medium uppercase">Intervalle des contractions*</label>
-        <div class="flex gap-2">
-          <input type="text" class="w-1/2 p-2 border rounded-lg" placeholder="- min">
-          <input type="text" class="w-1/2 p-2 border rounded-lg" placeholder="NR sec">
+            <div>
+              <label class="block font-medium uppercase">Date du terme</label>
+              <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
+            </div>
+
+            <div>
+              <label class="block font-medium uppercase">Durée du travail*</label>
+              <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
+            </div>
+
+            <div>
+              <label class="block font-medium uppercase">Intervalle des contractions*</label>
+              <div class="flex gap-2">
+                <input type="text" class="w-1/2 p-2 border rounded-lg" placeholder="- min">
+                <input type="text" class="w-1/2 p-2 border rounded-lg" placeholder="NR sec">
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-medium uppercase">Durée des contractions (sec)*</label>
+              <input type="text" class="w-full p-2 border rounded-lg" placeholder="-">
+            </div>
+
+            <div>
+              <label class="block font-medium uppercase">Perte des eaux*</label>
+              <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
+            </div>
+
+            <div>
+              <label class="block font-medium uppercase">Saignement estimé (mL)</label>
+              <input type="text" class="w-full p-2 border rounded-lg" placeholder="-">
+            </div>
+
+            <div>
+              <label class="block font-medium uppercase">Envie de pousser</label>
+              <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
+            </div>
+
+            <div class="flex justify-between pt-4">
+              <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded-xl shadow hover:bg-blue-800 w-1/2">
+                TRANSMISSION
+              </button>
+              <button type="button" class="bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:bg-orange-600 w-1/2 ml-2">
+                SURVEILLANCES
+              </button>
+            </div>
+          </form>
         </div>
       </div>
-
-      <!-- 7 -->
-      <div>
-        <label class="block font-medium uppercase">Durée des contractions (sec)*</label>
-        <input type="text" class="w-full p-2 border rounded-lg" placeholder="-">
-      </div>
-
-      <!-- 8 -->
-      <div>
-        <label class="block font-medium uppercase">Perte des eaux*</label>
-        <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
-      </div>
-
-      <!-- 9 -->
-      <div>
-        <label class="block font-medium uppercase">Saignement estimé (mL)</label>
-        <input type="text" class="w-full p-2 border rounded-lg" placeholder="-">
-      </div>
-
-      <!-- 10 -->
-      <div>
-        <label class="block font-medium uppercase">Envie de pousser</label>
-        <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
-      </div>
-
-      <!-- Boutons -->
-      <div class="flex justify-between pt-4">
-        <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded-xl shadow hover:bg-blue-800 w-1/2">
-          TRANSMISSION
-        </button>
-        <button type="button" class="bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:bg-orange-600 w-1/2 ml-2">
-          SURVEILLANCES
-        </button>
-      </div>
-    </form>
-  </div>
-
+    </div>
   </div>
 
   <script>
     function openTab(tabId) {
       const allTabs = document.querySelectorAll('.tabcontent');
       allTabs.forEach(tab => tab.style.display = 'none');
-
       const activeTab = document.getElementById(tabId);
-      if (activeTab) {
-        activeTab.style.display = 'block';
-      }
+      if (activeTab) activeTab.style.display = 'block';
     }
 
-    // Affiche le premier onglet automatiquement
     window.onload = () => openTab('tab1');
   </script>
 </body>
