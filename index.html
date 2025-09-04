@@ -1,33 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Page Bleue</title>
-    <style>
-        body {
-            background-color: blue;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: gauche;
-            padding-top: 100px;
-        }
-    </style>
-</head>
-</html>
-
-<html lang="fr">
-<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Onglets à gauche</title>
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: blue;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #003d99;
+      display: flex;
+      flex-direction: column;
+      padding: 10px 0;
+    }
+
+    .sidebar button {
+      background-color: transparent;
+      border: none;
+      color: white;
+      padding: 15px 20px;
+      text-align: left;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .sidebar button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .tabcontent {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <div class="sidebar">
+      <button onclick="openTab('tab1')">Onglet 1</button>
+      <button onclick="openTab('tab2')">Onglet 2</button>
+      <button onclick="openTab('tab3')">Onglet 3</button>
+      <button onclick="openTab('tab4')">Onglet 4</button>
+      <button onclick="openTab('tab5')">Onglet 5</button>
+      <button onclick="openTab('tab6')">Onglet 6</button>
+      <button onclick="openTab('tab7')">Onglet 7</button>
+      <button onclick="openTab('tab8')">Onglet 8</button>
+      <button onclick="openTab('tab9')">Onglet 9</button>
+      <button onclick="openTab('tab10')">Onglet 10</button>
+      <button onclick="openTab('tab11')">Onglet 11</button>
+      <button onclick="openTab('tab12')">Onglet 12</button>
+    </div>
 
     <div class="content">
-      <!-- Contenu pour chaque onglet -->
       <div id="tab1" class="tabcontent"><h2>Contenu 1</h2><p>Texte pour l'onglet 1.</p></div>
       <div id="tab2" class="tabcontent"><h2>Contenu 2</h2><p>Texte pour l'onglet 2.</p></div>
       <div id="tab3" class="tabcontent"><h2>Contenu 3</h2><p>Texte pour l'onglet 3.</p></div>
@@ -43,6 +84,22 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    function openTab(tabId) {
+      // Masquer tous les contenus
+      const allTabs = document.querySelectorAll('.tabcontent');
+      allTabs.forEach(tab => tab.style.display = 'none');
+
+      // Afficher le contenu cliqué
+      const activeTab = document.getElementById(tabId);
+      if (activeTab) {
+        activeTab.style.display = 'block';
+      }
+    }
+
+    // Affiche le premier onglet au chargement
+    window.onload = () => openTab('tab1');
+  </script>
 </body>
 </html>
+
