@@ -15,7 +15,7 @@
     }
   </style>
 </head>
-<body class="h-screen bg-gray-100">
+<body class="bg-gray-100 h-screen">
 
   <div class="flex h-screen">
     <!-- Barre latérale -->
@@ -35,9 +35,8 @@
       <button onclick="openTab('tab12')">Onglet 12</button>
     </div>
 
-    <!-- Contenu -->
-    <div class="flex-1 overflow-y-auto p-8">
-      
+    <!-- Contenu principal -->
+    <div class="flex-1 overflow-y-auto flex justify-center items-center p-6">
       <!-- Onglets vides -->
       <div id="tab1" class="tabcontent"><h2 class="text-xl font-bold">Contenu 1</h2></div>
       <div id="tab2" class="tabcontent"><h2 class="text-xl font-bold">Contenu 2</h2></div>
@@ -51,43 +50,43 @@
       <div id="tab10" class="tabcontent"><h2 class="text-xl font-bold">Contenu 10</h2></div>
       <div id="tab11" class="tabcontent"><h2 class="text-xl font-bold">Contenu 11</h2></div>
 
-      <!-- ✅ Onglet 12 affiché en plein écran -->
-      <div id="tab12" class="tabcontent">
-        <div class="bg-white rounded-xl shadow-lg p-8 w-full">
+      <!-- ✅ Onglet 12 (centré, style tablette) -->
+      <div id="tab12" class="tabcontent w-full flex justify-center">
+        <div class="w-full max-w-md bg-white shadow-xl rounded-2xl p-6">
           <!-- Titre -->
-          <div class="bg-blue-700 text-white text-center p-4 font-bold text-xl uppercase rounded-md mb-6">
+          <div class="bg-blue-700 text-white text-center p-3 font-bold text-lg uppercase rounded-md mb-4">
             Score de Malinas : NR
           </div>
 
           <!-- Formulaire -->
-          <form class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-black">
+          <form class="space-y-4 text-sm text-black">
             <div>
-              <label class="block font-medium uppercase">Nombre de grossesses</label>
+              <label class="block font-medium">Nombre de grossesses</label>
               <input type="number" class="w-full p-2 border rounded-lg" placeholder="-">
             </div>
 
             <div>
-              <label class="block font-medium uppercase">Parité*</label>
+              <label class="block font-medium">Parité*</label>
               <input type="text" class="w-full p-2 border rounded-lg" placeholder="-">
             </div>
 
             <div>
-              <label class="block font-medium uppercase">Date des dernières règles</label>
+              <label class="block font-medium">Date des dernières règles</label>
               <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
             </div>
 
             <div>
-              <label class="block font-medium uppercase">Date du terme</label>
+              <label class="block font-medium">Date du terme</label>
               <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
             </div>
 
             <div>
-              <label class="block font-medium uppercase">Durée du travail*</label>
+              <label class="block font-medium">Durée du travail*</label>
               <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
             </div>
 
             <div>
-              <label class="block font-medium uppercase">Intervalle des contractions*</label>
+              <label class="block font-medium">Intervalle des contractions*</label>
               <div class="flex gap-2">
                 <input type="text" class="w-1/2 p-2 border rounded-lg" placeholder="- min">
                 <input type="text" class="w-1/2 p-2 border rounded-lg" placeholder="NR sec">
@@ -95,41 +94,41 @@
             </div>
 
             <div>
-              <label class="block font-medium uppercase">Durée des contractions (sec)*</label>
+              <label class="block font-medium">Durée des contractions (sec)*</label>
               <input type="text" class="w-full p-2 border rounded-lg" placeholder="-">
             </div>
 
             <div>
-              <label class="block font-medium uppercase">Perte des eaux*</label>
+              <label class="block font-medium">Perte des eaux*</label>
               <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
             </div>
 
             <div>
-              <label class="block font-medium uppercase">Saignement estimé (mL)</label>
+              <label class="block font-medium">Saignement estimé (mL)</label>
               <input type="text" class="w-full p-2 border rounded-lg" placeholder="-">
             </div>
 
             <div>
-              <label class="block font-medium uppercase">Envie de pousser</label>
+              <label class="block font-medium">Envie de pousser</label>
               <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
+            </div>
+
+            <!-- Boutons -->
+            <div class="flex justify-between pt-4">
+              <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded-xl shadow hover:bg-blue-800 w-1/2">
+                TRANSMISSION
+              </button>
+              <button type="button" class="bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:bg-orange-600 w-1/2 ml-2">
+                SURVEILLANCES
+              </button>
             </div>
           </form>
-
-          <!-- Boutons -->
-          <div class="flex justify-between pt-6">
-            <button type="submit" class="bg-blue-700 text-white px-6 py-3 rounded-xl shadow hover:bg-blue-800 w-1/2">
-              TRANSMISSION
-            </button>
-            <button type="button" class="bg-orange-500 text-white px-6 py-3 rounded-xl shadow hover:bg-orange-600 w-1/2 ml-4">
-              SURVEILLANCES
-            </button>
-          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Script pour gérer l'affichage des onglets -->
+  <!-- Script pour afficher l’onglet -->
   <script>
     function openTab(tabId) {
       const allTabs = document.querySelectorAll('.tabcontent');
@@ -137,12 +136,12 @@
 
       const activeTab = document.getElementById(tabId);
       if (activeTab) {
-        activeTab.style.display = 'block';
+        activeTab.style.display = 'flex';
       }
     }
 
-    // Afficher l'onglet 1 par défaut
-    window.onload = () => openTab('tab12'); // tu peux mettre 'tab1' à la place si besoin
+    // Onglet par défaut
+    window.onload = () => openTab('tab12');
   </script>
 
 </body>
