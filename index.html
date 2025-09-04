@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Onglets Interactifs</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Onglets à gauche</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <button class="tablink" onclick="openTab('tab1')">Onglet 1</button>
-            <button class="tablink" onclick="openTab('tab2')">Onglet 2</button>
-            <button class="tablink" onclick="openTab('tab3')">Onglet 3</button>
-            <button class="tablink" onclick="openTab('tab4')">Onglet 4</button>
-            <button class="tablink" onclick="openTab('tab5')">Onglet 5</button>
-            <button class="tablink" onclick="openTab('tab6')">Onglet 6</button>
-            <button class="tablink" onclick="openTab('tab7')">Onglet 7</button>
-            <button class="tablink" onclick="openTab('tab8')">Onglet 8</button>
-            <button class="tablink" onclick="openTab('tab9')">Onglet 9</button>
-            <button class="tablink" onclick="openTab('tab10')">Onglet 10</button>
-            <button class="tablink" onclick="openTab('tab11')">Onglet 11</button>
-            <button class="tablink" onclick="openTab('tab12')">Onglet 12</button>
-        </div>
-
-        <div class="content">
-            <!-- Onglet 1 à 12 -->
-            <div id="tab1" class="tabcontent"><h2>Contenu 1</h2><p>Ceci est le contenu de l'onglet 1.</p></div>
-            <div id="tab2" class="tabcontent" style="display:none"><h2>Contenu 2</h2><p>Ceci est le contenu de l'onglet 2.</p></div>
-            <div id="tab3" class="tabcontent" style="display:none"><h2>Contenu 3</h2><p>Ceci est le contenu de l'onglet 3.</p></div>
-            <div id="tab4" class="tabcontent" style="display:none"><h2>Contenu 4</h2><p>Ceci est le contenu de l'onglet 4.</p></div>
-            <div id="tab5" class="tabcontent" style="display:none"><h2>Contenu 5</h2><p>Ceci est le contenu de l'onglet 5.</p></div>
-            <div id="tab6" class="tabcontent" style="display:none"><h2>Contenu 6</h2><p>Ceci est le contenu de l'onglet 6.</p></div>
-            <div id="tab7" class="tabcontent" style="display:none"><h2>Contenu 7</h2><p>Ceci est le contenu de l'onglet 7.</p></div>
-            <div id="tab8" class="tabcontent" style="display:none"><h2>Contenu 8</h2><p>Ceci est le contenu de l'onglet 8.</p></div>
-            <div id="tab9" class="tabcontent" style="display:none"><h2>Contenu 9</h2><p>Ceci est le contenu de l'onglet 9.</p></div>
-            <div id="tab10" class="tabcontent" style="display:none"><h2>Contenu 10</h2><p>Ceci est le contenu de l'onglet 10.</p></div>
-            <div id="tab11" class="tabcontent" style="display:none"><h2>Contenu 11</h2><p>Ceci est le contenu de l'onglet 11.</p></div>
-            <div id="tab12" class="tabcontent" style="display:none"><h2>Contenu 12</h2><p>Ceci est le contenu de l'onglet 12.</p></div>
-        </div>
+  <div class="container">
+    <div class="sidebar">
+      <!-- 12 onglets -->
+      <button class="tablink" onclick="openTab('tab1')">Onglet 1</button>
+      <button class="tablink" onclick="openTab('tab2')">Onglet 2</button>
+      <button class="tablink" onclick="openTab('tab3')">Onglet 3</button>
+      <button class="tablink" onclick="openTab('tab4')">Onglet 4</button>
+      <button class="tablink" onclick="openTab('tab5')">Onglet 5</button>
+      <button class="tablink" onclick="openTab('tab6')">Onglet 6</button>
+      <button class="tablink" onclick="openTab('tab7')">Onglet 7</button>
+      <button class="tablink" onclick="openTab('tab8')">Onglet 8</button>
+      <button class="tablink" onclick="openTab('tab9')">Onglet 9</button>
+      <button class="tablink" onclick="openTab('tab10')">Onglet 10</button>
+      <button class="tablink" onclick="openTab('tab11')">Onglet 11</button>
+      <button class="tablink" onclick="openTab('tab12')">Onglet 12</button>
     </div>
 
-    <script src="script.js"></script>
+    <div class="content">
+      <!-- Contenu pour chaque onglet -->
+      <div id="tab1" class="tabcontent"><h2>Contenu 1</h2><p>Texte pour l'onglet 1.</p></div>
+      <div id="tab2" class="tabcontent"><h2>Contenu 2</h2><p>Texte pour l'onglet 2.</p></div>
+      <div id="tab3" class="tabcontent"><h2>Contenu 3</h2><p>Texte pour l'onglet 3.</p></div>
+      <div id="tab4" class="tabcontent"><h2>Contenu 4</h2><p>Texte pour l'onglet 4.</p></div>
+      <div id="tab5" class="tabcontent"><h2>Contenu 5</h2><p>Texte pour l'onglet 5.</p></div>
+      <div id="tab6" class="tabcontent"><h2>Contenu 6</h2><p>Texte pour l'onglet 6.</p></div>
+      <div id="tab7" class="tabcontent"><h2>Contenu 7</h2><p>Texte pour l'onglet 7.</p></div>
+      <div id="tab8" class="tabcontent"><h2>Contenu 8</h2><p>Texte pour l'onglet 8.</p></div>
+      <div id="tab9" class="tabcontent"><h2>Contenu 9</h2><p>Texte pour l'onglet 9.</p></div>
+      <div id="tab10" class="tabcontent"><h2>Contenu 10</h2><p>Texte pour l'onglet 10.</p></div>
+      <div id="tab11" class="tabcontent"><h2>Contenu 11</h2><p>Texte pour l'onglet 11.</p></div>
+      <div id="tab12" class="tabcontent"><h2>Contenu 12</h2><p>Texte pour l'onglet 12.</p></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
