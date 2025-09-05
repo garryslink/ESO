@@ -130,4 +130,59 @@
             </div>
 
             <div class="flex justify-between pt-4">
-              <button type="submit" class="bg-blue-700 text-white
+              <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded-xl shadow hover:bg-blue-800 w-1/2">
+                TRANSMISSION
+              </button>
+              <button type="button" class="bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:bg-orange-600 w-1/2 ml-2">
+                SURVEILLANCES
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script JS -->
+  <script>
+    function openTab(tabId) {
+      const allTabs = document.querySelectorAll('.tabcontent');
+      allTabs.forEach(tab => tab.style.display = 'none');
+
+      const allButtons = document.querySelectorAll('.tab-btn');
+      allButtons.forEach(btn => {
+        btn.classList.remove('bg-blue-700', 'text-white');
+        btn.classList.add('bg-blue-900');
+      });
+
+      const activeTab = document.getElementById(tabId);
+      const activeButton = document.querySelectorAll(`.tab-btn[onclick="openTab('${tabId}')"]`);
+      
+      if (activeTab) {
+        if (tabId === 'tab12') {
+          activeTab.style.display = 'flex';
+        } else {
+          activeTab.style.display = 'block';
+        }
+      }
+
+      activeButton.forEach(btn => {
+        btn.classList.add('bg-blue-700', 'text-white');
+        btn.classList.remove('bg-blue-900');
+      });
+
+      // Fermer la sidebar mobile après clic
+      document.getElementById('mobileSidebar').classList.add('hidden');
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('mobileSidebar');
+      sidebar.classList.toggle('hidden');
+    }
+
+    // Onglet par défaut
+    window.onload = () => openTab('tab12');
+  </script>
+
+</body>
+</html>
