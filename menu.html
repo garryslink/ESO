@@ -2,85 +2,88 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Bilan Obstétrical</title>
+  <title>Interface Bilan avec Onglets</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  <div class="bg-white shadow-xl rounded-2xl w-full max-w-md p-6">
-    <h1 class="text-xl font-bold text-center mb-4 text-blue-700">Bilan Obstétrical</h1>
+<body class="bg-gray-100 flex">
 
-    <form class="space-y-3">
-      <div>
-        <label class="block text-sm font-medium">Nombre de grossesses</label>
-        <input type="number" class="w-full p-2 border rounded-lg" placeholder="Ex: 2">
-      </div>
+  <!-- Barre latérale -->
+  <div class="w-16 bg-blue-600 flex flex-col items-center py-4 space-y-6">
+    <button class="tab-btn relative" data-tab="patient">
+      <i data-lucide="user" class="text-white w-6 h-6"></i>
+      <span class="absolute -left-2 top-1 w-3 h-3 bg-green-400 rounded-full"></span>
+    </button>
 
-      <div>
-        <label class="block text-sm font-medium">Parité</label>
-        <input type="text" class="w-full p-2 border rounded-lg" placeholder="Ex: G2P1">
-      </div>
+    <button class="tab-btn relative" data-tab="bilan">
+      <i data-lucide="clipboard-list" class="text-white w-6 h-6"></i>
+      <span class="absolute -left-2 top-1 w-3 h-3 bg-yellow-400 rounded-full"></span>
+    </button>
 
-      <div>
-        <label class="block text-sm font-medium">Date des dernières règles</label>
-        <input type="date" class="w-full p-2 border rounded-lg">
-      </div>
+    <button class="tab-btn relative" data-tab="signes">
+      <i data-lucide="heart-pulse" class="text-white w-6 h-6"></i>
+      <span class="absolute -left-2 top-1 w-3 h-3 bg-red-500 rounded-full"></span>
+    </button>
 
-      <div>
-        <label class="block text-sm font-medium">Date du terme</label>
-        <input type="date" class="w-full p-2 border rounded-lg">
-      </div>
+    <button class="tab-btn relative" data-tab="monitoring">
+      <i data-lucide="activity" class="text-white w-6 h-6"></i>
+      <span class="absolute -left-2 top-1 w-3 h-3 bg-green-400 rounded-full"></span>
+    </button>
 
-      <div>
-        <label class="block text-sm font-medium">Durée du travail (heures)</label>
-        <input type="number" class="w-full p-2 border rounded-lg">
-      </div>
-
-      <div>
-        <label class="block text-sm font-medium">Intervalle des contractions</label>
-        <div class="flex gap-2">
-          <input type="number" class="w-1/2 p-2 border rounded-lg" placeholder="minutes">
-          <input type="number" class="w-1/2 p-2 border rounded-lg" placeholder="secondes">
-        </div>
-      </div>
-
-      <div>
-        <label class="block text-sm font-medium">Durée des contractions (sec)</label>
-        <input type="number" class="w-full p-2 border rounded-lg">
-      </div>
-
-      <div>
-        <label class="block text-sm font-medium">Perte des eaux</label>
-        <select class="w-full p-2 border rounded-lg">
-          <option value="NR">NR</option>
-          <option value="Oui">Oui</option>
-          <option value="Non">Non</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="block text-sm font-medium">Saignement estimé (mL)</label>
-        <input type="number" class="w-full p-2 border rounded-lg">
-      </div>
-
-      <div>
-        <label class="block text-sm font-medium">Envie de pousser</label>
-        <select class="w-full p-2 border rounded-lg">
-          <option value="NR">NR</option>
-          <option value="Oui">Oui</option>
-          <option value="Non">Non</option>
-        </select>
-      </div>
-
-      <!-- Boutons -->
-      <div class="flex justify-between pt-4">
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-xl shadow hover:bg-blue-700">
-          TRANSMISSION
-        </button>
-        <button type="button" class="bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:bg-orange-600">
-          SURVEILLANCES
-        </button>
-      </div>
-    </form>
+    <button class="tab-btn relative" data-tab="documents">
+      <i data-lucide="file-text" class="text-white w-6 h-6"></i>
+      <span class="absolute -left-2 top-1 w-3 h-3 bg-green-400 rounded-full"></span>
+    </button>
   </div>
+
+  <!-- Contenu principal -->
+  <div class="flex-1 p-6">
+    <!-- Onglet Patient -->
+    <div id="patient" class="tab-content">
+      <h1 class="text-xl font-bold mb-4">Dossier Patient</h1>
+      <p>Informations générales du patient ici...</p>
+    </div>
+
+    <!-- Onglet Bilan -->
+    <div id="bilan" class="tab-content hidden">
+      <h1 class="text-xl font-bold mb-4">Bilan Obstétrical</h1>
+      <p>Formulaire bilan obstétrical (nombre de grossesses, parité, etc.)</p>
+    </div>
+
+    <!-- Onglet Signes -->
+    <div id="signes" class="tab-content hidden">
+      <h1 class="text-xl font-bold mb-4">Signes Cliniques</h1>
+      <p>Fréquence cardiaque, TA, symptômes...</p>
+    </div>
+
+    <!-- Onglet Monitoring -->
+    <div id="monitoring" class="tab-content hidden">
+      <h1 class="text-xl font-bold mb-4">Monitoring</h1>
+      <p>Graphiques ou suivi en temps réel...</p>
+    </div>
+
+    <!-- Onglet Documents -->
+    <div id="documents" class="tab-content hidden">
+      <h1 class="text-xl font-bold mb-4">Documents</h1>
+      <p>Transmission, export PDF, etc.</p>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    lucide.createIcons();
+
+    const buttons = document.querySelectorAll(".tab-btn");
+    const tabs = document.querySelectorAll(".tab-content");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        // cacher tous les onglets
+        tabs.forEach(tab => tab.classList.add("hidden"));
+        // montrer l’onglet cliqué
+        document.getElementById(btn.dataset.tab).classList.remove("hidden");
+      });
+    });
+  </script>
 </body>
 </html>
