@@ -164,9 +164,10 @@
   </style>
 </head>
 <body>
-  <header>
-    <a href="index.html">⬅ Retour à l'accueil</a>
-
+ <header>
+  <a href="index.html">⬅ Retour à l'accueil</a>
+  
+  <div class="onglets-container">
     <!-- Onglet 1 -->
     <div class="onglet" onclick="ouvrirFiche('statusIndicator')">
       <div class="circle">?</div>
@@ -178,7 +179,8 @@
       <div class="circle">!</div>
       <div class="status" id="statusIndicator2"></div>
     </div>
-  </header>
+  </div>
+</header>
 
   <!-- Fiche intervention -->
   <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
