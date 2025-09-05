@@ -326,8 +326,14 @@
 
 <script>
 function ouvrirFiche(ficheId, statusId) {
+  // Fermer toutes les fiches d'abord
+  document.querySelectorAll('.fiche').forEach(f => f.style.display='none');
+
+  // Afficher la fiche sélectionnée et l'overlay
   document.getElementById(ficheId).style.display = 'block';
   document.getElementById('overlay').style.display = 'block';
+
+  // Mettre à jour l'état des champs
   updateStatus(statusId, ficheId);
 }
 
