@@ -15,6 +15,8 @@
       padding: 15px;
       display: flex;
       align-items: center;
+      flex-direction: column; /* Pour empiler le bouton retour et l’onglet */
+      gap: 10px; /* espace entre les éléments */
     }
 
     header a {
@@ -29,6 +31,81 @@
 
     header a:hover {
       background: #003d80;
+    }
+
+    /* Onglet carré bleu */
+    .onglet {
+      width: 70px;
+      height: 70px;
+      background: #0056b3;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .onglet:hover {
+      transform: scale(1.05);
+    }
+
+    /* Cercle gris avec ? */
+    .onglet .circle {
+      width: 35px;
+      height: 35px;
+      background: #ccc;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      color: #666;
+    }
+
+    /* Fenêtre fiche présentation */
+    .fiche {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      max-width: 400px;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .fiche h2 {
+      margin-top: 0;
+    }
+
+    .fiche button {
+      margin-top: 15px;
+      padding: 8px 15px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .fiche button:hover {
+      background: #0056b3;
+    }
+
+    /* Fond sombre derrière la fiche */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 900;
     }
 
     h1 {
@@ -61,7 +138,39 @@
 <body>
   <header>
     <a href="index.html">⬅ Retour à l'accueil</a>
+
+    <!-- Onglet carré bleu avec rond gris -->
+    <div class="onglet" onclick="ouvrirFiche()">
+      <div class="circle">?</div>
+    </div>
   </header>
 
+  <!-- Fiche de présentation -->
+  <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
+  <div class="fiche" id="fiche">
+    <h2>Fiche de Présentation</h2>
+    <p>Bienvenue dans le menu ! Ici, tu trouveras toutes les options disponibles.</p>
+    <button onclick="fermerFiche()">Fermer</button>
+  </div>
+
+  <h1>Menu</h1>
+  <ul>
+    <li><a href="#">Option 1</a></li>
+    <li><a href="#">Option 2</a></li>
+    <li><a href="#">Option 3</a></li>
+  </ul>
+
+  <script>
+    function ouvrirFiche() {
+      document.getElementById('fiche').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
+
+    function fermerFiche() {
+      document.getElementById('fiche').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
+
