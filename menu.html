@@ -87,6 +87,7 @@
       max-width: 500px;
       width: 90%;
       z-index: 1000;
+      box-sizing: border-box;
     }
 
     .fiche h2 {
@@ -112,6 +113,41 @@
 
     .fiche input[type="file"] {
       padding: 3px;
+    }
+
+    /* Boutons Transmission / Surveillance */
+    .fiche .bottom-buttons {
+      display: none;
+      margin-top: 15px;
+      text-align: center;
+      gap: 10px;
+    }
+
+    .fiche .bottom-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .fiche .bottom-buttons .transmission {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .fiche .bottom-buttons .transmission:hover {
+      background-color: #0056b3;
+    }
+
+    .fiche .bottom-buttons .surveillance {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .fiche .bottom-buttons .surveillance:hover {
+      background-color: #5a6268;
     }
 
     /* Fond sombre */
@@ -191,6 +227,11 @@
       <option value="technicien">Technicien</option>
       <option value="autre">Autre</option>
     </select>
+
+    <div class="bottom-buttons" id="bottomButtons">
+      <button class="transmission">Transmission</button>
+      <button class="surveillance">Surveillance</button>
+    </div>
   </div>
 
   <script>
@@ -205,7 +246,6 @@
       document.getElementById('overlay').style.display = 'none';
     }
 
-    // Mettre à jour indicateur global + fond vert sur champs remplis
     function updateStatus() {
       const fields = document.querySelectorAll('#fiche input, #fiche select, #fiche textarea');
       let total = fields.length;
@@ -221,14 +261,16 @@
           isFilled = f.value.trim() !== '';
         }
 
+        // Fond vert pour champ rempli
         if (isFilled) {
           filled++;
-          f.style.backgroundColor = '#d4edda'; // vert clair pour champ rempli
+          f.style.backgroundColor = '#d4edda';
         } else {
-          f.style.backgroundColor = 'white'; // vide
+          f.style.backgroundColor = 'white';
         }
       });
 
+      // Indicateur dans le carré
       const status = document.getElementById('statusIndicator');
       if (filled === 0) {
         status.style.backgroundColor = 'red';
@@ -236,6 +278,14 @@
         status.style.backgroundColor = 'orange';
       } else {
         status.style.backgroundColor = 'green';
+      }
+
+      // Afficher les boutons si tous les champs >= orange
+      const bottomButtons = document.getElementById('bottomButtons');
+      if (filled === total || filled / total >= 0.8) { // 80% ou plus = bouton visible
+        bottomButtons.style.display = 'flex';
+      } else {
+        bottomButtons.style.display = 'none';
       }
     }
 
