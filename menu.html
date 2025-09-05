@@ -16,7 +16,7 @@
       display: flex;
       align-items: flex-start;
       flex-direction: column; /* éléments empilés à gauche */
-      gap: 10px;
+      gap: 10px; /* espace entre les éléments */
     }
 
     header a {
@@ -84,20 +84,6 @@
       margin-top: 0;
     }
 
-    .fiche button {
-      margin-top: 15px;
-      padding: 8px 15px;
-      border: none;
-      background: #007bff;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .fiche button:hover {
-      background: #0056b3;
-    }
-
     /* Fond sombre derrière la fiche */
     .overlay {
       display: none;
@@ -150,7 +136,6 @@
   <div class="fiche" id="fiche">
     <h2>Fiche de Présentation</h2>
     <p>Bienvenue dans le menu ! Ici, tu trouveras toutes les options disponibles.</p>
-    <button onclick="fermerFiche()">Fermer</button>
   </div>
 
   <script>
