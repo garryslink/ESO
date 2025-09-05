@@ -144,6 +144,16 @@
       <option value="autre">Autre</option>
     </select>
 
+    <label for="motif">Motif d'intervention</label>
+    <select id="motif">
+      <option value="">-- Sélectionner --</option>
+      <option value="incendie">Incendie</option>
+      <option value="accident_routier">Accident routier</option>
+      <option value="urgence_medicale">Urgence médicale</option>
+      <option value="incident_travail">Incident au travail</option>
+      <option value="autre">Autre</option>
+    </select>
+
     <label for="situation">Situation à l'arrivée</label>
     <textarea id="situation" rows="4" placeholder="Décrire la situation à l'arrivée..."></textarea>
 
@@ -165,9 +175,10 @@
     <label for="role">Rôle principal</label>
     <select id="role">
       <option value="">-- Sélectionner --</option>
-      <option value="chef_equipe">ENGINE</option>
-      <option value="paramedic">RESCUE</option>
-      <option value="infirmier">LADDER</option>
+      <option value="chef_equipe">Chef d'équipe</option>
+      <option value="paramedic">Paramedic</option>
+      <option value="infirmier">Infirmier</option>
+      <option value="technicien">Technicien</option>
       <option value="autre">Autre</option>
     </select>
   </div>
@@ -195,7 +206,7 @@
         }
       });
 
-      // Pour le select, écouter change
+      // Pour les select, écouter change
       if (el.tagName.toLowerCase() === 'select') {
         el.addEventListener('change', () => {
           if (el.value !== '') {
