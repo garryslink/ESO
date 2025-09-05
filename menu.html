@@ -57,16 +57,16 @@
     }
 
     .onglet .circle {
-      width: 35px;
-      height: 35px;
+      width: 40px;
+      height: 40px;
       background: #ccc;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
       font-weight: bold;
-      font-size: 18px;
-      color: #666;
+      font-size: 20px;
+      color: #000;
     }
 
     .onglet .status {
@@ -168,96 +168,94 @@
     <a href="index.html">⬅ Retour à l'accueil</a>
 
     <div class="onglets-container">
-      <!-- Génération des 12 onglets -->
-      <script>
-        for (let i = 1; i <= 12; i++) {
-          document.write(`
-            <div class="onglet" onclick="ouvrirFiche('fiche${i}','statusIndicator${i}')">
-              <div class="circle">${i}</div>
-              <div class="status" id="statusIndicator${i}"></div>
-            </div>
-          `);
-        }
-      </script>
+      <!-- Onglets personnalisés -->
+      <div class="onglet" onclick="ouvrirFiche('fiche1','statusIndicator1')">
+        <div class="circle">❓</div>
+        <div class="status" id="statusIndicator1"></div>
+      </div>
+      <div class="onglet" onclick="ouvrirFiche('fiche2','statusIndicator2')">
+        <div class="circle">❗</div>
+        <div class="status" id="statusIndicator2"></div>
+      </div>
+      <div class="onglet" onclick="ouvrirFiche('fiche3','statusIndicator3')">
+        <div class="circle">✖</div>
+        <div class="status" id="statusIndicator3"></div>
+      </div>
+      <div class="onglet" onclick="ouvrirFiche('fiche4','statusIndicator4')">
+        <div class="circle">A</div>
+        <div class="status" id="statusIndicator4"></div>
+      </div>
+      <div class="onglet" onclick="ouvrirFiche('fiche5','statusIndicator5')">
+        <div class="circle">B</div>
+        <div class="status" id="statusIndicator5"></div>
+      </div>
+      <div class="onglet" onclick="ouvrirFiche('fiche6','statusIndicator6')">
+        <div class="circle">C</div>
+        <div class="status" id="statusIndicator6"></div>
+      </div>
+      <div class="onglet" onclick="ouvrirFiche('fiche7','statusIndicator7')">
+        <div class="circle">D</div>
+        <div class="status" id="statusIndicator7"></div>
+      </div>
+      <div class="onglet" onclick="ouvrirFiche('fiche8','statusIndicator8')">
+        <div class="circle">E</div>
+        <div class="status" id="statusIndicator8"></div>
+      </div>
+      <div class="onglet" onclick="ouvrirFiche('fiche9','statusIndicator9')">
+        <div class="circle">❤️</div>
+        <div class="status" id="statusIndicator9"></div>
+      </div>
+      <div class="onglet" onclick="ouvrirFiche('fiche10','statusIndicator10')">
+        <div class="circle">💊</div>
+        <div class="status" id="statusIndicator10"></div>
+      </div>
+      <div class="onglet" onclick="ouvrirFiche('fiche11','statusIndicator11')">
+        <div class="circle">✚</div>
+        <div class="status" id="statusIndicator11"></div>
+      </div>
+      <div class="onglet" onclick="ouvrirFiche('fiche12','statusIndicator12')">
+        <div class="circle">👶</div>
+        <div class="status" id="statusIndicator12"></div>
+      </div>
     </div>
   </header>
 
   <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
 
-  <!-- Génération des 12 fiches -->
+  <!-- Fiches générées automatiquement -->
   <script>
     for (let i = 1; i <= 12; i++) {
       document.write(`
         <div class="fiche" id="fiche${i}">
           <h2>Circonstance ${i}</h2>
-
           <label for="adresse${i}">Adresse de l'intervention</label>
-          <input type="text" id="adresse${i}" placeholder="Ex: 10 rue des Lilas">
-
+          <input type="text" id="adresse${i}">
           <label for="numero${i}">Numéro de l'intervention</label>
-          <input type="text" id="numero${i}" placeholder="Ex: 12345">
-
+          <input type="text" id="numero${i}">
           <label for="proposition${i}">Type d'intervention</label>
           <select id="proposition${i}">
             <option value="">-- Sélectionner --</option>
-            <option value="voie_publique">Voie publique</option>
-            <option value="voie_privee">Domicile</option>
-            <option value="travail">Travail</option>
-            <option value="autre">Autre</option>
+            <option>Voie publique</option>
+            <option>Domicile</option>
+            <option>Travail</option>
+            <option>Autre</option>
           </select>
-
           <label for="motif${i}">Motif d'intervention</label>
           <select id="motif${i}">
             <option value="">-- Sélectionner --</option>
             <option>Accouchement</option>
             <option>Arrêt cardio ventilatoire</option>
             <option>TS</option>
-            <option>Blessé au sport</option>
-            <option>Blessé au travail</option>
-            <option>Blessé chute</option>
-            <option>Blessé par arme à feu</option>
-            <option>Blessé par arme blanche</option>
-            <option>Blessé sur VP</option>
-            <option>Blessé à domicile</option>
-            <option>Blessé établissement enseignement</option>
-            <option>Brûlure</option>
-            <option>Carence d'Ambulance HCT</option>
-            <option>Détresse ventilatoire</option>
-            <option>Intoxication</option>
-            <option>Malaise au sport</option>
-            <option>Malaise au travail</option>
-            <option>Malaise VP</option>
-            <option>Malaise à domicile</option>
-            <option>Noyade / Personne tombée à l'eau</option>
-            <option>Pendaison</option>
-            <option>Personne inconsciente</option>
-            <option>Personne ne répondant pas aux appels</option>
-            <option>Renfort brancardage</option>
-            <option>Suspicion AVC</option>
-            <option>Électrisation / Foudroiement de personne</option>
+            <option>Blessé</option>
+            <option>Malaise</option>
             <option>Autre</option>
           </select>
-
           <label for="situation${i}">Situation à l'arrivée</label>
-          <textarea id="situation${i}" rows="4" placeholder="Décrire la situation à l'arrivée..."></textarea>
-
+          <textarea id="situation${i}" rows="4"></textarea>
           <h3>Équipage MEDIC</h3>
-          <label for="medic${i}_1">Ambulance Commander</label>
-          <input type="text" id="medic${i}_1">
-          <label for="medic${i}_2">Driver</label>
-          <input type="text" id="medic${i}_2">
-          <label for="medic${i}_3">Équipier</label>
-          <input type="text" id="medic${i}_3">
-
-          <label for="role${i}">Renfort</label>
-          <select id="role${i}">
-            <option value="">-- Sélectionner --</option>
-            <option>ENGINE</option>
-            <option>RESCUE</option>
-            <option>LADDER</option>
-            <option>Autre</option>
-          </select>
-
+          <input type="text" placeholder="Ambulance Commander">
+          <input type="text" placeholder="Driver">
+          <input type="text" placeholder="Équipier">
           <div class="bottom-buttons" id="bottomButtons${i}">
             <button class="transmission">Transmission</button>
             <button class="surveillance">Surveillance</button>
@@ -265,9 +263,7 @@
         </div>
       `);
     }
-  </script>
 
-  <script>
     function ouvrirFiche(ficheId, statusId) {
       for (let i = 1; i <= 12; i++) {
         document.getElementById('fiche' + i).style.display = 'none';
@@ -290,13 +286,7 @@
       let filled = 0;
 
       fields.forEach(f => {
-        let isFilled = false;
-        if (f.tagName.toLowerCase() === 'select') {
-          isFilled = f.value !== '';
-        } else {
-          isFilled = f.value.trim() !== '';
-        }
-
+        let isFilled = (f.tagName === 'SELECT') ? f.value !== '' : f.value.trim() !== '';
         if (isFilled) {
           filled++;
           f.style.backgroundColor = '#d4edda';
@@ -311,8 +301,7 @@
       else status.style.backgroundColor = 'green';
 
       const bottomButtons = document.querySelector('#' + ficheId + ' .bottom-buttons');
-      if (filled === total || filled / total >= 0.8) bottomButtons.style.display = 'flex';
-      else bottomButtons.style.display = 'none';
+      bottomButtons.style.display = (filled === total || filled / total >= 0.8) ? 'flex' : 'none';
     }
 
     for (let i = 1; i <= 12; i++) {
