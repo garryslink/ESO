@@ -13,7 +13,7 @@
     header {
       padding: 15px;
       display: flex;
-      flex-direction: column; /* lien + onglets */
+      flex-direction: column;
       gap: 10px;
     }
 
@@ -49,7 +49,6 @@
       flex-direction: column;
       cursor: pointer;
       transition: transform 0.2s;
-      position: relative;
     }
 
     .onglet:hover {
@@ -168,7 +167,6 @@
     <a href="index.html">⬅ Retour à l'accueil</a>
 
     <div class="onglets-container">
-      <!-- Onglets personnalisés -->
       <div class="onglet" onclick="ouvrirFiche('fiche1','statusIndicator1')">
         <div class="circle">❓</div>
         <div class="status" id="statusIndicator1"></div>
@@ -181,96 +179,77 @@
         <div class="circle">✖</div>
         <div class="status" id="statusIndicator3"></div>
       </div>
-      <div class="onglet" onclick="ouvrirFiche('fiche4','statusIndicator4')">
-        <div class="circle">A</div>
-        <div class="status" id="statusIndicator4"></div>
-      </div>
-      <div class="onglet" onclick="ouvrirFiche('fiche5','statusIndicator5')">
-        <div class="circle">B</div>
-        <div class="status" id="statusIndicator5"></div>
-      </div>
-      <div class="onglet" onclick="ouvrirFiche('fiche6','statusIndicator6')">
-        <div class="circle">C</div>
-        <div class="status" id="statusIndicator6"></div>
-      </div>
-      <div class="onglet" onclick="ouvrirFiche('fiche7','statusIndicator7')">
-        <div class="circle">D</div>
-        <div class="status" id="statusIndicator7"></div>
-      </div>
-      <div class="onglet" onclick="ouvrirFiche('fiche8','statusIndicator8')">
-        <div class="circle">E</div>
-        <div class="status" id="statusIndicator8"></div>
-      </div>
-      <div class="onglet" onclick="ouvrirFiche('fiche9','statusIndicator9')">
-        <div class="circle">❤️</div>
-        <div class="status" id="statusIndicator9"></div>
-      </div>
-      <div class="onglet" onclick="ouvrirFiche('fiche10','statusIndicator10')">
-        <div class="circle">💊</div>
-        <div class="status" id="statusIndicator10"></div>
-      </div>
-      <div class="onglet" onclick="ouvrirFiche('fiche11','statusIndicator11')">
-        <div class="circle">✚</div>
-        <div class="status" id="statusIndicator11"></div>
-      </div>
-      <div class="onglet" onclick="ouvrirFiche('fiche12','statusIndicator12')">
-        <div class="circle">👶</div>
-        <div class="status" id="statusIndicator12"></div>
-      </div>
     </div>
   </header>
 
   <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
 
-  <!-- Fiches générées automatiquement (sauf fiche 2) -->
-  <script>
-    for (let i = 1; i <= 12; i++) {
-      if (i === 2) continue; // ⚠️ on saute la fiche 2 car elle est spéciale
+  <!-- ✅ Fiche 1 : Circonstances + motif détaillé -->
+  <div class="fiche" id="fiche1">
+    <h2>Circonstance</h2>
+    <label for="adresse1">Adresse de l'intervention</label>
+    <input type="text" id="adresse1">
+    <label for="numero1">Numéro de l'intervention</label>
+    <input type="text" id="numero1">
 
-      document.write(`
-        <div class="fiche" id="fiche${i}">
-          <h2>Circonstance ${i}</h2>
-          <label for="adresse${i}">Adresse de l'intervention</label>
-          <input type="text" id="adresse${i}">
-          <label for="numero${i}">Numéro de l'intervention</label>
-          <input type="text" id="numero${i}">
-          <label for="proposition${i}">Type d'intervention</label>
-          <select id="proposition${i}">
-            <option value="">-- Sélectionner --</option>
-            <option>Voie publique</option>
-            <option>Domicile</option>
-            <option>Travail</option>
-            <option>Autre</option>
-          </select>
-          <label for="motif${i}">Motif d'intervention</label>
-          <select id="motif${i}">
-            <option value="">-- Sélectionner --</option>
-            <option>Accouchement</option>
-            <option>Arrêt cardio ventilatoire</option>
-            <option>TS</option>
-            <option>Blessé</option>
-            <option>Malaise</option>
-            <option>Autre</option>
-          </select>
-          <label for="situation${i}">Situation à l'arrivée</label>
-          <textarea id="situation${i}" rows="4"></textarea>
-          <h3>Équipage MEDIC</h3>
-          <input type="text" placeholder="Ambulance Commander">
-          <input type="text" placeholder="Driver">
-          <input type="text" placeholder="Équipier">
-          <div class="bottom-buttons" id="bottomButtons${i}">
-            <button class="transmission">Transmission</button>
-            <button class="surveillance">Surveillance</button>
-          </div>
-        </div>
-      `);
-    }
-  </script>
+    <label for="proposition1">Type d'intervention</label>
+    <select id="proposition1">
+      <option value="">-- Sélectionner --</option>
+      <option>Voie publique</option>
+      <option>Domicile</option>
+      <option>Travail</option>
+      <option>Autre</option>
+    </select>
 
-  <!-- ✅ Fiche 2 spéciale : Identité Patient -->
+    <label for="motif1">Motif d'intervention</label>
+    <select id="motif1">
+      <option value="">-- Sélectionner --</option>
+      <option>Accouchement</option>
+      <option>Arrêt cardio ventilatoire</option>
+      <option>TS</option>
+      <option>Blessé au sport</option>
+      <option>Blessé au travail</option>
+      <option>Blessé chute</option>
+      <option>Blessé par arme à feu</option>
+      <option>Blessé par arme blanche</option>
+      <option>Blessé sur VP</option>
+      <option>Blessé à domicile</option>
+      <option>Blessé établissement enseignement</option>
+      <option>Brûlure</option>
+      <option>Carence d'Ambulance HCT</option>
+      <option>Détresse ventilatoire</option>
+      <option>Intoxication</option>
+      <option>Malaise au sport</option>
+      <option>Malaise au travail</option>
+      <option>Malaise VP</option>
+      <option>Malaise à domicile</option>
+      <option>Noyade / Personne tombée à l'eau</option>
+      <option>Pendaison</option>
+      <option>Personne inconsciente</option>
+      <option>Personne ne répondant pas aux appels</option>
+      <option>Renfort brancardage</option>
+      <option>Suspicion AVC</option>
+      <option>Électrisation / Foudroiement de personne</option>
+      <option>Autre</option>
+    </select>
+
+    <label for="situation1">Situation à l'arrivée</label>
+    <textarea id="situation1" rows="4"></textarea>
+
+    <h3>Équipage MEDIC</h3>
+    <input type="text" placeholder="Ambulance Commander">
+    <input type="text" placeholder="Driver">
+    <input type="text" placeholder="Équipier">
+
+    <div class="bottom-buttons" id="bottomButtons1">
+      <button class="transmission">Transmission</button>
+      <button class="surveillance">Surveillance</button>
+    </div>
+  </div>
+
+  <!-- ✅ Fiche 2 : Identité patient (reste inchangée) -->
   <div class="fiche" id="fiche2">
     <h2>Identité Patient</h2>
-
     <label for="sexe2">Sexe</label>
     <select id="sexe2">
       <option value="">-- Sélectionner --</option>
@@ -294,13 +273,13 @@
     <input type="text" id="age2" readonly placeholder="Calculé automatiquement">
 
     <label for="nationalite2">Nationalité</label>
-    <input type="text" id="nationalite2" placeholder="Ex: Américaine">
+    <input type="text" id="nationalite2">
 
-    <label for="telephone2">Numéro de téléphone</label>
-    <input type="tel" id="telephone2" placeholder="9-111-25-878">
+    <label for="telephone2">Téléphone</label>
+    <input type="tel" id="telephone2">
 
     <label for="adressePerso2">Adresse personnelle</label>
-    <input type="text" id="adressePerso2" placeholder="Ex: 5th Mapple Road, Nashville, Tennesse">
+    <input type="text" id="adressePerso2">
 
     <div class="bottom-buttons" id="bottomButtons2">
       <button class="transmission">Transmission</button>
@@ -308,27 +287,65 @@
     </div>
   </div>
 
+  <!-- ✅ Fiche 3 : Examen rapide -->
+  <div class="fiche" id="fiche3">
+    <h2>Examen Rapide</h2>
+
+    <label>Hémorragie</label>
+    <select id="hemorragie3">
+      <option value="">-- Sélectionner --</option>
+      <option>Oui</option>
+      <option>Non</option>
+    </select>
+
+    <label>Obstruction des voies aériennes</label>
+    <select id="voies3">
+      <option value="">-- Sélectionner --</option>
+      <option>Libre</option>
+      <option>Obstruée</option>
+    </select>
+
+    <label>Traumatisme du rachis</label>
+    <select id="rachis3">
+      <option value="">-- Sélectionner --</option>
+      <option>Oui</option>
+      <option>Non</option>
+    </select>
+
+    <label>Conscience</label>
+    <select id="conscience3">
+      <option value="">-- Sélectionner --</option>
+      <option>Oui</option>
+      <option>Non</option>
+    </select>
+
+    <label>Plaintes principales</label>
+    <textarea id="plaintes3" rows="3"></textarea>
+
+    <button onclick="remplirRAS3()">RAS</button>
+
+    <div class="bottom-buttons" id="bottomButtons3">
+      <button class="transmission">Transmission</button>
+      <button class="surveillance">Surveillance</button>
+    </div>
+  </div>
+
   <script>
     function ouvrirFiche(ficheId, statusId) {
-      for (let i = 1; i <= 12; i++) {
-        document.getElementById('fiche' + i).style.display = 'none';
-      }
+      document.querySelectorAll('.fiche').forEach(f => f.style.display = 'none');
       document.getElementById('overlay').style.display = 'block';
       document.getElementById(ficheId).style.display = 'block';
       updateStatus(ficheId, statusId);
     }
 
     function fermerFiche() {
-      for (let i = 1; i <= 12; i++) {
-        document.getElementById('fiche' + i).style.display = 'none';
-      }
+      document.querySelectorAll('.fiche').forEach(f => f.style.display = 'none');
       document.getElementById('overlay').style.display = 'none';
     }
 
     function updateStatus(ficheId, statusId) {
       const fields = document.querySelectorAll('#' + ficheId + ' input, #' + ficheId + ' select, #' + ficheId + ' textarea');
-      let total = fields.length;
-      let filled = 0;
+      let total = fields.length, filled = 0;
 
       fields.forEach(f => {
         let isFilled = (f.tagName === 'SELECT') ? f.value !== '' : f.value.trim() !== '';
@@ -346,32 +363,31 @@
       else status.style.backgroundColor = 'green';
 
       const bottomButtons = document.querySelector('#' + ficheId + ' .bottom-buttons');
-      bottomButtons.style.display = (filled === total || filled / total >= 0.8) ? 'flex' : 'none';
+      bottomButtons.style.display = (filled === total) ? 'flex' : 'none';
     }
 
-    for (let i = 1; i <= 12; i++) {
-      const fields = document.querySelectorAll('#fiche' + i + ' input, #fiche' + i + ' select, #fiche' + i + ' textarea');
-      fields.forEach(f => {
-        f.addEventListener('input', () => updateStatus('fiche' + i, 'statusIndicator' + i));
-        f.addEventListener('change', () => updateStatus('fiche' + i, 'statusIndicator' + i));
-      });
-    }
-
-    // ✅ Calcul automatique de l’âge pour fiche 2
+    // ✅ Calcul âge fiche 2
     document.getElementById('dateNaissance2').addEventListener('change', function () {
       const birthDate = new Date(this.value);
-      if (!isNaN(birthDate.getTime())) {
+      if (!isNaN(birthDate)) {
         const today = new Date();
         let age = today.getFullYear() - birthDate.getFullYear();
-        const m = today.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        if (today.getMonth() < birthDate.getMonth() || 
+            (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
           age--;
         }
         document.getElementById('age2').value = age + " ans";
-      } else {
-        document.getElementById('age2').value = "";
       }
     });
+
+    // ✅ Bouton RAS fiche 3
+    function remplirRAS3() {
+      document.getElementById('hemorragie3').value = 'Non';
+      document.getElementById('voies3').value = 'Libre';
+      document.getElementById('rachis3').value = 'Non';
+      document.getElementById('conscience3').value = 'Oui';
+      document.getElementById('plaintes3').value = 'RAS - Patient normal';
+    }
   </script>
 </body>
 </html>
