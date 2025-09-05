@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Fiches Précédentes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
 
+    header {
+      background: #007bff;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      background: #0056b3;
+      padding: 8px 15px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    header a:hover {
+      background: #003d80;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .fiche-list {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .fiche-list p {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .fiche-list p:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">⬅ Retour à l'accueil</a>
+  </header>
+
+  <h1>Fiches Précédentes</h1>
+
+  <div class="fiche-list">
+    <p>📄 Fiche 1 - Exemple de contenu</p>
+    <p>📄 Fiche 2 - Exemple de contenu</p>
+    <p>📄 Fiche 3 - Exemple de contenu</p>
+  </div>
+</body>
+</html>
