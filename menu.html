@@ -164,21 +164,37 @@
   </style>
 </head>
 <body>
-  <header>
-    <a href="index.html">⬅ Retour à l'accueil</a>
+ header {
+  padding: 15px;
+  display: flex;
+  flex-direction: column; /* vertical : lien puis onglets */
+  gap: 10px;
+}
 
-    <div class="onglets-container">
-      <div class="onglet" onclick="ouvrirFiche('fiche1', 'statusIndicator1')">
-        <div class="circle">?</div>
-        <div class="status" id="statusIndicator1"></div>
-      </div>
+.onglets-container {
+  display: flex;
+  flex-direction: column; /* onglets sous le lien */
+  gap: 10px;
+}
 
-      <div class="onglet" onclick="ouvrirFiche('fiche2', 'statusIndicator2')">
-        <div class="circle">!</div>
-        <div class="status" id="statusIndicator2"></div>
-      </div>
-    </div>
-  </header>
+/* Onglet style inchangé */
+.onglet {
+  width: 70px;
+  height: 70px;
+  background: #0056b3;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: relative;
+}
+
+.onglet:hover {
+  transform: scale(1.05);
+}
 
   <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
 
