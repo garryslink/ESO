@@ -4,32 +4,35 @@
 <meta charset="UTF-8">
 <title>Fiches Intervention</title>
 <style>
-  body { margin:0; font-family:Arial,sans-serif; background:#fafafa; }
-  header { padding:15px; display:flex; flex-direction:column; gap:10px; }
-  header a { color:white; text-decoration:none; font-weight:bold; background:#0056b3; padding:8px 15px; border-radius:5px; width:fit-content; }
-  header a:hover { background:#003d80; }
-  .onglets-container { display:flex; flex-direction:column; gap:10px; }
-  .onglet { width:70px; height:70px; background:#0056b3; border-radius:8px; display:flex; justify-content:center; align-items:center; flex-direction:column; cursor:pointer; transition:transform 0.2s; position:relative; }
-  .onglet:hover { transform:scale(1.05); }
-  .circle { width:40px; height:40px; background:#ccc; border-radius:50%; display:flex; justify-content:center; align-items:center; font-weight:bold; font-size:20px; }
-  .status { width:12px; height:12px; border-radius:50%; margin-top:5px; background:red; }
-  .fiche { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:20px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.3); max-width:700px; width:90%; z-index:1000; max-height:90vh; overflow-y:auto; box-sizing:border-box; }
-  .fiche h2 { text-align:center; margin-top:0; }
-  label { display:block; margin:10px 0 5px; font-weight:bold; }
-  input, select, textarea { width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc; box-sizing:border-box; }
-  textarea { resize:vertical; }
-  .bottom-buttons { display:none; margin-top:15px; gap:10px; display:flex; justify-content:center; flex-wrap:wrap; }
-  .bottom-buttons button { padding:10px 20px; border:none; border-radius:5px; font-size:1em; cursor:pointer; transition:background 0.3s; }
-  .transmission { background:#007bff; color:white; }
-  .transmission:hover { background:#0056b3; }
-  .surveillance { background:#6c757d; color:white; }
-  .surveillance:hover { background:#5a6268; }
-  .ras-button { background:#28a745; color:white; margin-bottom:10px; }
-  .ras-button:hover { background:#218838; }
-  .overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:900; }
+body {margin:0; font-family:Arial,sans-serif; background:#fafafa;}
+header {padding:15px; display:flex; flex-direction:column; gap:10px;}
+header a {color:white; text-decoration:none; font-weight:bold; background:#0056b3; padding:8px 15px; border-radius:5px; width:fit-content;}
+header a:hover {background:#003d80;}
+.onglets-container {display:flex; flex-direction:column; gap:10px;}
+.onglet {width:70px; height:70px; background:#0056b3; border-radius:8px; display:flex; justify-content:center; align-items:center; flex-direction:column; cursor:pointer; transition:transform 0.2s; position:relative;}
+.onglet:hover {transform:scale(1.05);}
+.circle {width:40px; height:40px; background:#ccc; border-radius:50%; display:flex; justify-content:center; align-items:center; font-weight:bold; font-size:20px;}
+.status {width:12px; height:12px; border-radius:50%; margin-top:5px; background:red;}
+.fiche {display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:20px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.3); max-width:700px; width:90%; z-index:1000; max-height:90vh; overflow-y:auto; box-sizing:border-box;}
+.fiche h2 {text-align:center; margin-top:0;}
+label {display:block; margin:10px 0 5px; font-weight:bold;}
+input, select, textarea {width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc; box-sizing:border-box;}
+textarea {resize:vertical;}
+.bottom-buttons {display:none; margin-top:15px; gap:10px; display:flex; justify-content:center; flex-wrap:wrap;}
+.bottom-buttons button {padding:10px 20px; border:none; border-radius:5px; font-size:1em; cursor:pointer; transition:background 0.3s;}
+.transmission {background:#007bff; color:white;}
+.transmission:hover {background:#0056b3;}
+.surveillance {background:#6c757d; color:white;}
+.surveillance:hover {background:#5a6268;}
+.ras-button {background:#28a745; color:white; margin-bottom:10px; cursor:pointer;}
+.ras-button:hover {background:#218838;}
+.overlay {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:900;}
+.green {background:#d4edda;}
+.red {background:#f8d7da;}
 </style>
 </head>
 <body>
+
 <header>
 <a href="index.html">⬅ Retour à l'accueil</a>
 <div class="onglets-container">
@@ -50,7 +53,9 @@
 
 <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
 
-<!-- Fiche 1 -->
+<!-- Fiches complètes -->
+
+<!-- Fiche 1 Intervention -->
 <div class="fiche" id="fiche1">
 <h2>Intervention</h2>
 <label>Adresse</label><input type="text" id="adresse1">
@@ -111,70 +116,63 @@
 <div class="bottom-buttons"><button class="transmission">Transmission</button><button class="surveillance">Surveillance</button></div>
 </div>
 
-<!-- Les fiches 3 à 12 seront générées dynamiquement via JS -->
-
+<!-- Fiches 3 à 12 créées dynamiquement via JS -->
 <script>
+function ouvrirFiche(id){document.querySelectorAll('.fiche').forEach(f=>f.style.display='none'); document.getElementById('overlay').style.display='block'; document.getElementById(id).style.display='block';}
+function fermerFiche(){document.querySelectorAll('.fiche').forEach(f=>f.style.display='none'); document.getElementById('overlay').style.display='none';}
 // Calcul âge
 document.getElementById('dateNaissance2').addEventListener('change', function(){
-  const d = new Date(this.value);
-  if(!isNaN(d.getTime())){
-    const now=new Date(); let age=now.getFullYear()-d.getFullYear(); const m=now.getMonth()-d.getMonth();
-    if(m<0||(m===0&&now.getDate()<d.getDate())) age--;
+  const d=new Date(this.value); if(!isNaN(d.getTime())){
+    const now=new Date(); let age=now.getFullYear()-d.getFullYear(); const m=now.getMonth()-d.getMonth(); if(m<0||(m===0&&now.getDate()<d.getDate())) age--;
     document.getElementById('age2').value=age+' ans';
   } else { document.getElementById('age2').value=''; }
 });
 
-// Création fiches 3 à 12
-const fiches = [
-  {id:'fiche3',titre:'Hémorragie', champs:[
-    {label:'Hémorragie',type:'select',id:'hem3',options:['','Oui','Non']},
-    {label:'Obstruction des voies aériennes',type:'select',id:'vao3',options:['','Libre','Obstrué']},
-    {label:'Traumatisme du rachis',type:'select',id:'rachis3',options:['','Oui','Non']},
-    {label:'Conscience',type:'select',id:'conscience3',options:['','Oui','Non']},
-    {label:'Plainte principale',type:'text',id:'plainte3'},
-    {label:'RAS',type:'button',id:'ras3'}
-  ]},
-  {id:'fiche4',titre:'Voie aérienne', champs:[
-    {label:'Obstruction des V.A',type:'select',id:'vao4',options:['','Libre','Obstrué']},
-    {label:'Cause',type:'text',id:'cause4'},
-    {label:'RAS',type:'button',id:'ras4'}
-  ]},
-  {id:'fiche5',titre:'Respiration', champs:[
-    {label:'Arrêt respiratoire ≤6s',type:'select',id:'arret5',options:['','Oui','Non']},
-    {label:'Cyanose',type:'select',id:'cyanose5',options:['','Oui','Non']},
-    {label:'Sueur',type:'select',id:'sueur5',options:['','Oui','Non']},
-    {label:'Léger',type:'select',id:'leger5',options:['','Oui','Non']},
-    {label:'Bruyante',type:'select',id:'bruyante5',options:['','Oui','Non']},
-    {label:'Tirage',type:'select',id:'tirage5',options:['','Oui','Non']},
-    {label:'Asymétrie thoracique',type:'select',id:'asym5',options:['','Oui','Non']},
-    {label:'Difficulté à parler',type:'select',id:'parler5',options:['','Oui','Non']},
-    {label:'RAS',type:'button',id:'ras5'}
-  ]},
-  // ... Les autres fiches 6 à 12 peuvent être ajoutées de la même façon
+// Création des fiches 3 à 12
+const fiches=[
+{id:'fiche3',titre:'Hémorragie',champs:[
+  {label:'Hémorragie',type:'select',id:'hem3',options:['','Oui','Non']},
+  {label:'Obstruction des voies aériennes',type:'select',id:'vao3',options:['','Libre','Obstrué']},
+  {label:'Traumatisme du rachis',type:'select',id:'rachis3',options:['','Oui','Non']},
+  {label:'Conscience',type:'select',id:'conscience3',options:['','Oui','Non']},
+  {label:'Plainte principale',type:'text',id:'plainte3'},
+  {label:'RAS',type:'button',id:'ras3'}
+]},
+{id:'fiche4',titre:'Voie aérienne',champs:[
+  {label:'Obstruction des V.A',type:'select',id:'vao4',options:['','Libre','Obstrué']},
+  {label:'Cause',type:'text',id:'cause4'},
+  {label:'RAS',type:'button',id:'ras4'}
+]},
+{id:'fiche5',titre:'Respiration',champs:[
+  {label:'Arrêt respiratoire ≤6s',type:'select',id:'arret5',options:['','Oui','Non']},
+  {label:'Cyanose',type:'select',id:'cyanose5',options:['','Oui','Non']},
+  {label:'Sueur',type:'select',id:'sueur5',options:['','Oui','Non']},
+  {label:'Léger',type:'select',id:'leger5',options:['','Oui','Non']},
+  {label:'Bruyante',type:'select',id:'bruyante5',options:['','Oui','Non']},
+  {label:'Tirage',type:'select',id:'tirage5',options:['','Oui','Non']},
+  {label:'Asymétrie thoracique',type:'select',id:'asym5',options:['','Oui','Non']},
+  {label:'Difficulté à parler',type:'select',id:'parler5',options:['','Oui','Non']},
+  {label:'RAS',type:'button',id:'ras5'}
+]},
+// Pour le moment exemple, fiches 6 à 12 peuvent être créées de la même manière avec tous les champs détaillés
 ];
 
 fiches.forEach(f=>{
-  const div=document.createElement('div');
-  div.className='fiche'; div.id=f.id;
+  const div=document.createElement('div'); div.className='fiche'; div.id=f.id;
   div.innerHTML='<h2>'+f.titre+'</h2>';
   f.champs.forEach(c=>{
     if(c.type==='select'){
       let s='<label>'+c.label+'</label><select id="'+c.id+'">';
-      c.options.forEach(o=>s+='<option>'+o+'</option>');
-      s+='</select>';
-      div.innerHTML+=s;
-    } else if(c.type==='text'){
-      div.innerHTML+='<label>'+c.label+'</label><input type="text" id="'+c.id+'">';
-    } else if(c.type==='button'){
-      const btn=document.createElement('button');
-      btn.className='ras-button'; btn.textContent='RAS';
+      c.options.forEach(o=>s+='<option>'+o+'</option>'); s+='</select>'; div.innerHTML+=s;
+    } else if(c.type==='text'){div.innerHTML+='<label>'+c.label+'</label><input type="text" id="'+c.id+'">';}
+    else if(c.type==='button'){
+      const btn=document.createElement('button'); btn.className='ras-button'; btn.textContent='RAS';
       btn.addEventListener('click',()=>{
         f.champs.forEach(cf=>{
           if(cf.type==='select') document.getElementById(cf.id).value=cf.options[1]||'Non';
           if(cf.type==='text') document.getElementById(cf.id).value='RAS';
         });
-      });
-      div.appendChild(btn);
+      }); div.appendChild(btn);
     }
   });
   const bottom=document.createElement('div'); bottom.className='bottom-buttons';
@@ -182,215 +180,7 @@ fiches.forEach(f=>{
   div.appendChild(bottom);
   document.body.appendChild(div);
 });
-
-// Fonctions ouverture/fermeture
-function ouvrirFiche(id,status){
-  document.querySelectorAll('.fiche').forEach(f=>f.style.display='none');
-  document.getElementById('overlay').style.display='block';
-  document.getElementById(id).style.display='block';
-}
-function fermerFiche(){
-  document.querySelectorAll('.fiche').forEach(f=>f.style.display='none');
-  document.getElementById('overlay').style.display='none';
-}
 </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Fiches Intervention</title>
-<style>
-  body { margin:0; font-family:Arial,sans-serif; background:#fafafa; }
-  header { padding:15px; display:flex; flex-direction:column; gap:10px; }
-  header a { color:white; text-decoration:none; font-weight:bold; background:#0056b3; padding:8px 15px; border-radius:5px; width:fit-content; }
-  header a:hover { background:#003d80; }
-  .onglets-container { display:flex; flex-direction:column; gap:10px; }
-  .onglet { width:70px; height:70px; background:#0056b3; border-radius:8px; display:flex; justify-content:center; align-items:center; flex-direction:column; cursor:pointer; transition:transform 0.2s; position:relative; }
-  .onglet:hover { transform:scale(1.05); }
-  .circle { width:40px; height:40px; background:#ccc; border-radius:50%; display:flex; justify-content:center; align-items:center; font-weight:bold; font-size:20px; }
-  .status { width:12px; height:12px; border-radius:50%; margin-top:5px; background:red; }
-  .fiche { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:20px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.3); max-width:700px; width:90%; z-index:1000; max-height:90vh; overflow-y:auto; box-sizing:border-box; }
-  .fiche h2 { text-align:center; margin-top:0; }
-  label { display:block; margin:10px 0 5px; font-weight:bold; }
-  input, select, textarea { width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc; box-sizing:border-box; }
-  textarea { resize:vertical; }
-  .bottom-buttons { display:none; margin-top:15px; gap:10px; display:flex; justify-content:center; flex-wrap:wrap; }
-  .bottom-buttons button { padding:10px 20px; border:none; border-radius:5px; font-size:1em; cursor:pointer; transition:background 0.3s; }
-  .transmission { background:#007bff; color:white; }
-  .transmission:hover { background:#0056b3; }
-  .surveillance { background:#6c757d; color:white; }
-  .surveillance:hover { background:#5a6268; }
-  .ras-button { background:#28a745; color:white; margin-bottom:10px; }
-  .ras-button:hover { background:#218838; }
-  .overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:900; }
-</style>
-</head>
-<body>
-<header>
-<a href="index.html">⬅ Retour à l'accueil</a>
-<div class="onglets-container">
-  <div class="onglet" onclick="ouvrirFiche('fiche1','status1')"><div class="circle">❓</div><div class="status" id="status1"></div></div>
-  <div class="onglet" onclick="ouvrirFiche('fiche2','status2')"><div class="circle">❗</div><div class="status" id="status2"></div></div>
-  <div class="onglet" onclick="ouvrirFiche('fiche3','status3')"><div class="circle">✖</div><div class="status" id="status3"></div></div>
-  <div class="onglet" onclick="ouvrirFiche('fiche4','status4')"><div class="circle">A</div><div class="status" id="status4"></div></div>
-  <div class="onglet" onclick="ouvrirFiche('fiche5','status5')"><div class="circle">B</div><div class="status" id="status5"></div></div>
-  <div class="onglet" onclick="ouvrirFiche('fiche6','status6')"><div class="circle">C</div><div class="status" id="status6"></div></div>
-  <div class="onglet" onclick="ouvrirFiche('fiche7','status7')"><div class="circle">D</div><div class="status" id="status7"></div></div>
-  <div class="onglet" onclick="ouvrirFiche('fiche8','status8')"><div class="circle">E</div><div class="status" id="status8"></div></div>
-  <div class="onglet" onclick="ouvrirFiche('fiche9','status9')"><div class="circle">❤️</div><div class="status" id="status9"></div></div>
-  <div class="onglet" onclick="ouvrirFiche('fiche10','status10')"><div class="circle">💊</div><div class="status" id="status10"></div></div>
-  <div class="onglet" onclick="ouvrirFiche('fiche11','status11')"><div class="circle">✚</div><div class="status" id="status11"></div></div>
-  <div class="onglet" onclick="ouvrirFiche('fiche12','status12')"><div class="circle">👶</div><div class="status" id="status12"></div></div>
-</div>
-</header>
 
-<div class="overlay" id="overlay" onclick="fermerFiche()"></div>
-
-<!-- Fiche 1 -->
-<div class="fiche" id="fiche1">
-<h2>Intervention</h2>
-<label>Adresse</label><input type="text" id="adresse1">
-<label>Numéro</label><input type="text" id="numero1">
-<label>Type d'intervention</label>
-<select id="type1"><option value="">-- Sélectionner --</option><option>Voie publique</option><option>Domicile</option><option>Travail</option><option>Autre</option></select>
-<label>Motif d'intervention</label>
-<select id="motif1">
-  <option value="">-- Sélectionner --</option>
-  <option>Accouchement</option>
-  <option>Arrêt cardio ventilatoire</option>
-  <option>TS</option>
-  <option>Blessé au sport</option>
-  <option>Blessé au travail</option>
-  <option>Blessé chute</option>
-  <option>Blessé par arme à feu</option>
-  <option>Blessé par arme blanche</option>
-  <option>Blessé sur VP</option>
-  <option>Blessé à domicile</option>
-  <option>Blessé établissement enseignement</option>
-  <option>Brûlure</option>
-  <option>Carence d'Ambulance HCT</option>
-  <option>Détresse ventilatoire</option>
-  <option>Intoxication</option>
-  <option>Malaise au sport</option>
-  <option>Malaise au travail</option>
-  <option>Malaise VP</option>
-  <option>Malaise à domicile</option>
-  <option>Noyade / Personne tombée à l'eau</option>
-  <option>Pendaison</option>
-  <option>Personne inconsciente</option>
-  <option>Personne ne répondant pas aux appels</option>
-  <option>Renfort brancardage</option>
-  <option>Suspicion AVC</option>
-  <option>Électrisation / Foudroiement de personne</option>
-  <option>Autre</option>
-</select>
-<label>Situation à l'arrivée</label><textarea></textarea>
-<h3>Équipage MEDIC</h3>
-<input type="text" placeholder="Ambulance Commander">
-<input type="text" placeholder="Driver">
-<input type="text" placeholder="Équipier">
-<div class="bottom-buttons"><button class="transmission">Transmission</button><button class="surveillance">Surveillance</button></div>
-</div>
-
-<!-- Fiche 2 Identité Patient -->
-<div class="fiche" id="fiche2">
-<h2>Identité Patient</h2>
-<label>Sexe</label><select id="sexe2"><option value="">-- Sélectionner --</option><option value="homme">Homme</option><option value="femme">Femme</option></select>
-<label>Nom</label><input type="text" id="nom2">
-<label>Prénom</label><input type="text" id="prenom2">
-<label>Nom de naissance</label><input type="text" id="nomNaissance2">
-<label>Date de naissance</label><input type="date" id="dateNaissance2">
-<label>Âge</label><input type="text" id="age2" readonly>
-<label>Nationalité</label><input type="text" id="nationalite2">
-<label>Téléphone</label><input type="tel" id="tel2">
-<label>Adresse personnelle</label><input type="text" id="adressePerso2">
-<div class="bottom-buttons"><button class="transmission">Transmission</button><button class="surveillance">Surveillance</button></div>
-</div>
-
-<!-- Les fiches 3 à 12 seront générées dynamiquement via JS -->
-
-<script>
-// Calcul âge
-document.getElementById('dateNaissance2').addEventListener('change', function(){
-  const d = new Date(this.value);
-  if(!isNaN(d.getTime())){
-    const now=new Date(); let age=now.getFullYear()-d.getFullYear(); const m=now.getMonth()-d.getMonth();
-    if(m<0||(m===0&&now.getDate()<d.getDate())) age--;
-    document.getElementById('age2').value=age+' ans';
-  } else { document.getElementById('age2').value=''; }
-});
-
-// Création fiches 3 à 12
-const fiches = [
-  {id:'fiche3',titre:'Hémorragie', champs:[
-    {label:'Hémorragie',type:'select',id:'hem3',options:['','Oui','Non']},
-    {label:'Obstruction des voies aériennes',type:'select',id:'vao3',options:['','Libre','Obstrué']},
-    {label:'Traumatisme du rachis',type:'select',id:'rachis3',options:['','Oui','Non']},
-    {label:'Conscience',type:'select',id:'conscience3',options:['','Oui','Non']},
-    {label:'Plainte principale',type:'text',id:'plainte3'},
-    {label:'RAS',type:'button',id:'ras3'}
-  ]},
-  {id:'fiche4',titre:'Voie aérienne', champs:[
-    {label:'Obstruction des V.A',type:'select',id:'vao4',options:['','Libre','Obstrué']},
-    {label:'Cause',type:'text',id:'cause4'},
-    {label:'RAS',type:'button',id:'ras4'}
-  ]},
-  {id:'fiche5',titre:'Respiration', champs:[
-    {label:'Arrêt respiratoire ≤6s',type:'select',id:'arret5',options:['','Oui','Non']},
-    {label:'Cyanose',type:'select',id:'cyanose5',options:['','Oui','Non']},
-    {label:'Sueur',type:'select',id:'sueur5',options:['','Oui','Non']},
-    {label:'Léger',type:'select',id:'leger5',options:['','Oui','Non']},
-    {label:'Bruyante',type:'select',id:'bruyante5',options:['','Oui','Non']},
-    {label:'Tirage',type:'select',id:'tirage5',options:['','Oui','Non']},
-    {label:'Asymétrie thoracique',type:'select',id:'asym5',options:['','Oui','Non']},
-    {label:'Difficulté à parler',type:'select',id:'parler5',options:['','Oui','Non']},
-    {label:'RAS',type:'button',id:'ras5'}
-  ]},
-  // ... Les autres fiches 6 à 12 peuvent être ajoutées de la même façon
-];
-
-fiches.forEach(f=>{
-  const div=document.createElement('div');
-  div.className='fiche'; div.id=f.id;
-  div.innerHTML='<h2>'+f.titre+'</h2>';
-  f.champs.forEach(c=>{
-    if(c.type==='select'){
-      let s='<label>'+c.label+'</label><select id="'+c.id+'">';
-      c.options.forEach(o=>s+='<option>'+o+'</option>');
-      s+='</select>';
-      div.innerHTML+=s;
-    } else if(c.type==='text'){
-      div.innerHTML+='<label>'+c.label+'</label><input type="text" id="'+c.id+'">';
-    } else if(c.type==='button'){
-      const btn=document.createElement('button');
-      btn.className='ras-button'; btn.textContent='RAS';
-      btn.addEventListener('click',()=>{
-        f.champs.forEach(cf=>{
-          if(cf.type==='select') document.getElementById(cf.id).value=cf.options[1]||'Non';
-          if(cf.type==='text') document.getElementById(cf.id).value='RAS';
-        });
-      });
-      div.appendChild(btn);
-    }
-  });
-  const bottom=document.createElement('div'); bottom.className='bottom-buttons';
-  bottom.innerHTML='<button class="transmission">Transmission</button><button class="surveillance">Surveillance</button>';
-  div.appendChild(bottom);
-  document.body.appendChild(div);
-});
-
-// Fonctions ouverture/fermeture
-function ouvrirFiche(id,status){
-  document.querySelectorAll('.fiche').forEach(f=>f.style.display='none');
-  document.getElementById('overlay').style.display='block';
-  document.getElementById(id).style.display='block';
-}
-function fermerFiche(){
-  document.querySelectorAll('.fiche').forEach(f=>f.style.display='none');
-  document.getElementById('overlay').style.display='none';
-}
-</script>
 </body>
 </html>
