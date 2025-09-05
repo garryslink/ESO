@@ -15,8 +15,8 @@
       padding: 15px;
       display: flex;
       align-items: flex-start;
-      flex-direction: column; /* éléments empilés à gauche */
-      gap: 10px; /* espace entre les éléments */
+      flex-direction: column;
+      gap: 10px;
     }
 
     header a {
@@ -50,7 +50,6 @@
       transform: scale(1.05);
     }
 
-    /* Cercle gris avec ? */
     .onglet .circle {
       width: 35px;
       height: 35px;
@@ -64,7 +63,7 @@
       color: #666;
     }
 
-    /* Fenêtre fiche présentation */
+    /* Fiche intervention */
     .fiche {
       display: none;
       position: fixed;
@@ -75,16 +74,36 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      max-width: 400px;
-      text-align: center;
+      max-width: 500px;
+      width: 90%;
       z-index: 1000;
     }
 
     .fiche h2 {
       margin-top: 0;
+      text-align: center;
     }
 
-    /* Fond sombre derrière la fiche */
+    .fiche label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    .fiche input, .fiche select, .fiche textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    .fiche input[type="file"] {
+      padding: 3px;
+    }
+
+    /* Fond sombre */
     .overlay {
       display: none;
       position: fixed;
@@ -125,18 +144,44 @@
   <header>
     <a href="index.html">⬅ Retour à l'accueil</a>
 
-    <!-- Onglet carré bleu avec rond gris -->
     <div class="onglet" onclick="ouvrirFiche()">
       <div class="circle">?</div>
     </div>
   </header>
 
-  <!-- Fiche de présentation -->
+  <!-- Fiche intervention -->
   <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
   <div class="fiche" id="fiche">
-    <h2>Fiche de Présentation</h2>
-    <p>Bienvenue dans le menu ! Ici, tu trouveras toutes les options disponibles.</p>
+    <h2>Fiche d'Intervention</h2>
+
+    <label for="adresse">Adresse de l'intervention</label>
+    <input type="text" id="adresse" placeholder="Ex: 10 rue des Lilas">
+
+    <label for="numero">Numéro de l'intervention</label>
+    <input type="text" id="numero" placeholder="Ex: 12345">
+
+    <label for="proposition">Type d'intervention</label>
+    <select id="proposition">
+      <option value="">-- Sélectionner --</option>
+      <option value="incendie">Incendie</option>
+      <option value="accident">Accident</option>
+      <option value="urgence_medicale">Urgence médicale</option>
+      <option value="autre">Autre</option>
+    </select>
+
+    <label for="situation">Situation à l'arrivée</label>
+    <textarea id="situation" rows="4" placeholder="Décrire la situation à l'arrivée..."></textarea>
+
+    <label for="photos">Photos</label>
+    <input type="file" id="photos" multiple accept="image/*">
   </div>
+
+  <h1>Menu</h1>
+  <ul>
+    <li><a href="#">Option 1</a></li>
+    <li><a href="#">Option 2</a></li>
+    <li><a href="#">Option 3</a></li>
+  </ul>
 
   <script>
     function ouvrirFiche() {
