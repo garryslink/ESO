@@ -138,9 +138,9 @@
     <label for="proposition">Type d'intervention</label>
     <select id="proposition">
       <option value="">-- Sélectionner --</option>
-      <option value="incendie">Voie publique</option>
-      <option value="accident">Voie privée</option>
-      <option value="urgence_medicale">Travail</option>
+      <option value="voie_publique">Voie publique</option>
+      <option value="voie_privee">Voie privée</option>
+      <option value="travail">Travail</option>
       <option value="autre">Autre</option>
     </select>
 
@@ -149,6 +149,28 @@
 
     <label for="photos">Photos</label>
     <input type="file" id="photos" multiple accept="image/*">
+
+    <!-- Section Équipage Medic -->
+    <h3>Équipage Medic</h3>
+
+    <label for="medic1">Membre 1</label>
+    <input type="text" id="medic1" placeholder="Nom du membre">
+
+    <label for="medic2">Membre 2</label>
+    <input type="text" id="medic2" placeholder="Nom du membre">
+
+    <label for="medic3">Membre 3</label>
+    <input type="text" id="medic3" placeholder="Nom du membre">
+
+    <label for="role">Rôle principal</label>
+    <select id="role">
+      <option value="">-- Sélectionner --</option>
+      <option value="chef_equipe">Chef d'équipe</option>
+      <option value="paramedic">Paramedic</option>
+      <option value="infirmier">Infirmier</option>
+      <option value="technicien">Technicien</option>
+      <option value="autre">Autre</option>
+    </select>
   </div>
 
   <script>
