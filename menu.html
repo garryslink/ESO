@@ -2,33 +2,29 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Fiches Intervention</title>
+<title>Fiches Patient</title>
 <style>
 body {margin:0; font-family:Arial,sans-serif; background:#fafafa;}
 header {padding:15px; display:flex; flex-direction:column; gap:10px;}
 header a {color:white; text-decoration:none; font-weight:bold; background:#0056b3; padding:8px 15px; border-radius:5px; width:fit-content;}
 header a:hover {background:#003d80;}
 .onglets-container {display:flex; flex-direction:column; gap:10px;}
-.onglet {width:70px; height:70px; background:#0056b3; border-radius:8px; display:flex; justify-content:center; align-items:center; flex-direction:column; cursor:pointer; transition:transform 0.2s; position:relative;}
+.onglet {width:70px;height:70px; background:#0056b3; border-radius:8px; display:flex; justify-content:center; align-items:center; flex-direction:column; cursor:pointer; transition:transform 0.2s; position:relative;}
 .onglet:hover {transform:scale(1.05);}
-.circle {width:40px; height:40px; background:#ccc; border-radius:50%; display:flex; justify-content:center; align-items:center; font-weight:bold; font-size:20px;}
-.status {width:12px; height:12px; border-radius:50%; margin-top:5px; background:red;}
-.fiche {display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:20px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.3); max-width:700px; width:90%; z-index:1000; max-height:90vh; overflow-y:auto; box-sizing:border-box;}
+.onglet .circle {width:40px;height:40px; border-radius:50%; display:flex; justify-content:center; align-items:center; font-weight:bold; font-size:20px; color:#000; background:#ccc;}
+.onglet .status {width:12px;height:12px;border-radius:50%;margin-top:5px;background:red;}
+.fiche {display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:20px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.3); max-width:500px; width:90%; z-index:1000; box-sizing:border-box;}
 .fiche h2 {text-align:center; margin-top:0;}
-label {display:block; margin:10px 0 5px; font-weight:bold;}
-input, select, textarea {width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc; box-sizing:border-box;}
-textarea {resize:vertical;}
-.bottom-buttons {display:none; margin-top:15px; gap:10px; display:flex; justify-content:center; flex-wrap:wrap;}
-.bottom-buttons button {padding:10px 20px; border:none; border-radius:5px; font-size:1em; cursor:pointer; transition:background 0.3s;}
+.fiche label {display:block; margin:10px 0 5px; font-weight:bold;}
+.fiche input, .fiche select, .fiche textarea {width:100%; padding:8px; border-radius:5px; border:1px solid #ccc; margin-bottom:15px; box-sizing:border-box; transition:background 0.3s;}
+.fiche textarea {resize:vertical;}
+.bottom-buttons {display:flex; justify-content:center; gap:10px; margin-top:15px;}
+.bottom-buttons button {padding:10px 20px; border:none; border-radius:5px; cursor:pointer;}
 .transmission {background:#007bff; color:white;}
 .transmission:hover {background:#0056b3;}
 .surveillance {background:#6c757d; color:white;}
 .surveillance:hover {background:#5a6268;}
-.ras-button {background:#28a745; color:white; margin-bottom:10px; cursor:pointer;}
-.ras-button:hover {background:#218838;}
 .overlay {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:900;}
-.green {background:#d4edda;}
-.red {background:#f8d7da;}
 </style>
 </head>
 <body>
@@ -53,97 +49,47 @@ textarea {resize:vertical;}
 
 <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
 
-<!-- Fiches complètes -->
-
-<!-- Fiche 1 Intervention -->
-<div class="fiche" id="fiche1">
-<h2>Intervention</h2>
-<label>Adresse</label><input type="text" id="adresse1">
-<label>Numéro</label><input type="text" id="numero1">
-<label>Type d'intervention</label>
-<select id="type1"><option value="">-- Sélectionner --</option><option>Voie publique</option><option>Domicile</option><option>Travail</option><option>Autre</option></select>
-<label>Motif d'intervention</label>
-<select id="motif1">
-  <option value="">-- Sélectionner --</option>
-  <option>Accouchement</option>
-  <option>Arrêt cardio ventilatoire</option>
-  <option>TS</option>
-  <option>Blessé au sport</option>
-  <option>Blessé au travail</option>
-  <option>Blessé chute</option>
-  <option>Blessé par arme à feu</option>
-  <option>Blessé par arme blanche</option>
-  <option>Blessé sur VP</option>
-  <option>Blessé à domicile</option>
-  <option>Blessé établissement enseignement</option>
-  <option>Brûlure</option>
-  <option>Carence d'Ambulance HCT</option>
-  <option>Détresse ventilatoire</option>
-  <option>Intoxication</option>
-  <option>Malaise au sport</option>
-  <option>Malaise au travail</option>
-  <option>Malaise VP</option>
-  <option>Malaise à domicile</option>
-  <option>Noyade / Personne tombée à l'eau</option>
-  <option>Pendaison</option>
-  <option>Personne inconsciente</option>
-  <option>Personne ne répondant pas aux appels</option>
-  <option>Renfort brancardage</option>
-  <option>Suspicion AVC</option>
-  <option>Électrisation / Foudroiement de personne</option>
-  <option>Autre</option>
-</select>
-<label>Situation à l'arrivée</label><textarea></textarea>
-<h3>Équipage MEDIC</h3>
-<input type="text" placeholder="Ambulance Commander">
-<input type="text" placeholder="Driver">
-<input type="text" placeholder="Équipier">
-<div class="bottom-buttons"><button class="transmission">Transmission</button><button class="surveillance">Surveillance</button></div>
-</div>
-
-<!-- Fiche 2 Identité Patient -->
-<div class="fiche" id="fiche2">
-<h2>Identité Patient</h2>
-<label>Sexe</label><select id="sexe2"><option value="">-- Sélectionner --</option><option value="homme">Homme</option><option value="femme">Femme</option></select>
-<label>Nom</label><input type="text" id="nom2">
-<label>Prénom</label><input type="text" id="prenom2">
-<label>Nom de naissance</label><input type="text" id="nomNaissance2">
-<label>Date de naissance</label><input type="date" id="dateNaissance2">
-<label>Âge</label><input type="text" id="age2" readonly>
-<label>Nationalité</label><input type="text" id="nationalite2">
-<label>Téléphone</label><input type="tel" id="tel2">
-<label>Adresse personnelle</label><input type="text" id="adressePerso2">
-<div class="bottom-buttons"><button class="transmission">Transmission</button><button class="surveillance">Surveillance</button></div>
-</div>
-
-<!-- Fiches 3 à 12 créées dynamiquement via JS -->
+<!-- Fiches dynamiques -->
 <script>
+// Fonction ouverture/fermeture
 function ouvrirFiche(id){document.querySelectorAll('.fiche').forEach(f=>f.style.display='none'); document.getElementById('overlay').style.display='block'; document.getElementById(id).style.display='block';}
 function fermerFiche(){document.querySelectorAll('.fiche').forEach(f=>f.style.display='none'); document.getElementById('overlay').style.display='none';}
-// Calcul âge
-document.getElementById('dateNaissance2').addEventListener('change', function(){
-  const d=new Date(this.value); if(!isNaN(d.getTime())){
-    const now=new Date(); let age=now.getFullYear()-d.getFullYear(); const m=now.getMonth()-d.getMonth(); if(m<0||(m===0&&now.getDate()<d.getDate())) age--;
-    document.getElementById('age2').value=age+' ans';
-  } else { document.getElementById('age2').value=''; }
-});
 
-// Création des fiches 3 à 12
-const fiches=[
-{id:'fiche3',titre:'Hémorragie',champs:[
+// Tableau de fiches
+const fichesData = [
+{ id:'fiche1', titre:'Intervention', champs:[
+  {label:'Adresse',type:'text',id:'adresse1'},
+  {label:'Numéro',type:'text',id:'numero1'},
+  {label:'Type',type:'select',id:'type1',options:['','Voie publique','Domicile','Travail','Autre']},
+  {label:'Motif',type:'select',id:'motif1',options:['','Accouchement','Arrêt cardio ventilatoire','TS','Blessé au sport','Blessé au travail','Blessé chute','Blessé par arme à feu','Blessé par arme blanche','Blessé sur VP','Blessé à domicile','Blessé établissement enseignement','Brûlure','Carence d\'Ambulance HCT','Détresse ventilatoire','Intoxication','Malaise au sport','Malaise au travail','Malaise VP','Malaise à domicile','Noyade / Personne tombée à l\'eau','Pendaison','Personne inconsciente','Personne ne répondant pas aux appels','Renfort brancardage','Suspicion AVC','Électrisation / Foudroiement de personne','Autre']},
+  {label:'Situation',type:'textarea',id:'situation1'},
+  {label:'Équipage',type:'text',id:'equipage1'}
+]},
+{ id:'fiche2', titre:'Identité Patient', champs:[
+  {label:'Sexe',type:'select',id:'sexe2',options:['','Homme','Femme']},
+  {label:'Nom',type:'text',id:'nom2'},
+  {label:'Prénom',type:'text',id:'prenom2'},
+  {label:'Nom de naissance',type:'text',id:'nomNaissance2'},
+  {label:'Date de naissance',type:'date',id:'dateNaissance2'},
+  {label:'Âge',type:'text',id:'age2',readonly:true},
+  {label:'Nationalité',type:'text',id:'nationalite2'},
+  {label:'Téléphone',type:'tel',id:'tel2'},
+  {label:'Adresse personnelle',type:'text',id:'adressePerso2'}
+]},
+{ id:'fiche3', titre:'Hémorragie', champs:[
   {label:'Hémorragie',type:'select',id:'hem3',options:['','Oui','Non']},
-  {label:'Obstruction des voies aériennes',type:'select',id:'vao3',options:['','Libre','Obstrué']},
+  {label:'Obstruction voies aériennes',type:'select',id:'vao3',options:['','Libre','Obstrué']},
   {label:'Traumatisme du rachis',type:'select',id:'rachis3',options:['','Oui','Non']},
   {label:'Conscience',type:'select',id:'conscience3',options:['','Oui','Non']},
   {label:'Plainte principale',type:'text',id:'plainte3'},
   {label:'RAS',type:'button',id:'ras3'}
 ]},
-{id:'fiche4',titre:'Voie aérienne',champs:[
-  {label:'Obstruction des V.A',type:'select',id:'vao4',options:['','Libre','Obstrué']},
+{ id:'fiche4', titre:'Voie aérienne', champs:[
+  {label:'Obstruction V.A',type:'select',id:'vao4',options:['','Libre','Obstrué']},
   {label:'Cause',type:'text',id:'cause4'},
   {label:'RAS',type:'button',id:'ras4'}
 ]},
-{id:'fiche5',titre:'Respiration',champs:[
+{ id:'fiche5', titre:'Respiration', champs:[
   {label:'Arrêt respiratoire ≤6s',type:'select',id:'arret5',options:['','Oui','Non']},
   {label:'Cyanose',type:'select',id:'cyanose5',options:['','Oui','Non']},
   {label:'Sueur',type:'select',id:'sueur5',options:['','Oui','Non']},
@@ -154,23 +100,26 @@ const fiches=[
   {label:'Difficulté à parler',type:'select',id:'parler5',options:['','Oui','Non']},
   {label:'RAS',type:'button',id:'ras5'}
 ]},
-// Pour le moment exemple, fiches 6 à 12 peuvent être créées de la même manière avec tous les champs détaillés
+// Ajouter fiches 6 à 12 selon le même modèle, avec tous les champs détaillés
 ];
 
-fiches.forEach(f=>{
+// Création des fiches dynamiques
+fichesData.forEach(f=>{
   const div=document.createElement('div'); div.className='fiche'; div.id=f.id;
   div.innerHTML='<h2>'+f.titre+'</h2>';
   f.champs.forEach(c=>{
     if(c.type==='select'){
       let s='<label>'+c.label+'</label><select id="'+c.id+'">';
       c.options.forEach(o=>s+='<option>'+o+'</option>'); s+='</select>'; div.innerHTML+=s;
-    } else if(c.type==='text'){div.innerHTML+='<label>'+c.label+'</label><input type="text" id="'+c.id+'">';}
+    } else if(c.type==='text'){div.innerHTML+='<label>'+c.label+'</label><input type="text" id="'+c.id+'" '+(c.readonly?'readonly':'')+'>';
+    } else if(c.type==='date'){div.innerHTML+='<label>'+c.label+'</label><input type="date" id="'+c.id+'">';}
+    else if(c.type==='textarea'){div.innerHTML+='<label>'+c.label+'</label><textarea id="'+c.id+'"></textarea>';}
     else if(c.type==='button'){
-      const btn=document.createElement('button'); btn.className='ras-button'; btn.textContent='RAS';
+      const btn=document.createElement('button'); btn.textContent='RAS'; btn.className='ras-button';
       btn.addEventListener('click',()=>{
         f.champs.forEach(cf=>{
           if(cf.type==='select') document.getElementById(cf.id).value=cf.options[1]||'Non';
-          if(cf.type==='text') document.getElementById(cf.id).value='RAS';
+          if(cf.type==='text' || cf.type==='textarea') document.getElementById(cf.id).value='RAS';
         });
       }); div.appendChild(btn);
     }
@@ -180,7 +129,19 @@ fiches.forEach(f=>{
   div.appendChild(bottom);
   document.body.appendChild(div);
 });
-</script>
 
+// Calcul âge automatique pour fiche2
+document.addEventListener('change', function(e){
+  if(e.target.id==='dateNaissance2'){
+    const d=new Date(e.target.value);
+    if(!isNaN(d.getTime())){
+      const now=new Date();
+      let age=now.getFullYear()-d.getFullYear(); const m=now.getMonth()-d.getMonth();
+      if(m<0||(m===0&&now.getDate()<d.getDate())) age--;
+      document.getElementById('age2').value=age+' ans';
+    } else document.getElementById('age2').value='';
+  }
+});
+</script>
 </body>
 </html>
