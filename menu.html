@@ -11,12 +11,19 @@
     }
 
     header {
-      background: #007bff;
-      padding: 15px;
-      display: flex;
-      align-items: flex-start;
-      flex-direction: row; /* alignement horizontal des onglets */
-      gap: 10px;
+  background: #007bff;
+  padding: 15px;
+  display: flex;
+  flex-direction: column; /* vertical : bouton puis onglets */
+  gap: 10px;
+}
+
+.onglets-container {
+  display: flex;
+  flex-direction: row; /* onglets côte à côte */
+  gap: 10px;
+}
+
     }
 
     header a {
