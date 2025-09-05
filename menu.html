@@ -1,228 +1,220 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Menu</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #fafafa;
-    }
+<meta charset="UTF-8">
+<title>Menu</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+  }
 
-    header {
-  background: #007bff;
-  padding: 15px;
-  display: flex;
-  flex-direction: column; /* vertical : bouton puis onglets */
-  gap: 10px;
-}
+  header {
+    background: #007bff;
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* bouton puis onglets */
+    gap: 10px;
+  }
 
-.onglets-container {
-  display: flex;
-  flex-direction: row; /* onglets côte à côte */
-  gap: 10px;
-}
+  header a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    background: #0056b3;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
 
-    }
+  header a:hover {
+    background-color: #003d80;
+  }
 
-    header a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      background: #0056b3;
-      padding: 8px 15px;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
+  .onglets-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
 
-    header a:hover {
-      background-color: #003d80;
-    }
+  .onglet {
+    width: 70px;
+    height: 70px;
+    background: #0056b3;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+  }
 
-    /* Onglet carré bleu */
-    .onglet {
-      width: 70px;
-      height: 70px;
-      background: #0056b3;
-      border-radius: 8px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      cursor: pointer;
-      transition: transform 0.2s;
-      position: relative;
-    }
+  .onglet:hover {
+    transform: scale(1.05);
+  }
 
-    .onglet:hover {
-      transform: scale(1.05);
-    }
+  .onglet .circle {
+    width: 35px;
+    height: 35px;
+    background: #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #666;
+  }
 
-    .onglet .circle {
-      width: 35px;
-      height: 35px;
-      background: #ccc;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      font-size: 18px;
-      color: #666;
-    }
+  .onglet .status {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: 5px;
+    background-color: red;
+  }
 
-    .onglet .status {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      margin-top: 5px;
-      background-color: red;
-    }
+  .fiche {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    max-width: 500px;
+    width: 90%;
+    z-index: 1000;
+    box-sizing: border-box;
+  }
 
-    /* Fiche intervention */
-    .fiche {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      max-width: 500px;
-      width: 90%;
-      z-index: 1000;
-      box-sizing: border-box;
-    }
+  .fiche h2 {
+    margin-top: 0;
+    text-align: center;
+  }
 
-    .fiche h2 {
-      margin-top: 0;
-      text-align: center;
-    }
+  .fiche label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+  }
 
-    .fiche label {
-      display: block;
-      margin: 10px 0 5px;
-      font-weight: bold;
-    }
+  .fiche input, .fiche select, .fiche textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    transition: background 0.3s;
+  }
 
-    .fiche input, .fiche select, .fiche textarea {
-      width: 100%;
-      padding: 8px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      margin-bottom: 15px;
-      box-sizing: border-box;
-      transition: background 0.3s;
-    }
+  .fiche input[type="file"] {
+    padding: 3px;
+  }
 
-    .fiche input[type="file"] {
-      padding: 3px;
-    }
+  .fiche .bottom-buttons {
+    display: none;
+    margin-top: 15px;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: center;
+    display: flex;
+  }
 
-    /* Boutons Transmission / Surveillance */
-    .fiche .bottom-buttons {
-      display: none;
-      margin-top: 15px;
-      gap: 10px;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-    }
+  .fiche .bottom-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
 
-    .fiche .bottom-buttons button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+  .fiche .bottom-buttons .transmission {
+    background-color: #007bff;
+    color: white;
+  }
 
-    .fiche .bottom-buttons .transmission {
-      background-color: #007bff;
-      color: white;
-    }
+  .fiche .bottom-buttons .transmission:hover {
+    background-color: #0056b3;
+  }
 
-    .fiche .bottom-buttons .transmission:hover {
-      background-color: #0056b3;
-    }
+  .fiche .bottom-buttons .surveillance {
+    background-color: #6c757d;
+    color: white;
+  }
 
-    .fiche .bottom-buttons .surveillance {
-      background-color: #6c757d;
-      color: white;
-    }
+  .fiche .bottom-buttons .surveillance:hover {
+    background-color: #5a6268;
+  }
 
-    .fiche .bottom-buttons .surveillance:hover {
-      background-color: #5a6268;
-    }
-
-    /* Fond sombre */
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 900;
-    }
-  </style>
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 900;
+  }
+</style>
 </head>
 <body>
- <header>
+<header>
   <a href="index.html">⬅ Retour à l'accueil</a>
-  
+
   <div class="onglets-container">
-    <!-- Onglet 1 -->
-    <div class="onglet" onclick="ouvrirFiche('statusIndicator')">
+    <div class="onglet" onclick="ouvrirFiche('fiche1','statusIndicator')">
       <div class="circle">?</div>
       <div class="status" id="statusIndicator"></div>
     </div>
 
-    <!-- Onglet 2 -->
-    <div class="onglet" onclick="ouvrirFiche('statusIndicator2')">
+    <div class="onglet" onclick="ouvrirFiche('fiche2','statusIndicator2')">
       <div class="circle">!</div>
       <div class="status" id="statusIndicator2"></div>
     </div>
   </div>
 </header>
 
-  <!-- Fiche intervention -->
-  <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
-  <div class="fiche" id="fiche">
-    <h2>Circonstance</h2>
+<div class="overlay" id="overlay" onclick="fermerFiche()"></div>
 
-    <label for="adresse">Adresse de l'intervention</label>
-    <input type="text" id="adresse" placeholder="Ex: 10 rue des Lilas">
+<!-- Fiche 1 -->
+<div class="fiche" id="fiche1">
+  <h2>Fiche ?</h2>
 
-    <label for="numero">Numéro de l'intervention</label>
-    <input type="text" id="numero" placeholder="Ex: 12345">
+  <label for="adresse1">Adresse de l'intervention</label>
+  <input type="text" id="adresse1" placeholder="Ex: 10 rue des Lilas">
 
-    <label for="proposition">Type d'intervention</label>
-    <select id="proposition">
-      <option value="">-- Sélectionner --</option>
-      <option value="voie_publique">Voie publique</option>
-      <option value="voie_privee">Domicile</option>
-      <option value="travail">Travail</option>
-      <option value="autre">Autre</option>
-    </select>
+  <label for="numero1">Numéro de l'intervention</label>
+  <input type="text" id="numero1" placeholder="Ex: 12345">
 
-    <label for="motif">Motif d'intervention</label>
-    <select id="motif">
-      <option value="">-- Sélectionner --</option>
-      <option value="incendie">Accouchement</option>
-      <option value="accident_routier">Arrêt cardio ventilatoire</option>
-      <option value="urgence_medicale">TS</option>
-      <option value="incident_travail">Blessé au sport</option>
-      <option value="incident_travail">Blessé au travail</option>
-      <option value="incident_travail">Blessé chute</option>
-      <option value="incident_travail">Blessé par arme à feu</option>
-      <option value="incident_travail">Blessé par arme blanche</option>
-      <option value="incident_travail">Blessé sur VP</option>
-      <option value="incident_travail">Blessé à domicile</option>
-      <option value="incident_travail">Brûlure</option>
+  <label for="proposition1">Type d'intervention</label>
+  <select id="proposition1">
+    <option value="">-- Sélectionner --</option>
+    <option value="voie_publique">Voie publique</option>
+    <option value="voie_privee">Domicile</option>
+    <option value="travail">Travail</option>
+    <option value="autre">Autre</option>
+  </select>
+
+  <label for="motif1">Motif d'intervention</label>
+  <select id="motif1">
+    <option value="">-- Sélectionner --</option>
+    <option value="accouchement">Accouchement</option>
+    <option value="arret_cardio">Arrêt cardio ventilatoire</option>
+    <option value="blessure">Blessé au sport</option>
+    <option value="incident_travail">Blessé au travail</option>
+    <option value="incident_travail">Blessé par chute</option>
+    <option value="incident_travail">Blessé par arme à feu</option>
+    <option value="incident_travail">Blessé par arme blanche</option>
+    <option value="incident_travail">Blessé sur VP</option>
+    <option value="incident_travail">Blessé à domicile</option>
+    <option value="incident_travail">Brûlure</option>
       <option value="incident_travail">Carence d'Ambulance HCT</option>
       <option value="incident_travail">Détresse Ventilatoire</option>
       <option value="incident_travail">Intoxication</option>
@@ -237,82 +229,146 @@
       <option value="incident_travail">Remfort Brancardage</option>
       <option value="incident_travail">Suspicion AVC</option>
       <option value="incident_travail">Électrisation / foudroiement de personne</option>
-      <option value="autre">Autre</option>
-    </select>
+      <option value="urgence_medicale">TS</option>
+    <option value="autre">Autre</option>
+  </select>
 
-    <label for="situation">Situation à l'arrivée</label>
-    <textarea id="situation" rows="4" placeholder="Décrire la situation à l'arrivée..."></textarea>
+  <label for="situation1">Situation à l'arrivée</label>
+  <textarea id="situation1" rows="4" placeholder="Décrire la situation à l'arrivée..."></textarea>
 
-    <label for="photos">Photos</label>
-    <input type="file" id="photos" multiple accept="image/*">
+  <label for="photos1">Photos</label>
+  <input type="file" id="photos1" multiple accept="image/*">
 
-    <h3>Équipage MEDIC</h3>
-    <label for="medic1">Ambulance Commander</label>
-    <input type="text" id="medic1" placeholder="Nom du membre">
+  <h3>Équipage MEDIC</h3>
+  <label for="medic1_1">Ambulance Commander</label>
+  <input type="text" id="medic1_1">
 
-    <label for="medic2">Driver</label>
-    <input type="text" id="medic2" placeholder="Nom du membre">
+  <label for="medic2_1">Driver</label>
+  <input type="text" id="medic2_1">
 
-    <label for="medic3">Équipier</label>
-    <input type="text" id="medic3" placeholder="Nom du membre">
+  <label for="medic3_1">Équipier</label>
+  <input type="text" id="medic3_1">
 
-    <label for="role">Renfort</label>
-    <select id="role">
-      <option value="">-- Sélectionner --</option>
-      <option value="chef_equipe">ENGINE</option>
-      <option value="paramedic">RESCUE</option>
-      <option value="infirmier">LADDER</option>
-      <option value="autre">Autre</option>
-    </select>
+  <label for="role1">Renfort</label>
+  <select id="role1">
+    <option value="">-- Sélectionner --</option>
+    <option value="engine">ENGINE</option>
+    <option value="rescue">RESCUE</option>
+    <option value="ladder">LADDER</option>
+    <option value="autre">Autre</option>
+  </select>
 
-    <div class="bottom-buttons" id="bottomButtons">
-      <button class="transmission">Transmission</button>
-      <button class="surveillance">Surveillance</button>
-    </div>
+  <div class="bottom-buttons" id="bottomButtons1">
+    <button class="transmission">Transmission</button>
+    <button class="surveillance">Surveillance</button>
   </div>
+</div>
 
-  <script>
-    let currentStatusId = 'statusIndicator';
+<!-- Fiche 2 -->
+<div class="fiche" id="fiche2">
+  <h2>Fiche !</h2>
 
-    function ouvrirFiche(statusId) {
-      currentStatusId = statusId;
-      document.getElementById('fiche').style.display = 'block';
-      document.getElementById('overlay').style.display = 'block';
-      updateStatus();
-    }
+  <label for="adresse2">Adresse de l'intervention</label>
+  <input type="text" id="adresse2">
 
-    function fermerFiche() {
-      document.getElementById('fiche').style.display = 'none';
-      document.getElementById('overlay').style.display = 'none';
-    }
+  <label for="numero2">Numéro de l'intervention</label>
+  <input type="text" id="numero2">
 
-    function updateStatus() {
-      const fields = document.querySelectorAll('#fiche input, #fiche select, #fiche textarea');
-      let total = fields.length;
-      let filled = 0;
+  <label for="proposition2">Type d'intervention</label>
+  <select id="proposition2">
+    <option value="">-- Sélectionner --</option>
+    <option value="voie_publique">Voie publique</option>
+    <option value="voie_privee">Domicile</option>
+    <option value="travail">Travail</option>
+    <option value="autre">Autre</option>
+  </select>
 
-      fields.forEach(f => {
-        let isFilled = f.tagName.toLowerCase() === 'select' ? f.value !== '' :
-                       f.type === 'file' ? f.files.length > 0 :
-                       f.value.trim() !== '';
-        f.style.backgroundColor = isFilled ? '#d4edda' : 'white';
-        if (isFilled) filled++;
-      });
+  <label for="motif2">Motif d'intervention</label>
+  <select id="motif2">
+    <option value="">-- Sélectionner --</option>
+    <option value="accouchement">Accouchement</option>
+    <option value="arret_cardio">Arrêt cardio ventilatoire</option>
+    <option value="blessure">Blessé</option>
+    <option value="autre">Autre</option>
+  </select>
 
-      const status = document.getElementById(currentStatusId);
-      if (filled === 0) status.style.backgroundColor = 'red';
-      else if (filled < total) status.style.backgroundColor = 'orange';
-      else status.style.backgroundColor = 'green';
+  <label for="situation2">Situation à l'arrivée</label>
+  <textarea id="situation2" rows="4"></textarea>
 
-      const bottomButtons = document.getElementById('bottomButtons');
-      bottomButtons.style.display = filled / total >= 0.8 ? 'flex' : 'none';
-    }
+  <label for="photos2">Photos</label>
+  <input type="file" id="photos2" multiple accept="image/*">
 
-    const fields = document.querySelectorAll('#fiche input, #fiche select, #fiche textarea');
-    fields.forEach(f => {
-      f.addEventListener('input', updateStatus);
-      f.addEventListener('change', updateStatus);
-    });
-  </script>
-</body>
-</html>
+  <h3>Équipage MEDIC</h3>
+  <label for="medic1_2">Ambulance Commander</label>
+  <input type="text" id="medic1_2">
+
+  <label for="medic2_2">Driver</label>
+  <input type="text" id="medic2_2">
+
+  <label for="medic3_2">Équipier</label>
+  <input type="text" id="medic3_2">
+
+  <label for="role2">Renfort</label>
+  <select id="role2">
+    <option value="">-- Sélectionner --</option>
+    <option value="engine">ENGINE</option>
+    <option value="rescue">RESCUE</option>
+    <option value="ladder">LADDER</option>
+    <option value="autre">Autre</option>
+  </select>
+
+  <div class="bottom-buttons" id="bottomButtons2">
+    <button class="transmission">Transmission</button>
+    <button class="surveillance">Surveillance</button>
+  </div>
+</div>
+
+<script>
+function ouvrirFiche(ficheId, statusId) {
+  document.getElementById(ficheId).style.display = 'block';
+  document.getElementById('overlay').style.display = 'block';
+  updateStatus(statusId, ficheId);
+}
+
+function fermerFiche() {
+  const fiches = document.querySelectorAll('.fiche');
+  fiches.forEach(f => f.style.display = 'none');
+  document.getElementById('overlay').style.display = 'none';
+}
+
+function updateStatus(statusId, ficheId) {
+  const fields = document.querySelectorAll('#'+ficheId+' input, #'+ficheId+' select, #'+ficheId+' textarea');
+  let total = fields.length;
+  let filled = 0;
+
+  fields.forEach(f => {
+    let isFilled = f.tagName==='SELECT' ? f.value!=='' :
+                   f.type==='file' ? f.files.length>0 :
+                   f.value.trim()!=='';
+
+    f.style.backgroundColor = isFilled ? '#d4edda' : 'white';
+    if(isFilled) filled++;
+  });
+
+  const status = document.getElementById(statusId);
+  if(filled===0) status.style.backgroundColor='red';
+  else if(filled<total) status.style.backgroundColor='orange';
+  else status.style.backgroundColor='green';
+
+  const bottomButtons = document.querySelector('#'+ficheId+' .bottom-buttons');
+  if(filled/total >= 0.8) bottomButtons.style.display='flex';
+  else bottomButtons.style.display='none';
+}
+
+const allFields = document.querySelectorAll('.fiche input, .fiche select, .fiche textarea');
+allFields.forEach(f => {
+  f.addEventListener('input',()=> {
+    const fiche = f.closest('.fiche');
+    const statusId = fiche.id==='fiche1'?'statusIndicator':'statusIndicator2';
+    updateStatus(statusId, fiche.id);
+  });
+  f.addEventListener('change',()=> {
+    const fiche = f.closest('.fiche');
+    const statusId = fiche.id==='fiche1'?'statusIndicator':'statusIndicator2';
+    updateStatus(statusId, fiche.id);
+ 
