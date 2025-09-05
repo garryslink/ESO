@@ -3,71 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <title>Menu des Onglets</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-
     .tabcontent {
       display: none;
     }
   </style>
 </head>
-<body class="bg-gray-100 h-screen">
+<body class="bg-gray-100 h-screen overflow-hidden">
 
   <div class="flex h-screen">
-    <!-- Barre latérale -->
-    <div class="w-56 bg-blue-900 text-white flex flex-col p-4 space-y-2">
+    <!-- Sidebar pour desktop -->
+    <div class="hidden md:flex flex-col w-56 bg-blue-900 text-white p-4 space-y-2 sidebar">
       <a href="index.html" class="underline text-sm mb-4">← Retour à l'accueil</a>
-      <button onclick="openTab('tab1')">Onglet 1</button>
-      <button onclick="openTab('tab2')">Onglet 2</button>
-      <button onclick="openTab('tab3')">Onglet 3</button>
-      <button onclick="openTab('tab4')">Onglet 4</button>
-      <button onclick="openTab('tab5')">Onglet 5</button>
-      <button onclick="openTab('tab6')">Onglet 6</button>
-      <button onclick="openTab('tab7')">Onglet 7</button>
-      <button onclick="openTab('tab8')">Onglet 8</button>
-      <button onclick="openTab('tab9')">Onglet 9</button>
-      <button onclick="openTab('tab10')">Onglet 10</button>
-      <button onclick="openTab('tab11')">Onglet 11</button>
-      <button onclick="openTab('tab12')">Onglet 12</button>
+      <button onclick="openTab('tab1')" class="tab-btn">Onglet 1</button>
+      <button onclick="openTab('tab2')" class="tab-btn">Onglet 2</button>
+      <button onclick="openTab('tab3')" class="tab-btn">Onglet 3</button>
+      <button onclick="openTab('tab4')" class="tab-btn">Onglet 4</button>
+      <button onclick="openTab('tab5')" class="tab-btn">Onglet 5</button>
+      <button onclick="openTab('tab6')" class="tab-btn">Onglet 6</button>
+      <button onclick="openTab('tab7')" class="tab-btn">Onglet 7</button>
+      <button onclick="openTab('tab8')" class="tab-btn">Onglet 8</button>
+      <button onclick="openTab('tab9')" class="tab-btn">Onglet 9</button>
+      <button onclick="openTab('tab10')" class="tab-btn">Onglet 10</button>
+      <button onclick="openTab('tab11')" class="tab-btn">Onglet 11</button>
+      <button onclick="openTab('tab12')" class="tab-btn">Onglet 12</button>
+    </div>
+
+    <!-- Mobile menu toggle -->
+    <div class="md:hidden fixed top-0 left-0 w-full bg-blue-900 text-white z-10 p-4 flex justify-between items-center">
+      <span class="font-bold">Menu</span>
+      <button onclick="toggleSidebar()" class="bg-blue-700 px-3 py-1 rounded">☰</button>
+    </div>
+
+    <!-- Sidebar mobile -->
+    <div id="mobileSidebar" class="md:hidden hidden fixed top-16 left-0 w-56 bg-blue-900 text-white p-4 z-20 sidebar space-y-2">
+      <button onclick="openTab('tab1')" class="tab-btn">Onglet 1</button>
+      <button onclick="openTab('tab2')" class="tab-btn">Onglet 2</button>
+      <button onclick="openTab('tab3')" class="tab-btn">Onglet 3</button>
+      <button onclick="openTab('tab4')" class="tab-btn">Onglet 4</button>
+      <button onclick="openTab('tab5')" class="tab-btn">Onglet 5</button>
+      <button onclick="openTab('tab6')" class="tab-btn">Onglet 6</button>
+      <button onclick="openTab('tab7')" class="tab-btn">Onglet 7</button>
+      <button onclick="openTab('tab8')" class="tab-btn">Onglet 8</button>
+      <button onclick="openTab('tab9')" class="tab-btn">Onglet 9</button>
+      <button onclick="openTab('tab10')" class="tab-btn">Onglet 10</button>
+      <button onclick="openTab('tab11')" class="tab-btn">Onglet 11</button>
+      <button onclick="openTab('tab12')" class="tab-btn">Onglet 12</button>
     </div>
 
     <!-- Contenu principal -->
-    <div class="flex-1 overflow-y-auto flex justify-center items-center p-6">
-      <!-- Onglets vides -->
-      <div id="tab1" class="tabcontent"><h2 class="text-xl font-bold">Contenu 1</h2></div>
-      <div id="tab2" class="tabcontent"><h2 class="text-xl font-bold">Contenu 2</h2></div>
-      <div id="tab3" class="tabcontent"><h2 class="text-xl font-bold">Contenu 3</h2></div>
-      <div id="tab4" class="tabcontent"><h2 class="text-xl font-bold">Contenu 4</h2></div>
-      <div id="tab5" class="tabcontent"><h2 class="text-xl font-bold">Contenu 5</h2></div>
-      <div id="tab6" class="tabcontent"><h2 class="text-xl font-bold">Contenu 6</h2></div>
-      <div id="tab7" class="tabcontent"><h2 class="text-xl font-bold">Contenu 7</h2></div>
-      <div id="tab8" class="tabcontent"><h2 class="text-xl font-bold">Contenu 8</h2></div>
-      <div id="tab9" class="tabcontent"><h2 class="text-xl font-bold">Contenu 9</h2></div>
-      <div id="tab10" class="tabcontent"><h2 class="text-xl font-bold">Contenu 10</h2></div>
-      <div id="tab11" class="tabcontent"><h2 class="text-xl font-bold">Contenu 11</h2></div>
+    <div class="flex-1 overflow-y-auto flex justify-center items-start p-6 pt-24 md:pt-6">
+      <!-- Onglets génériques -->
+      <div id="tab1" class="tabcontent w-full"><h2 class="text-xl font-bold">Contenu 1</h2></div>
+      <div id="tab2" class="tabcontent w-full"><h2 class="text-xl font-bold">Contenu 2</h2></div>
+      <div id="tab3" class="tabcontent w-full"><h2 class="text-xl font-bold">Contenu 3</h2></div>
+      <div id="tab4" class="tabcontent w-full"><h2 class="text-xl font-bold">Contenu 4</h2></div>
+      <div id="tab5" class="tabcontent w-full"><h2 class="text-xl font-bold">Contenu 5</h2></div>
+      <div id="tab6" class="tabcontent w-full"><h2 class="text-xl font-bold">Contenu 6</h2></div>
+      <div id="tab7" class="tabcontent w-full"><h2 class="text-xl font-bold">Contenu 7</h2></div>
+      <div id="tab8" class="tabcontent w-full"><h2 class="text-xl font-bold">Contenu 8</h2></div>
+      <div id="tab9" class="tabcontent w-full"><h2 class="text-xl font-bold">Contenu 9</h2></div>
+      <div id="tab10" class="tabcontent w-full"><h2 class="text-xl font-bold">Contenu 10</h2></div>
+      <div id="tab11" class="tabcontent w-full"><h2 class="text-xl font-bold">Contenu 11</h2></div>
 
-      <!-- ✅ Onglet 12 (centré, style tablette) -->
+      <!-- Onglet 12 : Formulaire stylisé -->
       <div id="tab12" class="tabcontent w-full flex justify-center">
         <div class="w-full max-w-md bg-white shadow-xl rounded-2xl p-6">
-          <!-- Titre -->
           <div class="bg-blue-700 text-white text-center p-3 font-bold text-lg uppercase rounded-md mb-4">
             Score de Malinas : NR
           </div>
 
-          <!-- Formulaire -->
           <form class="space-y-4 text-sm text-black">
             <div>
               <label class="block font-medium">Nombre de grossesses</label>
-              <input type="number" class="w-full p-2 border rounded-lg" placeholder="-">
+              <input type="number" class="w-full p-2 border rounded-lg" placeholder="-" required>
             </div>
 
             <div>
               <label class="block font-medium">Parité*</label>
-              <input type="text" class="w-full p-2 border rounded-lg" placeholder="-">
+              <input type="text" class="w-full p-2 border rounded-lg" placeholder="-" required>
             </div>
 
             <div>
@@ -82,7 +98,7 @@
 
             <div>
               <label class="block font-medium">Durée du travail*</label>
-              <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
+              <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR" required>
             </div>
 
             <div>
@@ -95,12 +111,12 @@
 
             <div>
               <label class="block font-medium">Durée des contractions (sec)*</label>
-              <input type="text" class="w-full p-2 border rounded-lg" placeholder="-">
+              <input type="text" class="w-full p-2 border rounded-lg" placeholder="-" required>
             </div>
 
             <div>
               <label class="block font-medium">Perte des eaux*</label>
-              <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
+              <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR" required>
             </div>
 
             <div>
@@ -113,36 +129,5 @@
               <input type="text" class="w-full p-2 border rounded-lg" placeholder="NR">
             </div>
 
-            <!-- Boutons -->
             <div class="flex justify-between pt-4">
-              <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded-xl shadow hover:bg-blue-800 w-1/2">
-                TRANSMISSION
-              </button>
-              <button type="button" class="bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:bg-orange-600 w-1/2 ml-2">
-                SURVEILLANCES
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Script pour afficher l’onglet -->
-  <script>
-    function openTab(tabId) {
-      const allTabs = document.querySelectorAll('.tabcontent');
-      allTabs.forEach(tab => tab.style.display = 'none');
-
-      const activeTab = document.getElementById(tabId);
-      if (activeTab) {
-        activeTab.style.display = 'flex';
-      }
-    }
-
-    // Onglet par défaut
-    window.onload = () => openTab('tab12');
-  </script>
-
-</body>
-</html>
+              <button type="submit" class="bg-blue-700 text-white
