@@ -15,7 +15,7 @@
       padding: 15px;
       display: flex;
       align-items: flex-start;
-      flex-direction: column;
+      flex-direction: row; /* alignement horizontal des onglets */
       gap: 10px;
     }
 
@@ -73,7 +73,7 @@
       background-color: red;
     }
 
-    /* Circonstance */
+    /* Fiche intervention */
     .fiche {
       display: none;
       position: fixed;
@@ -122,7 +122,7 @@
       gap: 10px;
       display: flex;
       flex-direction: row;
-      justify-content: center; /* centrage horizontal */
+      justify-content: center;
     }
 
     .fiche .bottom-buttons button {
@@ -167,16 +167,23 @@
   <header>
     <a href="index.html">⬅ Retour à l'accueil</a>
 
-    <div class="onglet" onclick="ouvrirFiche()">
+    <!-- Onglet 1 -->
+    <div class="onglet" onclick="ouvrirFiche('statusIndicator')">
       <div class="circle">?</div>
       <div class="status" id="statusIndicator"></div>
     </div>
+
+    <!-- Onglet 2 -->
+    <div class="onglet" onclick="ouvrirFiche('statusIndicator2')">
+      <div class="circle">!</div>
+      <div class="status" id="statusIndicator2"></div>
+    </div>
   </header>
 
-  <!-- Circonstance -->
+  <!-- Fiche intervention -->
   <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
   <div class="fiche" id="fiche">
-    <h2>Circonstance</h2>
+    <h2>Fiche d'Intervention</h2>
 
     <label for="adresse">Adresse de l'intervention</label>
     <input type="text" id="adresse" placeholder="Ex: 10 rue des Lilas">
@@ -194,36 +201,21 @@
     </select>
 
     <label for="motif">Motif d'intervention</label>
-     <select id="motif">
-     <option value="">-- Sélectionner --</option>
-     <option value="incendie">Accouchement</option>
-     <option value="accident_routier">Arret cardio ventilatoire</option> 
-     <option value="urgence_medicale">TS</option>
-     <option value="incident_travail">blessé au sport</option>
-     <option value="incident_travail">blessé au travail</option>
-     <option value="incident_travail">blessé chute</option>
-     <option value="incident_travail">blessé par arme a feu</option>
-     <option value="incident_travail">blessé par arme blanche</option>
-     <option value="incident_travail">blessé sur VP</option>
-     <option value="incident_travail">blessé à domicile</option>
-     <option value="incident_travail">blessé établissement enseignement</option>
-     <option value="incident_travail">brulure</option>
-     <option value="incident_travail">Carence d'Ambulance HCT</option>
-     <option value="incident_travail">Détresse Ventilatoire</option>
-     <option value="incident_travail">Intoxication</option>
-     <option value="incident_travail">Malaise au sport</option>
-     <option value="incident_travail">Malaise au travail</option>
-     <option value="incident_travail">Malaise VP</option> 
-     <option value="incident_travail">Malaise a domicil</option>
-     <option value="incident_travail">Noyade / Personne toimbé a l'eau</option>
-     <option value="incident_travail">Pendaison</option>
-     <option value="incident_travail">Personne inconsciente</option>
-     <option value="incident_travail">Personne ne répondant pas au appels</option>
-     <option value="incident_travail">Remfort Brancardage</option>
-     <option value="incident_travail">Suspicion AVC</option>
-     <option value="incident_travail">Électrisation / foudroiement de personne</option>
-     <option value="autre">Autre</option>
-     </select>
+    <select id="motif">
+      <option value="">-- Sélectionner --</option>
+      <option value="incendie">Accouchement</option>
+      <option value="accident_routier">Arrêt cardio ventilatoire</option>
+      <option value="urgence_medicale">TS</option>
+      <option value="incident_travail">Blessé au sport</option>
+      <option value="incident_travail">Blessé au travail</option>
+      <option value="incident_travail">Blessé chute</option>
+      <option value="incident_travail">Blessé par arme à feu</option>
+      <option value="incident_travail">Blessé par arme blanche</option>
+      <option value="incident_travail">Blessé sur VP</option>
+      <option value="incident_travail">Blessé à domicile</option>
+      <option value="incident_travail">Brûlure</option>
+      <option value="autre">Autre</option>
+    </select>
 
     <label for="situation">Situation à l'arrivée</label>
     <textarea id="situation" rows="4" placeholder="Décrire la situation à l'arrivée..."></textarea>
@@ -257,7 +249,10 @@
   </div>
 
   <script>
-    function ouvrirFiche() {
+    let currentStatusId = 'statusIndicator';
+
+    function ouvrirFiche(statusId) {
+      currentStatusId = statusId;
       document.getElementById('fiche').style.display = 'block';
       document.getElementById('overlay').style.display = 'block';
       updateStatus();
@@ -274,41 +269,20 @@
       let filled = 0;
 
       fields.forEach(f => {
-        let isFilled = false;
-        if (f.tagName.toLowerCase() === 'select') {
-          isFilled = f.value !== '';
-        } else if (f.type === 'file') {
-          isFilled = f.files.length > 0;
-        } else {
-          isFilled = f.value.trim() !== '';
-        }
-
-        // Fond vert pour champ rempli
-        if (isFilled) {
-          filled++;
-          f.style.backgroundColor = '#d4edda';
-        } else {
-          f.style.backgroundColor = 'white';
-        }
+        let isFilled = f.tagName.toLowerCase() === 'select' ? f.value !== '' :
+                       f.type === 'file' ? f.files.length > 0 :
+                       f.value.trim() !== '';
+        f.style.backgroundColor = isFilled ? '#d4edda' : 'white';
+        if (isFilled) filled++;
       });
 
-      // Indicateur dans le carré
-      const status = document.getElementById('statusIndicator');
-      if (filled === 0) {
-        status.style.backgroundColor = 'red';
-      } else if (filled < total) {
-        status.style.backgroundColor = 'orange';
-      } else {
-        status.style.backgroundColor = 'green';
-      }
+      const status = document.getElementById(currentStatusId);
+      if (filled === 0) status.style.backgroundColor = 'red';
+      else if (filled < total) status.style.backgroundColor = 'orange';
+      else status.style.backgroundColor = 'green';
 
-      // Afficher les boutons si tous les champs >= orange
       const bottomButtons = document.getElementById('bottomButtons');
-      if (filled === total || filled / total >= 0.8) { // 80% ou plus = bouton visible
-        bottomButtons.style.display = 'flex';
-      } else {
-        bottomButtons.style.display = 'none';
-      }
+      bottomButtons.style.display = filled / total >= 0.8 ? 'flex' : 'none';
     }
 
     const fields = document.querySelectorAll('#fiche input, #fiche select, #fiche textarea');
