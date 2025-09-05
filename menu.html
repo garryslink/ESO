@@ -265,13 +265,64 @@
     }
 
     function ouvrirFiche(ficheId, statusId) {
-      for (let i = 1; i <= 12; i++) {
-        document.getElementById('fiche' + i).style.display = 'none';
+      for (let i = 1; i <= 12; i++) {<!-- Fiche 2 : Identité Patient -->
+<div class="fiche" id="fiche2">
+  <h2>Identité Patient</h2>
+
+  <label for="sexe2">Sexe</label>
+  <select id="sexe2">
+    <option value="">-- Sélectionner --</option>
+    <option value="homme">Homme</option>
+    <option value="femme">Femme</option>
+  </select>
+
+  <label for="nom2">Nom</label>
+  <input type="text" id="nom2" placeholder="Nom">
+
+  <label for="prenom2">Prénom</label>
+  <input type="text" id="prenom2" placeholder="Prénom">
+
+  <label for="nomNaissance2">Nom de naissance</label>
+  <input type="text" id="nomNaissance2" placeholder="Nom de naissance">
+
+  <label for="dateNaissance2">Date de naissance</label>
+  <input type="date" id="dateNaissance2">
+
+  <label for="age2">Âge</label>
+  <input type="text" id="age2" readonly placeholder="Calculé automatiquement">
+
+  <label for="nationalite2">Nationalité</label>
+  <input type="text" id="nationalite2" placeholder="Ex: Française">
+
+  <label for="telephone2">Numéro de téléphone</label>
+  <input type="tel" id="telephone2" placeholder="06 12 34 56 78">
+
+  <label for="adressePerso2">Adresse personnelle</label>
+  <input type="text" id="adressePerso2" placeholder="Ex: 15 avenue de la République">
+
+  <div class="bottom-buttons" id="bottomButtons2">
+    <button class="transmission">Transmission</button>
+    <button class="surveillance">Surveillance</button>
+  </div>
+</div>
+
+<script>
+  // Calcul automatique de l'âge
+  document.getElementById('dateNaissance2').addEventListener('change', function () {
+    const birthDate = new Date(this.value);
+    if (!isNaN(birthDate.getTime())) {
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
       }
-      document.getElementById('overlay').style.display = 'block';
-      document.getElementById(ficheId).style.display = 'block';
-      updateStatus(ficheId, statusId);
+      document.getElementById('age2').value = age + " ans";
+    } else {
+      document.getElementById('age2').value = "";
     }
+  });
+</script>
 
     function fermerFiche() {
       for (let i = 1; i <= 12; i++) {
