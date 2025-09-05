@@ -42,8 +42,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       cursor: pointer;
       transition: transform 0.2s;
+      position: relative;
     }
 
     .onglet:hover {
@@ -61,6 +63,15 @@
       font-weight: bold;
       font-size: 18px;
       color: #666;
+    }
+
+    /* Petit indicateur dans le carré */
+    .onglet .status {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-top: 5px;
+      background-color: red; /* rouge par défaut */
     }
 
     /* Fiche intervention */
@@ -85,9 +96,7 @@
     }
 
     .fiche label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: block;
       margin: 10px 0 5px;
       font-weight: bold;
     }
@@ -99,7 +108,6 @@
       border: 1px solid #ccc;
       margin-bottom: 15px;
       box-sizing: border-box;
-      transition: background 0.3s;
     }
 
     .fiche input[type="file"] {
@@ -115,23 +123,15 @@
       background: rgba(0,0,0,0.5);
       z-index: 900;
     }
-
-    /* Indicateurs */
-    .indicator {
-      display: inline-block;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      margin-left: 5px;
-      background-color: red;
-    }
   </style>
 </head>
 <body>
   <header>
     <a href="index.html">⬅ Retour à l'accueil</a>
+
     <div class="onglet" onclick="ouvrirFiche()">
       <div class="circle">?</div>
+      <div class="status" id="statusIndicator"></div>
     </div>
   </header>
 
@@ -140,13 +140,13 @@
   <div class="fiche" id="fiche">
     <h2>Fiche d'Intervention</h2>
 
-    <label for="adresse">Adresse de l'intervention <span class="indicator"></span></label>
+    <label for="adresse">Adresse de l'intervention</label>
     <input type="text" id="adresse" placeholder="Ex: 10 rue des Lilas">
 
-    <label for="numero">Numéro de l'intervention <span class="indicator"></span></label>
+    <label for="numero">Numéro de l'intervention</label>
     <input type="text" id="numero" placeholder="Ex: 12345">
 
-    <label for="proposition">Type d'intervention <span class="indicator"></span></label>
+    <label for="proposition">Type d'intervention</label>
     <select id="proposition">
       <option value="">-- Sélectionner --</option>
       <option value="voie_publique">Voie publique</option>
@@ -155,7 +155,7 @@
       <option value="autre">Autre</option>
     </select>
 
-    <label for="motif">Motif d'intervention <span class="indicator"></span></label>
+    <label for="motif">Motif d'intervention</label>
     <select id="motif">
       <option value="">-- Sélectionner --</option>
       <option value="accouchement">Accouchement</option>
@@ -166,25 +166,23 @@
       <option value="autre">Autre</option>
     </select>
 
-    <label for="situation">Situation à l'arrivée <span class="indicator"></span></label>
+    <label for="situation">Situation à l'arrivée</label>
     <textarea id="situation" rows="4" placeholder="Décrire la situation à l'arrivée..."></textarea>
 
-    <label for="photos">Photos <span class="indicator"></span></label>
+    <label for="photos">Photos</label>
     <input type="file" id="photos" multiple accept="image/*">
 
-    <!-- Section Équipage Medic -->
     <h3>Équipage Medic</h3>
-
-    <label for="medic1">Membre 1 <span class="indicator"></span></label>
+    <label for="medic1">Membre 1</label>
     <input type="text" id="medic1" placeholder="Nom du membre">
 
-    <label for="medic2">Membre 2 <span class="indicator"></span></label>
+    <label for="medic2">Membre 2</label>
     <input type="text" id="medic2" placeholder="Nom du membre">
 
-    <label for="medic3">Membre 3 <span class="indicator"></span></label>
+    <label for="medic3">Membre 3</label>
     <input type="text" id="medic3" placeholder="Nom du membre">
 
-    <label for="role">Rôle principal <span class="indicator"></span></label>
+    <label for="role">Rôle principal</label>
     <select id="role">
       <option value="">-- Sélectionner --</option>
       <option value="chef_equipe">Chef d'équipe</option>
@@ -199,6 +197,7 @@
     function ouvrirFiche() {
       document.getElementById('fiche').style.display = 'block';
       document.getElementById('overlay').style.display = 'block';
+      updateStatus(); // Mettre à jour l'indicateur dès ouverture
     }
 
     function fermerFiche() {
@@ -206,28 +205,37 @@
       document.getElementById('overlay').style.display = 'none';
     }
 
-    // Fonction pour mettre à jour l'indicateur
-    function updateIndicator(el) {
-      const indicator = el.previousElementSibling.querySelector('.indicator');
-      let value = el.value.trim();
-      if (el.tagName.toLowerCase() === 'select') {
-        value = el.value;
-      }
-      if (value === '') {
-        indicator.style.backgroundColor = 'red'; // vide
-      } else if (value.length < 3) {
-        indicator.style.backgroundColor = 'orange'; // partiellement rempli
+    // Met à jour l'indicateur dans le carré bleu
+    function updateStatus() {
+      const fields = document.querySelectorAll('#fiche input, #fiche select, #fiche textarea');
+      let total = fields.length;
+      let filled = 0;
+
+      fields.forEach(f => {
+        if (f.tagName.toLowerCase() === 'select') {
+          if (f.value !== '') filled++;
+        } else if (f.type === 'file') {
+          if (f.files.length > 0) filled++;
+        } else {
+          if (f.value.trim() !== '') filled++;
+        }
+      });
+
+      const status = document.getElementById('statusIndicator');
+      if (filled === 0) {
+        status.style.backgroundColor = 'red';
+      } else if (filled < total) {
+        status.style.backgroundColor = 'orange';
       } else {
-        indicator.style.backgroundColor = 'green'; // rempli
+        status.style.backgroundColor = 'green';
       }
     }
 
-    const inputs = document.querySelectorAll('#fiche input, #fiche select, #fiche textarea');
-    inputs.forEach(el => {
-      el.addEventListener('input', () => updateIndicator(el));
-      if (el.tagName.toLowerCase() === 'select') {
-        el.addEventListener('change', () => updateIndicator(el));
-      }
+    // Écoute tous les champs pour mise à jour en temps réel
+    const fields = document.querySelectorAll('#fiche input, #fiche select, #fiche textarea');
+    fields.forEach(f => {
+      f.addEventListener('input', updateStatus);
+      f.addEventListener('change', updateStatus);
     });
   </script>
 </body>
