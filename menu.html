@@ -1,204 +1,199 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Fiche Obstétricale</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Onglet 12 - Score de Malinas</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .tabcontent { display: none; }
-    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 50; }
-    .modal-content { background: white; padding: 2rem; border-radius: 1rem; max-height: 80vh; overflow-y: auto; width: 90%; max-width: 800px; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .tabcontent {
+      display: none;
+    }
   </style>
 </head>
-<body class="bg-gray-100 h-screen overflow-hidden">
+<body class="bg-gray-100 h-screen">
 
-  <div class="flex h-screen">
-    <!-- SIDEBAR DESKTOP -->
-    <div class="hidden md:flex flex-col w-56 bg-blue-900 text-white p-4 space-y-2 sidebar">
-      <a href="index.html" class="underline text-sm mb-4">← Retour à l'accueil</a>
-      <!-- Boutons onglets -->
-      <template id="sidebar-buttons">
-        <!-- Injecté dynamiquement en JS -->
-      </template>
-    </div>
-
-    <!-- MENU MOBILE -->
-    <div class="md:hidden fixed top-0 left-0 w-full bg-blue-900 text-white z-10 p-4 flex justify-between items-center">
-      <span class="font-bold">Menu</span>
-      <button onclick="toggleSidebar()" class="bg-blue-700 px-3 py-1 rounded">☰</button>
-    </div>
-
-    <!-- SIDEBAR MOBILE -->
-    <div id="mobileSidebar" class="md:hidden hidden fixed top-16 left-0 w-56 bg-blue-900 text-white p-4 z-20 sidebar space-y-2">
-      <!-- Boutons onglets (idem que desktop) -->
-    </div>
-
-    <!-- CONTENU PRINCIPAL -->
-    <div class="flex-1 overflow-y-auto p-6 pt-24 md:pt-6 relative">
-      <!-- Contenu des onglets -->
-      <div id="tabs-container" class="w-full h-full">
-        <!-- Onglets injectés ici -->
-      </div>
-    </div>
+<div class="flex h-screen">
+  <!-- Barre latérale -->
+  <div class="w-56 bg-blue-900 text-white flex flex-col p-4 space-y-2">
+    <a href="index.html" class="underline text-sm mb-4">← Retour à l'accueil</a>
+    <button onclick="openTab('tab12')">Onglet 12</button>
   </div>
 
-  <!-- MODAL de transmission -->
-  <div id="bilanModal" class="modal">
-    <div class="modal-content">
-      <h2 class="text-xl font-bold mb-4">Bilan complet</h2>
-      <pre id="bilanContent" class="text-sm whitespace-pre-wrap bg-gray-100 p-4 rounded-lg"></pre>
-      <div class="text-right mt-4">
-        <button onclick="closeBilan()" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800">Fermer</button>
-      </div>
-    </div>
-  </div>
-<script>
-  const tabContainer = document.getElementById('tabs-container');
-  const sidebarButtons = document.getElementById('sidebar-buttons');
-  const mobileSidebar = document.getElementById('mobileSidebar');
-
-  // Crée les onglets 1 à 11 dynamiquement
-  for (let i = 1; i <= 11; i++) {
-    const btn = document.createElement('button');
-    btn.textContent = 'Onglet ' + i;
-    btn.className = 'tab-btn bg-blue-900 hover:bg-blue-800 px-3 py-2 rounded text-left w-full';
-    btn.setAttribute('onclick', `openTab('tab${i}')`);
-    sidebarButtons.parentElement.appendChild(btn);
-    const mobileBtn = btn.cloneNode(true);
-    mobileSidebar.appendChild(mobileBtn);
-
-    const tab = document.createElement('div');
-    tab.id = 'tab' + i;
-    tab.className = 'tabcontent w-full';
-    tab.innerHTML = `<h2 class="text-xl font-bold">Contenu ${i}</h2>`;
-    tabContainer.appendChild(tab);
-  }
-</script>
-<script>
-  // Onglet 12
-  const tab12 = document.createElement('div');
-  tab12.id = 'tab12';
-  tab12.className = 'tabcontent w-full h-full';
-
-  tab12.innerHTML = `
-    <div class="w-full h-full bg-white shadow-inner p-8 overflow-y-auto">
-      <div class="bg-blue-700 text-white text-center p-4 font-bold text-xl uppercase mb-6 rounded">
+  <!-- Contenu principal -->
+  <div class="flex-1 overflow-y-auto flex justify-center items-start p-6 bg-white">
+    <!-- Onglet 12 -->
+    <div id="tab12" class="tabcontent w-full max-w-4xl flex flex-col space-y-4">
+      <div class="bg-blue-700 text-white text-center p-3 font-bold text-lg uppercase rounded-md">
         Score de Malinas : <span id="malinasScore">NR</span>
       </div>
 
-      <form id="malinasForm" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-black">
+      <form class="space-y-4 text-sm text-black" oninput="calculateMalinas()">
+        <!-- Infos principales -->
         <div>
-          <label class="block font-medium">Durée du travail (en heures)*</label>
-          <input type="number" id="travail" class="w-full p-3 border rounded-lg" placeholder="0">
+          <label class="block font-medium">Nombre de grossesses</label>
+          <input type="number" id="grossesses" class="w-full p-2 border rounded-lg" placeholder="-">
         </div>
 
         <div>
-          <label class="block font-medium">Intervalle des contractions (minutes)*</label>
-          <input type="number" id="intervalle" class="w-full p-3 border rounded-lg" placeholder="0">
+          <label class="block font-medium">Parité*</label>
+          <input type="number" id="parite" class="w-full p-2 border rounded-lg" placeholder="-">
         </div>
 
         <div>
-          <label class="block font-medium">Durée des contractions (secondes)*</label>
-          <input type="number" id="duree" class="w-full p-3 border rounded-lg" placeholder="0">
+          <label class="block font-medium">Date des dernières règles</label>
+          <input type="text" id="ddr" class="w-full p-2 border rounded-lg" placeholder="NR">
+        </div>
+
+        <div>
+          <label class="block font-medium">Date du terme</label>
+          <input type="text" id="terme" class="w-full p-2 border rounded-lg" placeholder="NR">
+        </div>
+
+        <div>
+          <label class="block font-medium">Durée du travail*</label>
+          <input type="text" id="dureeTravail" class="w-full p-2 border rounded-lg" placeholder="NR">
+        </div>
+
+        <div>
+          <label class="block font-medium">Intervalle des contractions*</label>
+          <div class="flex gap-2">
+            <input type="number" id="intervalleMin" class="w-1/2 p-2 border rounded-lg" placeholder="min">
+            <input type="number" id="intervalleSec" class="w-1/2 p-2 border rounded-lg" placeholder="sec">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-medium">Durée des contractions (sec)*</label>
+          <input type="number" id="dureeContractions" class="w-full p-2 border rounded-lg" placeholder="-">
         </div>
 
         <div>
           <label class="block font-medium">Perte des eaux*</label>
-          <select id="eaux" class="w-full p-3 border rounded-lg">
-            <option value="non">Non</option>
-            <option value="oui">Oui</option>
+          <input type="text" id="perteEaux" class="w-full p-2 border rounded-lg" placeholder="NR">
+        </div>
+
+        <div>
+          <label class="block font-medium">Saignement estimé (mL)</label>
+          <input type="text" id="saignement" class="w-full p-2 border rounded-lg" placeholder="-">
+        </div>
+
+        <div>
+          <label class="block font-medium">Envie de pousser</label>
+          <input type="text" id="enviePousser" class="w-full p-2 border rounded-lg" placeholder="NR">
+        </div>
+
+        <!-- Données supplémentaires -->
+        <hr class="my-4">
+
+        <div>
+          <label class="block font-medium">Identité de la patiente</label>
+          <input type="text" id="identite" class="w-full p-2 border rounded-lg" placeholder="Nom, Prénom">
+        </div>
+
+        <div>
+          <label class="block font-medium">Professionnel contacté</label>
+          <select id="contacte" class="w-full p-2 border rounded-lg">
+            <option value="">Sélectionner</option>
+            <option>Médecin</option>
+            <option>Sage-femme</option>
+            <option>Autre</option>
           </select>
         </div>
 
         <div>
-          <label class="block font-medium">Envie de pousser*</label>
-          <select id="pousser" class="w-full p-3 border rounded-lg">
-            <option value="non">Non</option>
-            <option value="oui">Oui</option>
+          <label class="block font-medium">ATCD médicaux / obstétricaux</label>
+          <textarea id="atcd" class="w-full p-2 border rounded-lg"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-medium">Signes fonctionnels</label>
+          <textarea id="signes" class="w-full p-2 border rounded-lg"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-medium">Évaluation obstétricale</label>
+          <textarea id="eval_obst" class="w-full p-2 border rounded-lg"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-medium">Présentation fœtale</label>
+          <select id="presentation" class="w-full p-2 border rounded-lg">
+            <option value="">Sélectionner</option>
+            <option>Céphalique</option>
+            <option>Siège</option>
+            <option>Transverse</option>
           </select>
         </div>
 
+        <div>
+          <label class="block font-medium">Mobilité fœtale</label>
+          <select id="mobilite" class="w-full p-2 border rounded-lg">
+            <option value="">Sélectionner</option>
+            <option>Présente</option>
+            <option>Absente</option>
+            <option>Diminution</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-medium">RCF / Monitoring</label>
+          <textarea id="rcf" class="w-full p-2 border rounded-lg"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-medium">Échographie</label>
+          <textarea id="echo" class="w-full p-2 border rounded-lg"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-medium">Urines / Glycosurie / Protéinurie</label>
+          <textarea id="urines" class="w-full p-2 border rounded-lg"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-medium">Bilan biologique</label>
+          <textarea id="bilan_bio" class="w-full p-2 border rounded-lg"></textarea>
+        </div>
+
         <!-- Boutons -->
-        <div class="md:col-span-2 flex justify-between pt-6">
-          <button type="submit" class="bg-blue-700 text-white px-6 py-3 rounded-xl shadow hover:bg-blue-800 w-1/2">
+        <div class="flex justify-between pt-4">
+          <button type="button" onclick="transmettre()" class="bg-blue-700 text-white px-4 py-2 rounded-xl shadow hover:bg-blue-800 w-1/2">
             TRANSMISSION
           </button>
-          <button type="button" class="bg-orange-500 text-white px-6 py-3 rounded-xl shadow hover:bg-orange-600 w-1/2 ml-4">
+          <button type="button" class="bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:bg-orange-600 w-1/2 ml-2">
             SURVEILLANCES
           </button>
         </div>
       </form>
+
+      <div id="bilanText" class="mt-6 p-4 bg-gray-200 rounded-lg whitespace-pre-wrap text-sm hidden"></div>
     </div>
-  `;
+  </div>
+</div>
 
-  tabContainer.appendChild(tab12);
-
-  const tab12Btn = document.createElement('button');
-  tab12Btn.textContent = 'Onglet 12';
-  tab12Btn.className = 'tab-btn bg-blue-900 hover:bg-blue-800 px-3 py-2 rounded text-left w-full';
-  tab12Btn.setAttribute('onclick', `openTab('tab12')`);
-  sidebarButtons.parentElement.appendChild(tab12Btn);
-  mobileSidebar.appendChild(tab12Btn.cloneNode(true));
-</script>
+<!-- Scripts -->
 <script>
   function openTab(tabId) {
     document.querySelectorAll('.tabcontent').forEach(tab => tab.style.display = 'none');
     const activeTab = document.getElementById(tabId);
-    if (activeTab) {
-      activeTab.style.display = 'block';
-    }
-    // Fermer sidebar mobile après clic
-    document.getElementById('mobileSidebar').classList.add('hidden');
+    if (activeTab) activeTab.style.display = 'block';
   }
 
-  function toggleSidebar() {
-    document.getElementById('mobileSidebar').classList.toggle('hidden');
-  }
-
-  // Score de Malinas dynamique
-  function calculerScore() {
-    let score = 0;
-    const travail = parseFloat(document.getElementById("travail").value) || 0;
-    const intervalle = parseFloat(document.getElementById("intervalle").value) || 0;
-    const duree = parseFloat(document.getElementById("duree").value) || 0;
-    const eaux = document.getElementById("eaux").value;
-    const pousser = document.getElementById("pousser").value;
-
-    if (travail > 4) score++;
-    if (intervalle < 5) score++;
-    if (duree > 40) score++;
-    if (eaux === "oui") score++;
-    if (pousser === "oui") score++;
-
-    document.getElementById("malinasScore").textContent = score;
-  }
-
-  document.getElementById("malinasForm").addEventListener("input", calculerScore);
-
-  // Bilan complet
-  document.getElementById("malinasForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    let bilan = "📝 Bilan des données saisies :\n\n";
-    for (let i = 1; i <= 11; i++) {
-      bilan += `🗂 Onglet ${i} : Données non saisies\n`;
-    }
-
-    bilan += `\n🧾 Onglet 12 - Score de Malinas : ${document.getElementById("malinasScore").textContent}\n`;
-    bilan += `- Durée du travail : ${document.getElementById("travail").value} h\n`;
-    bilan += `- Intervalle des contractions : ${document.getElementById("intervalle").value} min\n`;
-    bilan += `- Durée des contractions : ${document.getElementById("duree").value} sec\n`;
-    bilan += `- Perte des eaux : ${document.getElementById("eaux").value}\n`;
-    bilan += `- Envie de pousser : ${document.getElementById("pousser").value}\n`;
-
-    document.getElementById("bilanContent").textContent = bilan;
-    document.getElementById("bilanModal").style.display = "flex";
-  });
-
-  function closeBilan() {
-    document.getElementById("bilanModal").style.display = "none";
-  }
-
-  // Onglet par défaut
   window.onload = () => openTab('tab12');
-</script>
+
+  function calculateMalinas() {
+    const parite = parseInt(document.getElementById("parite").value) || 0;
+    const dureeTravail = document.getElementById("dureeTravail").value.trim() !== "" ? 1 : 0;
+    const contraction = parseInt(document.getElementById("dureeContractions").value) || 0;
+
+    // Exemple très simple : additionner les points
+    let score = 0;
+    if (parite >= 1) score++;
+    if (dureeTravail) score++;
+    if (contraction >= 40) score++;
+
+    document.getElementById("malinasScore").
