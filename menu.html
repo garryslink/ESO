@@ -1,133 +1,203 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Application Médic</title>
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #f5f5f5; }
-    header { padding: 15px; display: flex; flex-direction: column; gap: 10px; }
-    header a { color: white; background: #0056b3; text-decoration: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; width: fit-content; }
-    .onglets-container { display: flex; flex-direction: column; gap: 10px; }
-    .onglet { width: 70px; height: 70px; background: #0056b3; border-radius: 8px; display: flex; justify-content: center; align-items: center; flex-direction: column; cursor: pointer; }
-    .onglet .circle { width: 40px; height: 40px; border-radius: 50%; background: #ccc; display: flex; justify-content: center; align-items: center; font-size: 20px; }
-    .onglet .status { width: 12px; height: 12px; border-radius: 50%; margin-top: 5px; background: red; }
-    .fiche { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 600px; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
-    .fiche h2 { text-align: center; margin-top: 0; }
-    label { font-weight: bold; display: block; margin: 10px 0 5px; }
-    input, select, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 10px; }
-    textarea { resize: vertical; }
-    .bottom-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
-    .bottom-buttons button { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; color: white; }
-    .transmission { background: #007bff; }
-    .surveillance { background: #6c757d; }
-    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 900; }
-  </style>
-</head>
-<body>
-  <header>
-    <a href="#">⬅ Retour à l'accueil</a>
-    <div class="onglets-container">
-      <div class="onglet" onclick="ouvrirFiche(1)"><div class="circle">❓</div><div class="status" id="s1"></div></div>
-      <div class="onglet" onclick="ouvrirFiche(2)"><div class="circle">❗</div><div class="status" id="s2"></div></div>
-      <div class="onglet" onclick="ouvrirFiche(3)"><div class="circle">✖</div><div class="status" id="s3"></div></div>
-      <div class="onglet" onclick="ouvrirFiche(4)"><div class="circle">A</div><div class="status" id="s4"></div></div>
-      <div class="onglet" onclick="ouvrirFiche(5)"><div class="circle">B</div><div class="status" id="s5"></div></div>
-      <div class="onglet" onclick="ouvrirFiche(6)"><div class="circle">C</div><div class="status" id="s6"></div></div>
-      <div class="onglet" onclick="ouvrirFiche(7)"><div class="circle">D</div><div class="status" id="s7"></div></div>
-      <div class="onglet" onclick="ouvrirFiche(8)"><div class="circle">E</div><div class="status" id="s8"></div></div>
-      <div class="onglet" onclick="ouvrirFiche(9)"><div class="circle">❤️</div><div class="status" id="s9"></div></div>
-      <div class="onglet" onclick="ouvrirFiche(10)"><div class="circle">💊</div><div class="status" id="s10"></div></div>
-      <div class="onglet" onclick="ouvrirFiche(11)"><div class="circle">✚</div><div class="status" id="s11"></div></div>
-      <div class="onglet" onclick="ouvrirFiche(12)"><div class="circle">👶</div><div class="status" id="s12"></div></div>
-    </div>
-  </header>
+import React, { useState, useEffect, useRef } from "react";
 
-  <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
-  <div id="fiches-container"></div>
+// Single-file React component prototype for a Syopé-like RP webapp
+// - Tailwind-ready classes (assumes Tailwind is available in the project)
+// - Local-only history (localStorage) — no accounts
+// - Create / view incident cards, export single card to PDF
+// - Minimal, extensible UI
 
-  <script>
-    function creerFiche(num, titre, contenu) {
-      return `
-        <div class="fiche" id="fiche${num}">
-          <h2>${titre}</h2>
-          ${contenu}
-          <div class="bottom-buttons">
-            <button class="transmission">Transmission</button>
-            <button class="surveillance">Surveillance</button>
+export default function SyopeLikeApp() {
+  const [cards, setCards] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("syope_cards")) || [];
+    } catch (e) {
+      return [];
+    }
+  });
+
+  const [form, setForm] = useState({
+    title: "",
+    location: "",
+    priority: "Normal",
+    description: "",
+  });
+
+  const [selectedId, setSelectedId] = useState(null);
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem("syope_cards", JSON.stringify(cards));
+  }, [cards]);
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm((f) => ({ ...f, [name]: value }));
+  }
+
+  function addCard(e) {
+    e && e.preventDefault();
+    if (!form.title.trim()) return;
+    const newCard = {
+      id: Date.now().toString(),
+      createdAt: new Date().toISOString(),
+      ...form,
+    };
+    setCards((c) => [newCard, ...c]);
+    setForm({ title: "", location: "", priority: "Normal", description: "" });
+  }
+
+  function removeCard(id) {
+    if (!confirm("Supprimer cette fiche ?")) return;
+    setCards((c) => c.filter((x) => x.id !== id));
+    if (selectedId === id) setSelectedId(null);
+  }
+
+  function exportCardToPDF(card) {
+    // Lightweight PDF export using jsPDF if available; otherwise fallback to window.print
+    try {
+      // eslint-disable-next-line no-undef
+      const { jsPDF } = window.jspdf || {};
+      if (jsPDF) {
+        const doc = new jsPDF();
+        doc.setFontSize(16);
+        doc.text(card.title || "Fiche incident", 10, 20);
+        doc.setFontSize(11);
+        doc.text(`Date: ${new Date(card.createdAt).toLocaleString()}`, 10, 30);
+        doc.text(`Lieu: ${card.location || "-"}`, 10, 40);
+        doc.text(`Priorité: ${card.priority || "-"}`, 10, 50);
+        // split description into lines
+        const lines = doc.splitTextToSize(card.description || "-", 180);
+        doc.text(lines, 10, 60);
+        doc.save((card.title || "fiche").replace(/[^a-z0-9]/gi, "_") + ".pdf");
+        return;
+      }
+    } catch (err) {
+      // ignore and fallback
+    }
+
+    // Fallback: open printable page
+    const w = window.open("", "_blank");
+    w.document.write(`<pre style='font-family:system-ui'>${escapeHtml(renderCardText(card))}</pre>`);
+    w.document.title = card.title || "fiche";
+    w.document.close();
+    w.print();
+  }
+
+  function renderCardText(card) {
+    return `Titre: ${card.title}\nDate: ${new Date(card.createdAt).toLocaleString()}\nLieu: ${card.location}\nPriorité: ${card.priority}\n\n${card.description}`;
+  }
+
+  function escapeHtml(s) {
+    return s
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\n/g, "<br />");
+  }
+
+  function importSampleData() {
+    const sample = [
+      {
+        id: "sample1",
+        createdAt: new Date().toISOString(),
+        title: "RP : malaise sur la voie publique",
+        location: "Centre-ville — Place du marché",
+        priority: "Haute",
+        description: "Personne inconsciente, respiration faible. Mise en place d'un périmètre. Demande d'ambulance et police.",
+      },
+    ];
+    setCards((c) => [...sample, ...c]);
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50 p-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Left: form */}
+        <div className="col-span-1 md:col-span-2">
+          <div className="bg-white shadow rounded-lg p-6">
+            <h1 className="text-2xl font-semibold mb-4">Création de fiche — Syopé-like (RP)</h1>
+            <form ref={formRef} onSubmit={addCard} className="space-y-3">
+              <div>
+                <label className="block text-sm">Titre</label>
+                <input name="title" value={form.title} onChange={handleChange} className="mt-1 block w-full rounded-md border p-2" placeholder="Ex : Malaise — Place X" />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm">Lieu</label>
+                  <input name="location" value={form.location} onChange={handleChange} className="mt-1 block w-full rounded-md border p-2" placeholder="Adresse / repère" />
+                </div>
+                <div>
+                  <label className="block text-sm">Priorité</label>
+                  <select name="priority" value={form.priority} onChange={handleChange} className="mt-1 block w-full rounded-md border p-2">
+                    <option>Faible</option>
+                    <option>Normal</option>
+                    <option>Haute</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm">Description</label>
+                <textarea name="description" value={form.description} onChange={handleChange} className="mt-1 block w-full rounded-md border p-2" rows={6} placeholder="Détails — qui, quoi, comment"></textarea>
+              </div>
+
+              <div className="flex gap-2">
+                <button type="submit" className="px-4 py-2 rounded bg-indigo-600 text-white">Ajouter la fiche</button>
+                <button type="button" onClick={() => { setForm({ title: "", location: "", priority: "Normal", description: "" }); }} className="px-3 py-2 rounded border">Réinitialiser</button>
+                <button type="button" onClick={importSampleData} className="px-3 py-2 rounded border">Importer exemple</button>
+              </div>
+            </form>
+          </div>
+
+          {/* Map placeholder / live view */}
+          <div className="mt-6 bg-white shadow rounded-lg p-6">
+            <h2 className="text-lg font-medium mb-3">Carte / Vue opérationnelle (placeholder)</h2>
+            <div className="h-48 rounded border-dashed border-2 border-slate-200 flex items-center justify-center text-slate-400">Intégrer un composant carte (Leaflet / Mapbox) ici</div>
+            <p className="text-sm mt-2 text-slate-500">Conseil : remplacez le placeholder par Leaflet + OpenStreetMap pour éviter des coûts Mapbox.</p>
           </div>
         </div>
-      `;
-    }
 
-    let fichesHTML = "";
+        {/* Right: history list */}
+        <aside className="col-span-1">
+          <div className="bg-white shadow rounded-lg p-4 sticky top-6">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-medium">Historique (local)</h3>
+              <button onClick={() => { if (confirm('Vider tout l\'historique ?')) { setCards([]); } }} className="text-sm">Vider</button>
+            </div>
 
-    // Fiche 1
-    fichesHTML += creerFiche(1,"Circonstance",
-      `<label>Adresse</label><input type="text">
-       <label>Numéro</label><input type="text">
-       <label>Motif d'intervention</label>
-       <select><option>Accouchement</option><option>Arrêt cardio ventilatoire</option><option>Blessé au sport</option></select>`
-    );
+            <div className="mt-3 max-h-[60vh] overflow-auto">
+              {cards.length === 0 ? (
+                <div className="text-sm text-slate-500">Aucune fiche — créez-en une à gauche.</div>
+              ) : (
+                cards.map((c) => (
+                  <div key={c.id} className={`p-3 rounded mb-2 border ${selectedId === c.id ? 'border-indigo-300 bg-indigo-50' : 'border-slate-100 bg-white'}`}>
+                    <div className="flex justify-between">
+                      <div>
+                        <div className="font-semibold text-sm">{c.title}</div>
+                        <div className="text-xs text-slate-500">{new Date(c.createdAt).toLocaleString()}</div>
+                      </div>
+                      <div className="flex gap-2 items-center">
+                        <button onClick={() => { setSelectedId(c.id === selectedId ? null : c.id); }} className="text-xs px-2 py-1 rounded border">Voir</button>
+                        <button onClick={() => exportCardToPDF(c)} className="text-xs px-2 py-1 rounded border">PDF</button>
+                        <button onClick={() => removeCard(c.id)} className="text-xs px-2 py-1 rounded border">Suppr</button>
+                      </div>
+                    </div>
+                    {selectedId === c.id && (
+                      <div className="mt-2 text-sm text-slate-700">
+                        <div><strong>Lieu :</strong> {c.location}</div>
+                        <div><strong>Priorité :</strong> {c.priority}</div>
+                        <div className="mt-2 whitespace-pre-wrap">{c.description}</div>
+                      </div>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
 
-    // Fiche 2
-    fichesHTML += creerFiche(2,"Identité Patient",
-      `<label>Sexe</label><select><option>Homme</option><option>Femme</option></select>
-       <label>Nom</label><input type="text">
-       <label>Prénom</label><input type="text">
-       <label>Date de naissance</label><input type="date" id="dateNaissance2">
-       <label>Âge</label><input type="text" id="age2" readonly>`
-    );
-
-    // Fiche 3
-    fichesHTML += creerFiche(3,"Examen rapide",
-      `<label>Hémorragie</label><select><option>Oui</option><option>Non</option></select>
-       <label>Obstruction V.A</label><select><option>Libre</option><option>Obstruée</option></select>`
-    );
-
-    // Exemple Fiche 4
-    fichesHTML += creerFiche(4,"Voies Aériennes",
-      `<label>Obstruction des V.A</label><select><option>Libre</option><option>Obstrué</option></select>
-       <label>Cause</label><input type="text">`
-    );
-
-    // Exemple Fiche 6
-    fichesHTML += creerFiche(6,"Circulation",
-      `<label>Hémorragie</label><select><option>Oui</option><option>Non</option></select>
-       <label>Arrêt cardiaque</label><select><option>Oui</option><option>Non</option></select>`
-    );
-
-    // Exemple Fiche 12
-    fichesHTML += creerFiche(12,"Score de Malinas",
-      `<label>Nombre de grossesses</label><input type="number" min="0">
-       <label>Mois de grossesse</label><input type="number" min="0" max="12">
-       <label>Date du terme</label><input type="date">`
-    );
-
-    document.getElementById("fiches-container").innerHTML = fichesHTML;
-
-    function ouvrirFiche(n) {
-      document.querySelectorAll(".fiche").forEach(f=>f.style.display="none");
-      document.getElementById("fiche"+n).style.display="block";
-      document.getElementById("overlay").style.display="block";
-    }
-    function fermerFiche() {
-      document.querySelectorAll(".fiche").forEach(f=>f.style.display="none");
-      document.getElementById("overlay").style.display="none";
-    }
-
-    // Calcul âge auto Fiche 2
-    document.addEventListener("change", e=>{
-      if(e.target.id==="dateNaissance2"){
-        const d=new Date(e.target.value);
-        if(!isNaN(d)){
-          let today=new Date();
-          let age=today.getFullYear()-d.getFullYear();
-          const m=today.getMonth()-d.getMonth();
-          if(m<0 || (m===0 && today.getDate()<d.getDate())) age--;
-          document.getElementById("age2").value=age+" ans";
-        }
-      }
-    });
-  </script>
-</body>
-</html>
+            <div className="mt-3 text-xs text-slate-500">Les fiches sont stockées localement dans votre navigateur (localStorage). Pas de comptes.</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+}
