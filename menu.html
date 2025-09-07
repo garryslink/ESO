@@ -1,221 +1,204 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<title>Fiches Intervention - 12 onglets</title>
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<style>
-  :root{
-    --blue:#0056b3;
-    --blue-dark:#003d80;
-    --green-bg:#d4edda;
-    --red-bg:#f8d7da;
-    --card-bg:#ffffff;
-  }
-  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f6f7fb;color:#111}
-  header{padding:12px 16px; display:flex; gap:12px; align-items:flex-start; flex-direction:column}
-  .top-row{display:flex; gap:12px; align-items:center}
-  a.home{color:white;background:var(--blue);padding:8px 12px;border-radius:6px;text-decoration:none;font-weight:600}
-  a.home:hover{background:var(--blue-dark)}
-  button.transmission-open{background:#007bff;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
-  .container{display:flex; gap:16px; padding:0 16px 32px}
-  .left{width:94px} /* onglets column */
-  .onglet{width:70px;height:70px;background:var(--blue);border-radius:8px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.12)}
-  .onglet:hover{transform:scale(1.04)}
-  .circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#ccc;font-weight:700;font-size:18px}
-  .status{width:12px;height:12px;border-radius:50%;margin-top:6px;background:red;box-shadow:0 0 0 2px rgba(0,0,0,0.02)}
-  .main{flex:1;display:flex;align-items:flex-start;justify-content:center}
-  .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:90}
-  .fiche{display:none;position:fixed;z-index:100; top:50%; left:50%; transform:translate(-50%,-50%); width:92%; max-width:900px; max-height:88vh; overflow:auto; background:var(--card-bg); border-radius:10px; padding:18px; box-shadow:0 8px 30px rgba(0,0,0,0.2)}
-  .fiche h2{text-align:center;margin-top:0}
-  label{display:block;margin:10px 0 6px;font-weight:600}
-  input[type="text"], input[type="tel"], input[type="number"], input[type="date"], select, textarea{width:100%;padding:8px;border-radius:6px;border:1px solid #cfcfcf;box-sizing:border-box;font-size:14px}
-  textarea{min-height:70px; resize:vertical}
-  .row{display:flex; gap:10px}
-  .col{flex:1}
-  .small{width:160px}
-  .btn{display:inline-block;padding:8px 12px;border-radius:6px;border:none;background:var(--blue);color:#fff;cursor:pointer;margin-top:8px}
-  .btn.gray{background:#6c757d}
-  .ras{background:#28a745}
-  table{width:100%;border-collapse:collapse;margin-top:10px}
-  table th, table td{border:1px solid #ddd;padding:6px;text-align:left;font-size:14px}
-  .green{background:var(--green-bg) !important}
-  .red{background:var(--red-bg) !important}
-  .section-title{margin-top:14px;font-weight:700}
-  .footer-actions{display:flex;gap:10px;justify-content:center;margin-top:12px}
-  .signature{width:100%;padding:8px;border:1px dashed #ccc;border-radius:6px;background:#fafafa}
-  .note{font-size:13px;color:#666;margin-top:6px}
-  @media (max-width:700px){
-    .left{width:72px}
-    .circle{width:36px;height:36px}
-    .onglet{height:64px}
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Application Médic</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+    header {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    header a {
+      color: white;
+      background: #0056b3;
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      width: fit-content;
+    }
+    .onglets-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .onglet {
+      width: 70px;
+      height: 70px;
+      background: #0056b3;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .onglet .circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+    }
+    .onglet .status {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-top: 5px;
+      background: red;
+    }
+    .fiche {
+      display: none;
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%; max-width: 600px;
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    .fiche h2 { text-align: center; margin-top: 0; }
+    label { font-weight: bold; display: block; margin: 10px 0 5px; }
+    input, select, textarea {
+      width: 100%; padding: 8px;
+      border: 1px solid #ccc; border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    textarea { resize: vertical; }
+    .bottom-buttons {
+      display: flex; justify-content: center;
+      gap: 10px; margin-top: 15px;
+    }
+    .bottom-buttons button {
+      padding: 10px 20px;
+      border: none; border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+    }
+    .transmission { background: #007bff; }
+    .surveillance { background: #6c757d; }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 900;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <a href="#">⬅ Retour à l'accueil</a>
+    <div class="onglets-container">
+      <div class="onglet" onclick="ouvrirFiche(1)"><div class="circle">❓</div><div class="status" id="s1"></div></div>
+      <div class="onglet" onclick="ouvrirFiche(2)"><div class="circle">❗</div><div class="status" id="s2"></div></div>
+      <div class="onglet" onclick="ouvrirFiche(3)"><div class="circle">✖</div><div class="status" id="s3"></div></div>
+      <div class="onglet" onclick="ouvrirFiche(4)"><div class="circle">A</div><div class="status" id="s4"></div></div>
+      <div class="onglet" onclick="ouvrirFiche(5)"><div class="circle">B</div><div class="status" id="s5"></div></div>
+      <div class="onglet" onclick="ouvrirFiche(6)"><div class="circle">C</div><div class="status" id="s6"></div></div>
+      <div class="onglet" onclick="ouvrirFiche(7)"><div class="circle">D</div><div class="status" id="s7"></div></div>
+      <div class="onglet" onclick="ouvrirFiche(8)"><div class="circle">E</div><div class="status" id="s8"></div></div>
+      <div class="onglet" onclick="ouvrirFiche(9)"><div class="circle">❤️</div><div class="status" id="s9"></div></div>
+      <div class="onglet" onclick="ouvrirFiche(10)"><div class="circle">💊</div><div class="status" id="s10"></div></div>
+      <div class="onglet" onclick="ouvrirFiche(11)"><div class="circle">✚</div><div class="status" id="s11"></div></div>
+      <div class="onglet" onclick="ouvrirFiche(12)"><div class="circle">👶</div><div class="status" id="s12"></div></div>
+    </div>
+  </header>
 
-<header>
-  <div class="top-row">
-    <a class="home" href="index.html">⬅ Retour à l'accueil</a>
-    <button class="transmission-open" onclick="ouvrirFiche('ficheTransmission')">Ouvrir Transmission</button>
-    <div style="margin-left:8px;color:#444;font-weight:600">12 onglets — remplis, utilise RAS pour normal</div>
-  </div>
-  <div class="note">Remplis les champs — champ non vide = vert. Certains champs numériques ont une validation simple (ex : SPO2 0–100). Les champs incorrects ou vides sont en rouge.</div>
-</header>
+  <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
 
-<div class="container">
-  <div class="left" id="onglets">
-    <!-- 12 onglets -->
-    <div class="onglet" onclick="ouvrirFiche('fiche1','status1')">
-      <div class="circle">❓</div><div class="status" id="status1"></div>
-    </div>
-    <div class="onglet" onclick="ouvrirFiche('fiche2','status2')">
-      <div class="circle">❗</div><div class="status" id="status2"></div>
-    </div>
-    <div class="onglet" onclick="ouvrirFiche('fiche3','status3')">
-      <div class="circle">✖</div><div class="status" id="status3"></div>
-    </div>
-    <div class="onglet" onclick="ouvrirFiche('fiche4','status4')">
-      <div class="circle">A</div><div class="status" id="status4"></div>
-    </div>
-    <div class="onglet" onclick="ouvrirFiche('fiche5','status5')">
-      <div class="circle">B</div><div class="status" id="status5"></div>
-    </div>
-    <div class="onglet" onclick="ouvrirFiche('fiche6','status6')">
-      <div class="circle">C</div><div class="status" id="status6"></div>
-    </div>
-    <div class="onglet" onclick="ouvrirFiche('fiche7','status7')">
-      <div class="circle">D</div><div class="status" id="status7"></div>
-    </div>
-    <div class="onglet" onclick="ouvrirFiche('fiche8','status8')">
-      <div class="circle">E</div><div class="status" id="status8"></div>
-    </div>
-    <div class="onglet" onclick="ouvrirFiche('fiche9','status9')">
-      <div class="circle">❤️</div><div class="status" id="status9"></div>
-    </div>
-    <div class="onglet" onclick="ouvrirFiche('fiche10','status10')">
-      <div class="circle">💊</div><div class="status" id="status10"></div>
-    </div>
-    <div class="onglet" onclick="ouvrirFiche('fiche11','status11')">
-      <div class="circle">✚</div><div class="status" id="status11"></div>
-    </div>
-    <div class="onglet" onclick="ouvrirFiche('fiche12','status12')">
-      <div class="circle">👶</div><div class="status" id="status12"></div>
-    </div>
-  </div>
+  <!-- Ici viennent les 12 fiches -->
+  <div id="fiches-container"></div>
 
-  <div class="main">
-    <!-- FICHE 1 : Intervention -->
-    <div class="fiche" id="fiche1">
-      <h2>Circonstance — Intervention</h2>
-      <label for="adresse1">Adresse de l'intervention</label>
-      <input id="adresse1" type="text" oninput="validateField(this)">
-      <label for="numero1">Numéro de l'intervention</label>
-      <input id="numero1" type="text" oninput="validateField(this)">
-      <div class="row">
-        <div class="col">
-          <label for="type1">Type d'intervention</label>
-          <select id="type1" onchange="validateField(this)"><option value="">-- Sélectionner --</option><option>Voie publique</option><option>Domicile</option><option>Travail</option><option>Autre</option></select>
+  <script>
+    function creerFiche(num, titre, contenu) {
+      return `
+        <div class="fiche" id="fiche${num}">
+          <h2>${titre}</h2>
+          ${contenu}
+          <div class="bottom-buttons">
+            <button class="transmission">Transmission</button>
+            <button class="surveillance">Surveillance</button>
+          </div>
         </div>
-        <div class="col">
-          <label for="motif1">Motif d'intervention</label>
-          <select id="motif1" onchange="validateField(this)">
-            <option value="">-- Sélectionner --</option>
-            <option>Accouchement</option>
-            <option>Arrêt cardio ventilatoire</option>
-            <option>TS</option>
-            <option>Blessé au sport</option>
-            <option>Blessé au travail</option>
-            <option>Blessé chute</option>
-            <option>Blessé par arme à feu</option>
-            <option>Blessé par arme blanche</option>
-            <option>Blessé sur VP</option>
-            <option>Blessé à domicile</option>
-            <option>Blessé établissement enseignement</option>
-            <option>Brûlure</option>
-            <option>Carence d'Ambulance HCT</option>
-            <option>Détresse ventilatoire</option>
-            <option>Intoxication</option>
-            <option>Malaise au sport</option>
-            <option>Malaise au travail</option>
-            <option>Malaise VP</option>
-            <option>Malaise à domicile</option>
-            <option>Noyade / Personne tombée à l'eau</option>
-            <option>Pendaison</option>
-            <option>Personne inconsciente</option>
-            <option>Personne ne répondant pas aux appels</option>
-            <option>Renfort brancardage</option>
-            <option>Suspicion AVC</option>
-            <option>Électrisation / Foudroiement de personne</option>
-            <option>Autre</option>
-          </select>
-        </div>
-      </div>
+      `;
+    }
 
-      <label for="situation1">Situation à l'arrivée</label>
-      <textarea id="situation1" oninput="validateField(this)"></textarea>
+    let fichesHTML = "";
 
-      <h3 class="section-title">Équipage MEDIC</h3>
-      <div class="row">
-        <div class="col"><label>Ambulance Commander</label><input id="med1_comm" type="text" oninput="validateField(this)"></div>
-        <div class="col"><label>Driver</label><input id="med1_drv" type="text" oninput="validateField(this)"></div>
-        <div class="col"><label>Équipier</label><input id="med1_eq" type="text" oninput="validateField(this)"></div>
-      </div>
+    // Fiche 1
+    fichesHTML += creerFiche(1,"Circonstance",
+      `<label>Adresse</label><input type="text">
+       <label>Numéro</label><input type="text">
+       <label>Motif d'intervention</label>
+       <select>
+         <option>Accouchement</option>
+         <option>Arrêt cardio ventilatoire</option>
+         <option>TS</option>
+         <option>Blessé au sport</option>
+         <option>Blessé au travail</option>
+         <option>Blessé chute</option>
+         <option>Blessé par arme à feu</option>
+         <option>Blessé par arme blanche</option>
+         <option>Blessé sur VP</option>
+         <option>Blessé à domicile</option>
+         <option>Blessé établissement enseignement</option>
+         <option>Brûlure</option>
+         <option>Carence d'Ambulance HCT</option>
+         <option>Détresse ventilatoire</option>
+         <option>Intoxication</option>
+         <option>Malaise au sport</option>
+         <option>Malaise au travail</option>
+         <option>Malaise VP</option>
+         <option>Malaise à domicile</option>
+         <option>Noyade / Personne tombée à l'eau</option>
+         <option>Pendaison</option>
+         <option>Personne inconsciente</option>
+         <option>Personne ne répondant pas aux appels</option>
+         <option>Renfort brancardage</option>
+         <option>Suspicion AVC</option>
+         <option>Électrisation / Foudroiement</option>
+         <option>Autre</option>
+       </select>`
+    );
 
-      <div class="footer-actions">
-        <button class="btn ras" onclick="rasFiche(1)">RAS</button>
-        <button class="btn" onclick="openTransmissionFromFiche(1)">Transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-    </div>
+    // Fiche 2 (Identité Patient)
+    fichesHTML += creerFiche(2,"Identité Patient",
+      `<label>Sexe</label><select><option>Homme</option><option>Femme</option></select>
+       <label>Nom</label><input type="text">
+       <label>Prénom</label><input type="text">
+       <label>Nom de naissance</label><input type="text">
+       <label>Date de naissance</label><input type="date" id="dateNaissance2">
+       <label>Âge</label><input type="text" id="age2" readonly>
+       <label>Nationalité</label><input type="text">
+       <label>Téléphone</label><input type="tel">
+       <label>Adresse</label><input type="text">`
+    );
 
-    <!-- FICHE 2 : Identité Patient -->
-    <div class="fiche" id="fiche2">
-      <h2>Identité Patient</h2>
-      <div class="row">
-        <div class="col"><label>Sexe</label><select id="sexe2" onchange="validateField(this)"><option value="">--</option><option value="Homme">Homme</option><option value="Femme">Femme</option></select></div>
-        <div class="col"><label>Nom</label><input id="nom2" type="text" oninput="validateField(this)"></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Prénom</label><input id="prenom2" type="text" oninput="validateField(this)"></div>
-        <div class="col"><label>Nom de naissance</label><input id="nomNaissance2" type="text" oninput="validateField(this)"></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Date de naissance</label><input id="dateNaissance2" type="date" onchange="calcAge2(); validateField(this)"></div>
-        <div class="col"><label>Âge</label><input id="age2" type="text" readonly></div>
-      </div>
-      <label>Nationalité</label><input id="nationalite2" type="text" oninput="validateField(this)">
-      <label>Numéro de téléphone</label><input id="tel2" type="tel" oninput="validateField(this)">
-      <label>Adresse personnelle</label><input id="adressePerso2" type="text" oninput="validateField(this)">
+    // Fiche 3 (Examen rapide)
+    fichesHTML += creerFiche(3,"Examen rapide",
+      `<label>Hémorragie</label><select><option>Oui</option><option>Non</option></select>
+       <label>Obstruction V.A</label><select><option>Libre</option><option>Obstruée</option></select>
+       <label>Traumatisme rachis</label><select><option>Oui</option><option>Non</option></select>
+       <label>Conscience</label><select><option>Oui</option><option>Non</option></select>
+       <label>Plaintes</label><textarea></textarea>
+       <button onclick="alert('RAS - Normal')">RAS</button>`
+    );
 
-      <div class="footer-actions">
-        <button class="btn ras" onclick="rasFiche(2)">RAS</button>
-        <button class="btn" onclick="openTransmissionFromFiche(2)">Transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-    </div>
-
-    <!-- FICHE 3 : Examen rapide (Hémorragie / etc) -->
-    <div class="fiche" id="fiche3">
-      <h2>Examen rapide (Hémorragie)</h2>
-      <div class="row">
-        <div class="col"><label>Hémorragie</label><select id="hem3" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Obstruction V.A</label><select id="vao3" onchange="validateField(this)"><option value="">--</option><option>Libre</option><option>Obstrué</option></select></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Traumatisme du rachis</label><select id="rachis3" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Conscience</label><select id="conscience3" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <label>Plaintes principales</label><textarea id="plainte3" oninput="validateField(this)"></textarea>
-
-      <div class="footer-actions">
-        <button class="btn ras" onclick="rasFiche(3)">RAS</button>
-        <button class="btn" onclick="openTransmissionFromFiche(3)">Transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-    </div>
-
-    <!-- FICHE 4 : Voies aériennes -->
     <div class="fiche" id="fiche4">
       <h2>Voies Aériennes</h2>
       <label>Obstruction des V.A</label>
@@ -228,33 +211,6 @@
       </div>
     </div>
 
-    <!-- FICHE 5 : Respiration -->
-    <div class="fiche" id="fiche5">
-      <h2>Respiration</h2>
-      <div class="row">
-        <div class="col"><label>Arrêt respiratoire ≤6s</label><select id="arret5" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Cyanose</label><select id="cyanose5" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Sueur</label><select id="sueur5" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Léger</label><select id="leger5" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Bruyante</label><select id="bruyante5" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Tirage</label><select id="tirage5" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Asymétrie thoracique</label><select id="asym5" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Difficulté à parler</label><select id="parler5" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <div class="footer-actions">
-        <button class="btn ras" onclick="rasFiche(5)">RAS</button>
-        <button class="btn" onclick="openTransmissionFromFiche(5)">Transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-    </div>
-
-    <!-- FICHE 6 : Circulation -->
     <div class="fiche" id="fiche6">
       <h2>Circulation</h2>
       <div class="row">
@@ -283,7 +239,6 @@
       </div>
     </div>
 
-    <!-- FICHE 7 : Déficit neurologique -->
     <div class="fiche" id="fiche7">
       <h2>Déficit neurologique</h2>
       <div class="row">
@@ -310,7 +265,6 @@
       </div>
     </div>
 
-    <!-- FICHE 8 : Environnement / lésions / brûlures / température -->
     <div class="fiche" id="fiche8">
       <h2>Environnement</h2>
       <label>Lésion apparente</label><select id="lesion8" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select>
@@ -326,7 +280,6 @@
       </div>
     </div>
 
-    <!-- FICHE 9 : Constantes (Ventilation / Circulation / Divers) -->
     <div class="fiche" id="fiche9">
       <h2>Constantes</h2>
       <h3>Ventilation</h3>
@@ -358,7 +311,6 @@
       </div>
     </div>
 
-    <!-- FICHE 10 : Médicaments et Solutés -->
     <div class="fiche" id="fiche10">
       <h2>Médicaments / Solutés</h2>
       <h3>Ajouter un médicament</h3>
@@ -392,7 +344,6 @@
       </div>
     </div>
 
-    <!-- FICHE 11 : Vitaux / gestes -->
     <div class="fiche" id="fiche11">
       <h2>Vitaux / Gestes</h2>
       <div class="row">
@@ -423,8 +374,7 @@
       </div>
     </div>
 
-    <!-- FICHE 12 : Score de Malinas -->
-    <div class="fiche" id="fiche12">
+<div class="fiche" id="fiche12">
       <h2>Score de Malinas (NR)</h2>
       <label>Nombre de grossesses</label><input id="malina_gp" type="number" min="0" oninput="validateField(this); calcMalinas()">
       <label>Mois de grossesse (mois)</label><input id="malina_month" type="number" min="0" max="12" oninput="validateField(this); calcMalinas()">
@@ -450,288 +400,31 @@
       </div>
     </div>
 
-    <!-- FICHE Transmission (séparée) -->
-    <div class="fiche" id="ficheTransmission">
-      <h2>Transmission</h2>
-      <label>Nombre de bilans de surveillance enregistrés</label>
-      <input id="trans_nb" type="number" min="0" value="0">
-      <label>Catégorisation de la victime</label>
-      <select id="trans_cat"><option value="">--</option><option>Impliqué</option><option>Urgence relative</option><option>Urgence absolue</option><option>Delta</option><option>Charlie</option><option>Delta/Charlie</option></select>
-      <label>Décision</label>
-      <select id="trans_decision"><option value="">--</option><option>Transporté</option><option>Laissé sur place</option></select>
-      <label>Vecteur du transport</label>
-      <select id="trans_vector"><option value="">--</option><option>MEDIC</option><option>NFD</option><option>AMR du HCT</option></select>
-      <label>Destination</label>
-      <select id="trans_dest"><option value="">--</option><option>Nashville Memorial Hospital</option><option>Townsend Medical Center</option></select>
-      <label>Signature Ambulance Commander</label>
-      <input id="trans_sign" type="text" placeholder="Nom / signature">
-      <div class="footer-actions">
-        <button class="btn" onclick="submitTransmission()">Enregistrer transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-      <div style="margin-top:10px;font-size:13px;color:#444" id="trans_result"></div>
-    </div>
+    document.getElementById("fiches-container").innerHTML = fichesHTML;
 
-  </div>
-</div>
-
-<script>
-/* ------------- Utilities ------------- */
-function openTransmissionFromFiche(ficheNum){
-  // Optionnel : pré-remplir quelques éléments dans la fiche Transmission depuis la fiche ouverte
-  document.getElementById('overlay').style.display='block';
-  document.querySelectorAll('.fiche').forEach(e=>e.style.display='none');
-  document.getElementById('ficheTransmission').style.display='block';
-  // increment display hint
-  const nb = parseInt(document.getElementById('trans_nb').value || '0',10);
-  document.getElementById('trans_nb').value = nb+1;
-}
-function closeFiche(){
-  document.getElementById('overlay').style.display='none';
-  document.querySelectorAll('.fiche').forEach(e=>e.style.display='none');
-}
-
-/* ouverture fiche par onglet */
-function ouvrirFiche(id,statusId){
-  document.getElementById('overlay').style.display='block';
-  document.querySelectorAll('.fiche').forEach(e=>e.style.display='none');
-  const f = document.getElementById(id);
-  if(f) f.style.display='block';
-  // update status immediately
-  updateStatus(id, statusId);
-}
-
-/* submit transmission: basic display */
-function submitTransmission(){
-  const result = {
-    nb_surv: document.getElementById('trans_nb').value,
-    cat: document.getElementById('trans_cat').value,
-    decision: document.getElementById('trans_decision').value,
-    vector: document.getElementById('trans_vector').value,
-    dest: document.getElementById('trans_dest').value,
-    sign: document.getElementById('trans_sign').value
-  };
-  document.getElementById('trans_result').textContent = 'Transmission enregistrée — Cat: '+result.cat+', Decision: '+result.decision+', Dest: '+result.dest+', Signature: '+result.sign;
-}
-
-/* ------------- RAS : remplit la fiche avec valeurs 'normales' ------------- */
-function rasFiche(n){
-  // For each fiche, set typical default normal values
-  switch(n){
-    case 1:
-      document.getElementById('adresse1').value='RAS'; document.getElementById('numero1').value='RAS'; document.getElementById('type1').value='Voie publique'; document.getElementById('motif1').value='Autre';
-      document.getElementById('situation1').value='RAS'; document.getElementById('med1_comm').value='Nom'; document.getElementById('med1_drv').value='Nom'; document.getElementById('med1_eq').value='Nom';
-      break;
-    case 2:
-      document.getElementById('sexe2').value='Homme'; document.getElementById('nom2').value='Dupont'; document.getElementById('prenom2').value='Jean';
-      document.getElementById('nomNaissance2').value='Dupont'; document.getElementById('dateNaissance2').value='1980-01-01'; calcAge2();
-      document.getElementById('nationalite2').value='Française'; document.getElementById('tel2').value='0600000000'; document.getElementById('adressePerso2').value='Adresse';
-      break;
-    case 3:
-      document.getElementById('hem3').value='Non'; document.getElementById('vao3').value='Libre'; document.getElementById('rachis3').value='Non'; document.getElementById('conscience3').value='Oui';
-      document.getElementById('plainte3').value='RAS'; break;
-    case 4:
-      document.getElementById('vao4').value='Libre'; document.getElementById('cause4').value='RAS'; break;
-    case 5:
-      document.getElementById('arret5').value='Non'; document.getElementById('cyanose5').value='Non'; document.getElementById('sueur5').value='Non';
-      document.getElementById('leger5').value='Non'; document.getElementById('bruyante5').value='Non'; document.getElementById('tirage5').value='Non';
-      document.getElementById('asym5').value='Non'; document.getElementById('parler5').value='Oui'; break;
-    case 6:
-      document.getElementById('hem6').value='Non'; document.getElementById('arret6').value='Non'; document.getElementById('pale6').value='Non';
-      document.getElementById('sueur6').value='Non'; document.getElementById('tempPeau6').value='Non'; document.getElementById('poul6').value='Non';
-      document.getElementById('irr6').value='Non'; document.getElementById('asym6').value='Non'; document.getElementById('trc6').value='Non'; break;
-    case 7:
-      document.getElementById('con7').value='Oui'; document.getElementById('conv7').value='Non'; document.getElementById('pci7').value='0';
-      document.getElementById('pup7').value='Réactif et symétrique'; document.getElementById('mot7').value='Non'; document.getElementById('sen7').value='Non';
-      document.getElementById('agit7').value='Non'; document.getElementById('fac7').value='Non'; document.getElementById('par7').value='Non'; break;
-    case 8:
-      document.getElementById('lesion8').value='Non'; document.getElementById('brul8').value='1er'; document.getElementById('therm8').value='Normal'; document.getElementById('douleur8').value=0; break;
-    case 9:
-      document.getElementById('fr9').value=16; document.getElementById('spo2a9').value=98; document.getElementById('spo2o9').value=99; document.getElementById('spco9').value=0;
-      document.getElementById('fc9').value=75; document.getElementById('pag9').value=120; document.getElementById('pad9').value=80;
-      document.getElementById('gly9').value=1; document.getElementById('dou9').value=0; document.getElementById('temp9').value=36.8; break;
-    case 10:
-      // clear med/sol tables then leave empty - RAS: no meds by default
-      document.querySelector('#med_table tbody').innerHTML=''; document.querySelector('#sol_table tbody').innerHTML=''; break;
-    case 11:
-      document.getElementById('relev11').value='Non'; document.getElementById('garot11').value='Non'; document.getElementById('garotTime11').value='';
-      document.getElementById('pan11').value='Non'; document.getElementById('rcp11').value='Non'; document.getElementById('ins11').value='Non';
-      document.getElementById('insL11').value=''; document.getElementById('inh11').value='Non'; document.getElementById('inhL11').value='';
-      document.getElementById('def11').value='Non'; document.getElementById('defNb11').value=''; document.getElementById('asp11').value='Non'; break;
-    case 12:
-      document.getElementById('malina_gp').value=0; document.getElementById('malina_month').value=0; document.getElementById('malina_lmp').value=''; document.getElementById('malina_due').value='';
-      document.getElementById('malina_work').value=''; document.getElementById('malina_interval').value=''; document.getElementById('malina_interval_unit').value='min';
-      document.getElementById('malina_dur').value=''; document.getElementById('malina_water').value='Non'; document.getElementById('malina_bleed').value='0'; document.getElementById('malina_push').value='Non'; calcMalinas();
-      break;
-  }
-  // validate fields in the fiche to update colors and indicators
-  updateStatus('fiche'+n, 'status'+n);
-}
-
-/* ------------- Medication / Solute tables ------------- */
-function ajouterMed(){
-  const nom=document.getElementById('med_nom').value.trim();
-  const qte=document.getElementById('med_qte').value.trim();
-  const voie=document.getElementById('med_voie').value.trim();
-  const time=document.getElementById('med_time').value || new Date().toTimeString().slice(0,5);
-  if(!nom){alert('Entrez le nom du médicament'); return;}
-  const tbody=document.querySelector('#med_table tbody');
-  const tr=document.createElement('tr');
-  tr.innerHTML='<td>'+time+'</td><td>'+nom+'</td><td>'+qte+'</td><td>'+voie+'</td>';
-  tbody.appendChild(tr);
-  // clear inputs
-  document.getElementById('med_nom').value=''; document.getElementById('med_qte').value=''; document.getElementById('med_voie').value=''; document.getElementById('med_time').value='';
-  updateStatus('fiche10','status10');
-}
-function ajouterSol(){
-  const nom=document.getElementById('sol_nom').value.trim();
-  const qte=document.getElementById('sol_qte').value.trim();
-  const voie=document.getElementById('sol_voie').value.trim();
-  const time=document.getElementById('sol_time').value || new Date().toTimeString().slice(0,5);
-  if(!nom){alert('Entrez le nom du soluté'); return;}
-  const tbody=document.querySelector('#sol_table tbody');
-  const tr=document.createElement('tr');
-  tr.innerHTML='<td>'+time+'</td><td>'+nom+'</td><td>'+qte+'</td><td>'+voie+'</td>';
-  tbody.appendChild(tr);
-  document.getElementById('sol_nom').value=''; document.getElementById('sol_qte').value=''; document.getElementById('sol_voie').value=''; document.getElementById('sol_time').value='';
-  updateStatus('fiche10','status10');
-}
-
-/* ------------- Score Malinas (simple heuristic) ------------- */
-function calcMalinas(){
-  // Basic heuristic: add points for risk factors; this is illustrative — adapt as needed
-  let score=0;
-  const gp = Number(document.getElementById('malina_gp').value||0);
-  const month = Number(document.getElementById('malina_month').value||0);
-  const work = Number(document.getElementById('malina_work').value||0);
-  const interval = Number(document.getElementById('malina_interval').value||Infinity);
-  const intervalUnit = document.getElementById('malina_interval_unit').value;
-  const dur = Number(document.getElementById('malina_dur').value||0);
-  const water = document.getElementById('malina_water').value;
-  const bleed = Number(document.getElementById('malina_bleed').value||0);
-  const push = document.getElementById('malina_push').value;
-
-  if(gp >=3) score +=1;
-  if(month >= 37) score +=1;
-  if(work >= 480) score +=1; // long labor >8h
-  let intervalMin = interval;
-  if(intervalUnit === 'sec') intervalMin = interval/60;
-  if(intervalMin <= 5) score +=2; // frequent contractions raise score
-  if(dur >= 60) score +=1;
-  if(water === 'Oui') score +=1;
-  if(bleed > 500) score +=2;
-  if(push === 'Oui') score +=1;
-
-  document.getElementById('malina_score').value = score + ' (heuristique)';
-  updateStatus('fiche12','status12');
-}
-
-/* ------------- Validation & status update ------------- */
-function validateField(el){
-  // simple: non-empty => green; otherwise red.
-  if(!el) return;
-  const tag = el.tagName.toLowerCase();
-  let ok=false;
-  if(tag==='select') ok = el.value !== '';
-  else if(tag==='input'){
-    const type = el.type;
-    if(type==='number' || type==='tel') ok = el.value !== '' && !isNaN(el.value);
-    else if(type==='date') ok = el.value !== '';
-    else ok = el.value.trim() !== '';
-    // specific numeric checks:
-    if(el.id === 'spo2a9' || el.id === 'spo2o9' || el.id === 'spco9'){
-      const v = Number(el.value); ok = !isNaN(v) && v>=0 && v<=100;
+    function ouvrirFiche(n) {
+      document.querySelectorAll(".fiche").forEach(f=>f.style.display="none");
+      document.getElementById("fiche"+n).style.display="block";
+      document.getElementById("overlay").style.display="block";
     }
-    if(el.id === 'fr9'){ const v=Number(el.value); ok = !isNaN(v) && v>0; }
-    if(el.id === 'fc9'){ const v=Number(el.value); ok = !isNaN(v) && v>0; }
-    if(el.id === 'gly9'){ const v=Number(el.value); ok = !isNaN(v) && v>=0; }
-    if(el.id === 'temp9'){ const v=Number(el.value); ok = !isNaN(v) && v>20 && v<45; }
-    if(el.id === 'douleur8' || el.id === 'dou9'){ const v=Number(el.value); ok = !isNaN(v) && v>=0 && v<=10; }
-  } else if(tag==='textarea') ok = el.value.trim() !== '';
-  // apply classes
-  if(ok){ el.classList.remove('red'); el.classList.add('green'); }
-  else { el.classList.remove('green'); el.classList.add('red'); }
-  // find fiche id parent to update overall status
-  const fiche = el.closest('.fiche');
-  if(fiche){
-    const id = fiche.id;
-    const statusId = 'status'+ id.replace('fiche','');
-    updateStatus(id, statusId);
-  }
-  return ok;
-}
+    function fermerFiche() {
+      document.querySelectorAll(".fiche").forEach(f=>f.style.display="none");
+      document.getElementById("overlay").style.display="none";
+    }
 
-/* updateStatus: check all inputs/selects/textarea in the fiche and set status dot (red/orange/green)
-   - red = none filled
-   - orange = partially filled (some filled)
-   - green = all filled or pass numeric checks
-*/
-function updateStatus(ficheId, statusId){
-  const fiche = document.getElementById(ficheId);
-  if(!fiche) return;
-  const fields = fiche.querySelectorAll('input,select,textarea, table tbody tr');
-  let total = 0, filled = 0;
-  fields.forEach(f=>{
-    // exclude buttons or tables header rows
-    if(f.tagName.toLowerCase()==='tr') {
-      total += 1;
-      if(f.children.length>0) {
-        // consider row present = filled
-        filled += 1;
+    // Calcul de l'âge auto pour Fiche 2
+    document.addEventListener("change", e=>{
+      if(e.target.id==="dateNaissance2"){
+        const d=new Date(e.target.value);
+        if(!isNaN(d)){
+          let today=new Date();
+          let age=today.getFullYear()-d.getFullYear();
+          const m=today.getMonth()-d.getMonth();
+          if(m<0 || (m===0 && today.getDate()<d.getDate())) age--;
+          document.getElementById("age2").value=age+" ans";
+        }
       }
-      return;
-    }
-    if(f.type === 'button') return;
-    total++;
-    const ok = validateField(f);
-    if(ok) filled++;
-  });
-  // set status dot
-  const status = document.getElementById(statusId);
-  if(!status) return;
-  if(filled === 0){ status.style.backgroundColor='red'; }
-  else if(filled < total){ status.style.backgroundColor='orange'; }
-  else { status.style.backgroundColor='green'; }
-
-  // show bottom-buttons if all fields at least partially filled (>=80% filled)
-  const bottom = fiche.querySelector('.bottom-buttons');
-  if(bottom){
-    if(total === 0) bottom.style.display='none';
-    else if(filled/total >= 0.8) bottom.style.display='flex';
-    else bottom.style.display='none';
-  }
-}
-
-/* initialize: attach validation listeners for all existing input/select/textarea */
-function attachValidation() {
-  document.querySelectorAll('input,select,textarea').forEach(el=>{
-    el.addEventListener('input',()=>validateField(el));
-    el.addEventListener('change',()=>validateField(el));
-  });
-}
-attachValidation();
-
-/* age calc for fiche2 */
-function calcAge2(){
-  const el = document.getElementById('dateNaissance2');
-  if(!el) return;
-  const d = new Date(el.value);
-  if(!isNaN(d.getTime())){
-    const now = new Date();
-    let age = now.getFullYear() - d.getFullYear();
-    const m = now.getMonth() - d.getMonth();
-    if(m < 0 || (m === 0 && now.getDate() < d.getDate())) age--;
-    document.getElementById('age2').value = age + ' ans';
-    validateField(document.getElementById('age2'));
-  } else document.getElementById('age2').value = '';
-}
-
-/* initial update of statuses (all red) */
-for(let i=1;i<=12;i++){
-  const status = document.getElementById('status'+i);
-  if(status) status.style.backgroundColor='red';
-}
-</script>
-
+    });
+  </script>
 </body>
 </html>
