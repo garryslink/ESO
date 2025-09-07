@@ -4,100 +4,23 @@
   <meta charset="UTF-8">
   <title>Application Médic</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-    }
-    header {
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    header a {
-      color: white;
-      background: #0056b3;
-      text-decoration: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      font-weight: bold;
-      width: fit-content;
-    }
-    .onglets-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .onglet {
-      width: 70px;
-      height: 70px;
-      background: #0056b3;
-      border-radius: 8px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      cursor: pointer;
-    }
-    .onglet .circle {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #ccc;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-    }
-    .onglet .status {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      margin-top: 5px;
-      background: red;
-    }
-    .fiche {
-      display: none;
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%; max-width: 600px;
-      background: white;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 1000;
-    }
+    body { margin: 0; font-family: Arial, sans-serif; background: #f5f5f5; }
+    header { padding: 15px; display: flex; flex-direction: column; gap: 10px; }
+    header a { color: white; background: #0056b3; text-decoration: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; width: fit-content; }
+    .onglets-container { display: flex; flex-direction: column; gap: 10px; }
+    .onglet { width: 70px; height: 70px; background: #0056b3; border-radius: 8px; display: flex; justify-content: center; align-items: center; flex-direction: column; cursor: pointer; }
+    .onglet .circle { width: 40px; height: 40px; border-radius: 50%; background: #ccc; display: flex; justify-content: center; align-items: center; font-size: 20px; }
+    .onglet .status { width: 12px; height: 12px; border-radius: 50%; margin-top: 5px; background: red; }
+    .fiche { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 600px; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
     .fiche h2 { text-align: center; margin-top: 0; }
     label { font-weight: bold; display: block; margin: 10px 0 5px; }
-    input, select, textarea {
-      width: 100%; padding: 8px;
-      border: 1px solid #ccc; border-radius: 5px;
-      margin-bottom: 10px;
-    }
+    input, select, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 10px; }
     textarea { resize: vertical; }
-    .bottom-buttons {
-      display: flex; justify-content: center;
-      gap: 10px; margin-top: 15px;
-    }
-    .bottom-buttons button {
-      padding: 10px 20px;
-      border: none; border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      color: white;
-    }
+    .bottom-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+    .bottom-buttons button { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; color: white; }
     .transmission { background: #007bff; }
     .surveillance { background: #6c757d; }
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 900;
-    }
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 900; }
   </style>
 </head>
 <body>
@@ -120,8 +43,6 @@
   </header>
 
   <div class="overlay" id="overlay" onclick="fermerFiche()"></div>
-
-  <!-- Ici viennent les 12 fiches -->
   <div id="fiches-container"></div>
 
   <script>
@@ -145,260 +66,42 @@
       `<label>Adresse</label><input type="text">
        <label>Numéro</label><input type="text">
        <label>Motif d'intervention</label>
-       <select>
-         <option>Accouchement</option>
-         <option>Arrêt cardio ventilatoire</option>
-         <option>TS</option>
-         <option>Blessé au sport</option>
-         <option>Blessé au travail</option>
-         <option>Blessé chute</option>
-         <option>Blessé par arme à feu</option>
-         <option>Blessé par arme blanche</option>
-         <option>Blessé sur VP</option>
-         <option>Blessé à domicile</option>
-         <option>Blessé établissement enseignement</option>
-         <option>Brûlure</option>
-         <option>Carence d'Ambulance HCT</option>
-         <option>Détresse ventilatoire</option>
-         <option>Intoxication</option>
-         <option>Malaise au sport</option>
-         <option>Malaise au travail</option>
-         <option>Malaise VP</option>
-         <option>Malaise à domicile</option>
-         <option>Noyade / Personne tombée à l'eau</option>
-         <option>Pendaison</option>
-         <option>Personne inconsciente</option>
-         <option>Personne ne répondant pas aux appels</option>
-         <option>Renfort brancardage</option>
-         <option>Suspicion AVC</option>
-         <option>Électrisation / Foudroiement</option>
-         <option>Autre</option>
-       </select>`
+       <select><option>Accouchement</option><option>Arrêt cardio ventilatoire</option><option>Blessé au sport</option></select>`
     );
 
-    // Fiche 2 (Identité Patient)
+    // Fiche 2
     fichesHTML += creerFiche(2,"Identité Patient",
       `<label>Sexe</label><select><option>Homme</option><option>Femme</option></select>
        <label>Nom</label><input type="text">
        <label>Prénom</label><input type="text">
-       <label>Nom de naissance</label><input type="text">
        <label>Date de naissance</label><input type="date" id="dateNaissance2">
-       <label>Âge</label><input type="text" id="age2" readonly>
-       <label>Nationalité</label><input type="text">
-       <label>Téléphone</label><input type="tel">
-       <label>Adresse</label><input type="text">`
+       <label>Âge</label><input type="text" id="age2" readonly>`
     );
 
-    // Fiche 3 (Examen rapide)
+    // Fiche 3
     fichesHTML += creerFiche(3,"Examen rapide",
       `<label>Hémorragie</label><select><option>Oui</option><option>Non</option></select>
-       <label>Obstruction V.A</label><select><option>Libre</option><option>Obstruée</option></select>
-       <label>Traumatisme rachis</label><select><option>Oui</option><option>Non</option></select>
-       <label>Conscience</label><select><option>Oui</option><option>Non</option></select>
-       <label>Plaintes</label><textarea></textarea>
-       <button onclick="alert('RAS - Normal')">RAS</button>`
+       <label>Obstruction V.A</label><select><option>Libre</option><option>Obstruée</option></select>`
     );
 
-    <div class="fiche" id="fiche4">
-      <h2>Voies Aériennes</h2>
-      <label>Obstruction des V.A</label>
-      <select id="vao4" onchange="validateField(this)"><option value="">--</option><option>Libre</option><option>Obstrué</option></select>
-      <label>Cause</label><input id="cause4" type="text" oninput="validateField(this)">
-      <div class="footer-actions">
-        <button class="btn ras" onclick="rasFiche(4)">RAS</button>
-        <button class="btn" onclick="openTransmissionFromFiche(4)">Transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-    </div>
+    // Exemple Fiche 4
+    fichesHTML += creerFiche(4,"Voies Aériennes",
+      `<label>Obstruction des V.A</label><select><option>Libre</option><option>Obstrué</option></select>
+       <label>Cause</label><input type="text">`
+    );
 
-    <div class="fiche" id="fiche6">
-      <h2>Circulation</h2>
-      <div class="row">
-        <div class="col"><label>Hémorragie</label><select id="hem6" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Arrêt cardiaque</label><select id="arret6" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Pâleur</label><select id="pale6" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Sueur</label><select id="sueur6" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Température de la peau altérée</label><select id="tempPeau6" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Pouls difficilement perçu</label><select id="poul6" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Pouls irrégulier</label><select id="irr6" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Asymétrie</label><select id="asym6" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>TRC &gt; 2s</label><select id="trc6" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <div class="footer-actions">
-        <button class="btn ras" onclick="rasFiche(6)">RAS</button>
-        <button class="btn" onclick="openTransmissionFromFiche(6)">Transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-    </div>
+    // Exemple Fiche 6
+    fichesHTML += creerFiche(6,"Circulation",
+      `<label>Hémorragie</label><select><option>Oui</option><option>Non</option></select>
+       <label>Arrêt cardiaque</label><select><option>Oui</option><option>Non</option></select>`
+    );
 
-    <div class="fiche" id="fiche7">
-      <h2>Déficit neurologique</h2>
-      <div class="row">
-        <div class="col"><label>Conscience</label><select id="con7" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Convulsion</label><select id="conv7" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <label>Durée PCI (s)</label><input id="pci7" type="number" min="0" oninput="validateField(this)">
-      <label>Pupilles</label>
-      <select id="pup7" onchange="validateField(this)"><option value="">--</option><option>Réactif et symétrique</option><option>Aréactif mais symétrique</option><option>Réactif mais asymétrique</option><option>Asymétrique et non réactif</option></select>
-      <div class="row">
-        <div class="col"><label>Absence de motricité</label><select id="mot7" onchange="validateField(this)"><option value="">--</option><option>Non</option><option>Haut</option><option>Bas</option></select></div>
-        <div class="col"><label>Absence de sensibilité</label><select id="sen7" onchange="validateField(this)"><option value="">--</option><option>Non</option><option>Haut</option><option>Bas</option></select></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Agitation</label><select id="agit7" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Paralysie faciale</label><select id="fac7" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <label>Trouble de la parole</label><select id="par7" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select>
-
-      <div class="footer-actions">
-        <button class="btn ras" onclick="rasFiche(7)">RAS</button>
-        <button class="btn" onclick="openTransmissionFromFiche(7)">Transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-    </div>
-
-    <div class="fiche" id="fiche8">
-      <h2>Environnement</h2>
-      <label>Lésion apparente</label><select id="lesion8" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select>
-      <label>Degré de brûlure</label><select id="brul8" onchange="validateField(this)"><option value="">--</option><option>1er</option><option>2e</option><option>3e</option></select>
-      <label>Situation thermique</label>
-      <select id="therm8" onchange="validateField(this)"><option value="">--</option><option>Coups de chaud sévère</option><option>Coups de chaud modéré</option><option>Normal</option><option>Hypothermie légère</option><option>Hypothermie modérée</option><option>Hypothermie sévère</option></select>
-      <label>Douleur (0-10)</label><input id="douleur8" type="number" min="0" max="10" oninput="validateField(this)">
-
-      <div class="footer-actions">
-        <button class="btn ras" onclick="rasFiche(8)">RAS</button>
-        <button class="btn" onclick="openTransmissionFromFiche(8)">Transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-    </div>
-
-    <div class="fiche" id="fiche9">
-      <h2>Constantes</h2>
-      <h3>Ventilation</h3>
-      <div class="row">
-        <div class="col"><label>FR (CPM)</label><input id="fr9" type="number" min="0" oninput="validateField(this)"></div>
-        <div class="col"><label>SPO2 Ambiant (%)</label><input id="spo2a9" type="number" min="0" max="100" oninput="validateField(this)"></div>
-        <div class="col"><label>SPO2 sous O2 (%)</label><input id="spo2o9" type="number" min="0" max="100" oninput="validateField(this)"></div>
-      </div>
-      <label>Et SPCO (%)</label><input id="spco9" type="number" min="0" max="100" oninput="validateField(this)">
-
-      <h3>Circulation</h3>
-      <div class="row">
-        <div class="col"><label>FC (BPM)</label><input id="fc9" type="number" min="0" oninput="validateField(this)"></div>
-        <div class="col"><label>PA Gauche (mmHg)</label><input id="pag9" type="number" min="0" oninput="validateField(this)"></div>
-        <div class="col"><label>PA Droite (mmHg)</label><input id="pad9" type="number" min="0" oninput="validateField(this)"></div>
-      </div>
-
-      <h3>Divers</h3>
-      <div class="row">
-        <div class="col"><label>Glycémie (g/L)</label><input id="gly9" type="number" min="0" step="0.1" oninput="validateField(this)"></div>
-        <div class="col"><label>Douleur 0/10</label><input id="dou9" type="number" min="0" max="10" oninput="validateField(this)"></div>
-        <div class="col"><label>Température (°C)</label><input id="temp9" type="number" step="0.1" oninput="validateField(this)"></div>
-      </div>
-
-      <div class="footer-actions">
-        <button class="btn ras" onclick="rasFiche(9)">RAS</button>
-        <button class="btn" onclick="openTransmissionFromFiche(9)">Transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-    </div>
-
-    <div class="fiche" id="fiche10">
-      <h2>Médicaments / Solutés</h2>
-      <h3>Ajouter un médicament</h3>
-      <div class="row">
-        <div class="col"><label>Nom médicament</label><input id="med_nom" type="text"></div>
-        <div class="col small"><label>Quantité</label><input id="med_qte" type="text"></div>
-        <div class="col small"><label>Voie</label><input id="med_voie" type="text"></div>
-        <div class="col small"><label>Heure</label><input id="med_time" type="time"></div>
-      </div>
-      <button class="btn" onclick="ajouterMed()">Ajouter médicament</button>
-
-      <h3 style="margin-top:12px">Tableau des médicaments</h3>
-      <table id="med_table"><thead><tr><th>Heure</th><th>Nom</th><th>Quantité</th><th>Voie</th></tr></thead><tbody></tbody></table>
-
-      <h3 style="margin-top:12px">Ajouter un soluté</h3>
-      <div class="row">
-        <div class="col"><label>Nom soluté</label><input id="sol_nom" type="text"></div>
-        <div class="col small"><label>Quantité</label><input id="sol_qte" type="text"></div>
-        <div class="col small"><label>Voie</label><input id="sol_voie" type="text"></div>
-        <div class="col small"><label>Heure</label><input id="sol_time" type="time"></div>
-      </div>
-      <button class="btn" onclick="ajouterSol()">Ajouter soluté</button>
-
-      <h3 style="margin-top:12px">Tableau solutés</h3>
-      <table id="sol_table"><thead><tr><th>Heure</th><th>Nom</th><th>Quantité</th><th>Voie</th></tr></thead><tbody></tbody></table>
-
-      <div class="footer-actions">
-        <button class="btn ras" onclick="rasFiche(10)">RAS</button>
-        <button class="btn" onclick="openTransmissionFromFiche(10)">Transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-    </div>
-
-    <div class="fiche" id="fiche11">
-      <h2>Vitaux / Gestes</h2>
-      <div class="row">
-        <div class="col"><label>Relevage</label><select id="relev11" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Garrot</label><select id="garot11" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Heure pose garrot</label><input id="garotTime11" type="time" onchange="validateField(this)"></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Pansement compressif</label><select id="pan11" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>RCP</label><select id="rcp11" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Insufflation</label><select id="ins11" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Si insufflation : L/min</label><input id="insL11" type="number" min="0" oninput="validateField(this)"></div>
-        <div class="col"><label>Inhalation</label><select id="inh11" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Si inhalation : L/min</label><input id="inhL11" type="number" min="0" oninput="validateField(this)"></div>
-      </div>
-      <div class="row">
-        <div class="col"><label>Défibrillation</label><select id="def11" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-        <div class="col"><label>Si défibrillation : nb</label><input id="defNb11" type="number" min="0" oninput="validateField(this)"></div>
-        <div class="col"><label>Aspiration mucosités</label><select id="asp11" onchange="validateField(this)"><option value="">--</option><option>Oui</option><option>Non</option></select></div>
-      </div>
-
-      <div class="footer-actions">
-        <button class="btn ras" onclick="rasFiche(11)">RAS</button>
-        <button class="btn" onclick="openTransmissionFromFiche(11)">Transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-    </div>
-
-<div class="fiche" id="fiche12">
-      <h2>Score de Malinas (NR)</h2>
-      <label>Nombre de grossesses</label><input id="malina_gp" type="number" min="0" oninput="validateField(this); calcMalinas()">
-      <label>Mois de grossesse (mois)</label><input id="malina_month" type="number" min="0" max="12" oninput="validateField(this); calcMalinas()">
-      <label>Date des dernières règles</label><input id="malina_lmp" type="date" onchange="validateField(this)">
-      <label>Date du terme</label><input id="malina_due" type="date" onchange="validateField(this)">
-      <label>Durée du travail (min)</label><input id="malina_work" type="number" min="0" oninput="validateField(this); calcMalinas()">
-      <div class="row">
-        <div class="col"><label>Intervalle des contractions</label><input id="malina_interval" type="number" min="0" oninput="validateField(this); calcMalinas()"></div>
-        <div class="col small"><label>Unité</label><select id="malina_interval_unit" onchange="validateField(this); calcMalinas()"><option value="min">min</option><option value="sec">sec</option></select></div>
-      </div>
-      <label>Durée des contractions (s)</label><input id="malina_dur" type="number" min="0" oninput="validateField(this); calcMalinas()">
-      <label>Perte des eaux</label><select id="malina_water" onchange="validateField(this); calcMalinas()"><option value="">--</option><option>Oui</option><option>Non</option></select>
-      <label>Saignement estimé (mL)</label><input id="malina_bleed" type="number" min="0" oninput="validateField(this); calcMalinas()">
-      <label>Envie de pousser</label><select id="malina_push" onchange="validateField(this); calcMalinas()"><option value="">--</option><option>Oui</option><option>Non</option></select>
-
-      <h3>Score calculé</h3>
-      <input id="malina_score" type="text" readonly>
-
-      <div class="footer-actions">
-        <button class="btn ras" onclick="rasFiche(12)">RAS</button>
-        <button class="btn" onclick="openTransmissionFromFiche(12)">Transmission</button>
-        <button class="btn gray" onclick="closeFiche()">Fermer</button>
-      </div>
-    </div>
+    // Exemple Fiche 12
+    fichesHTML += creerFiche(12,"Score de Malinas",
+      `<label>Nombre de grossesses</label><input type="number" min="0">
+       <label>Mois de grossesse</label><input type="number" min="0" max="12">
+       <label>Date du terme</label><input type="date">`
+    );
 
     document.getElementById("fiches-container").innerHTML = fichesHTML;
 
@@ -412,7 +115,7 @@
       document.getElementById("overlay").style.display="none";
     }
 
-    // Calcul de l'âge auto pour Fiche 2
+    // Calcul âge auto Fiche 2
     document.addEventListener("change", e=>{
       if(e.target.id==="dateNaissance2"){
         const d=new Date(e.target.value);
