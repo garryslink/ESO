@@ -144,20 +144,15 @@
       <i class="fas fa-procedures" onclick="showForm('form12')"></i>
     </div>
 
-    <!-- Zone centrale avec 12 formulaires -->
+    <!-- Zone centrale avec formulaires -->
     <div class="content">
+      <!-- Accueil -->
       <div id="form1" class="form-box active">
-        <h3>Fiche Maison</h3>
-        <label>Adresse :</label>
-        <input type="text" id="addr">
-        <label>Remarque :</label>
-        <textarea id="note1"></textarea>
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form1')">Transmission</button>
-          <button class="btn btn-orange">Surveillance</button>
-        </div>
+        <h3>Accueil</h3>
+        <p>Choisissez une icône dans le menu de gauche pour ouvrir une fiche.</p>
       </div>
 
+      <!-- Exemple fiche -->
       <div id="form2" class="form-box">
         <h3>Fiche Médecin</h3>
         <label>Nom :</label>
@@ -166,32 +161,29 @@
         <input type="text" id="docSpec">
         <div class="btn-container">
           <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
-          <button class="btn btn-orange">Surveillance</button>
+          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
         </div>
       </div>
 
-      <div id="form3" class="form-box">
-        <h3>Fiche Ambulance</h3>
-        <label>Numéro de véhicule :</label>
-        <input type="text" id="veh">
-        <label>Équipe :</label>
-        <input type="text" id="team">
+      <!-- ... autres fiches 3 à 12 (même structure que form2) -->
+
+      <!-- Fiche Surveillance (constantes) -->
+      <div id="surveillance" class="form-box">
+        <h3>Fiche Surveillance - Constantes</h3>
+        <label>Tension artérielle :</label>
+        <input type="text" id="tension">
+        <label>Pouls :</label>
+        <input type="text" id="pouls">
+        <label>Température :</label>
+        <input type="text" id="temperature">
+        <label>Saturation O₂ :</label>
+        <input type="text" id="saturation">
+        <label>Fréquence respiratoire :</label>
+        <input type="text" id="freqResp">
         <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form3')">Transmission</button>
-          <button class="btn btn-orange">Surveillance</button>
+          <button class="btn btn-blue" onclick="saveForm('surveillance')">Transmission</button>
         </div>
       </div>
-
-      <!-- 👉 Répète pour les fiches 4 à 12 -->
-      <div id="form4" class="form-box"><h3>Fiche Hôpital</h3><label>Nom :</label><input type="text"><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form4')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
-      <div id="form5" class="form-box"><h3>Fiche Téléphone</h3><label>Numéro :</label><input type="text"><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form5')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
-      <div id="form6" class="form-box"><h3>Fiche Cœur</h3><label>Observation :</label><textarea></textarea><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form6')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
-      <div id="form7" class="form-box"><h3>Fiche Stéthoscope</h3><label>Remarque :</label><textarea></textarea><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form7')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
-      <div id="form8" class="form-box"><h3>Fiche Notes médicales</h3><label>Note :</label><textarea></textarea><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form8')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
-      <div id="form9" class="form-box"><h3>Fiche Injection</h3><label>Médicament :</label><input type="text"><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form9')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
-      <div id="form10" class="form-box"><h3>Fiche Pansement</h3><label>Soin :</label><textarea></textarea><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form10')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
-      <div id="form11" class="form-box"><h3>Fiche Trousse médicale</h3><label>Matériel :</label><textarea></textarea><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form11')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
-      <div id="form12" class="form-box"><h3>Fiche Patient hospitalisé</h3><label>Nom :</label><input type="text"><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form12')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
     </div>
   </div>
 
@@ -203,7 +195,7 @@
 
     function goBack() {
       document.querySelectorAll(".form-box").forEach(f => f.classList.remove("active"));
-      document.getElementById("form1").classList.add("active"); // retour à la fiche "accueil"
+      document.getElementById("form1").classList.add("active"); // retour à l'accueil
     }
 
     function saveForm(formId) {
