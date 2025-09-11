@@ -112,27 +112,35 @@
   <div class="topbar">Mon Application</div>
 
   <div class="container">
-    <!-- Barre latérale avec icônes -->
+    <!-- Barre latérale avec 12 icônes -->
     <div class="sidebar">
       <i class="fas fa-home" onclick="showForm('form1')"></i>
       <i class="fas fa-user-md" onclick="showForm('form2')"></i>
       <i class="fas fa-ambulance" onclick="showForm('form3')"></i>
-      <!-- 👉 continue jusqu’à 12 -->
+      <i class="fas fa-hospital" onclick="showForm('form4')"></i>
+      <i class="fas fa-phone" onclick="showForm('form5')"></i>
+      <i class="fas fa-heartbeat" onclick="showForm('form6')"></i>
+      <i class="fas fa-stethoscope" onclick="showForm('form7')"></i>
+      <i class="fas fa-notes-medical" onclick="showForm('form8')"></i>
+      <i class="fas fa-syringe" onclick="showForm('form9')"></i>
+      <i class="fas fa-band-aid" onclick="showForm('form10')"></i>
+      <i class="fas fa-briefcase-medical" onclick="showForm('form11')"></i>
+      <i class="fas fa-procedures" onclick="showForm('form12')"></i>
     </div>
 
-    <!-- Zone centrale -->
+    <!-- Zone centrale avec 12 formulaires -->
     <div class="content">
       <div id="form1" class="form-box active">
         <h3>Fiche Maison</h3>
         <label>Adresse :</label>
-        <input type="text" placeholder="Entrer une adresse">
+        <input type="text">
         <label>Remarque :</label>
         <textarea></textarea>
       </div>
 
       <div id="form2" class="form-box">
         <h3>Fiche Médecin</h3>
-        <label>Nom du médecin :</label>
+        <label>Nom :</label>
         <input type="text">
         <label>Spécialité :</label>
         <input type="text">
@@ -143,6 +151,74 @@
         <label>Numéro de véhicule :</label>
         <input type="text">
         <label>Équipe :</label>
+        <input type="text">
+      </div>
+
+      <div id="form4" class="form-box">
+        <h3>Fiche Hôpital</h3>
+        <label>Nom :</label>
+        <input type="text">
+        <label>Service :</label>
+        <input type="text">
+      </div>
+
+      <div id="form5" class="form-box">
+        <h3>Fiche Téléphone</h3>
+        <label>Numéro :</label>
+        <input type="text">
+        <label>Contact :</label>
+        <input type="text">
+      </div>
+
+      <div id="form6" class="form-box">
+        <h3>Fiche Cœur</h3>
+        <label>Fréquence cardiaque :</label>
+        <input type="text">
+        <label>Observation :</label>
+        <textarea></textarea>
+      </div>
+
+      <div id="form7" class="form-box">
+        <h3>Fiche Stéthoscope</h3>
+        <label>Bruit respiratoire :</label>
+        <input type="text">
+        <label>Remarque :</label>
+        <textarea></textarea>
+      </div>
+
+      <div id="form8" class="form-box">
+        <h3>Fiche Notes médicales</h3>
+        <label>Note :</label>
+        <textarea></textarea>
+      </div>
+
+      <div id="form9" class="form-box">
+        <h3>Fiche Injection</h3>
+        <label>Médicament :</label>
+        <input type="text">
+        <label>Dosage :</label>
+        <input type="text">
+      </div>
+
+      <div id="form10" class="form-box">
+        <h3>Fiche Pansement</h3>
+        <label>Type de blessure :</label>
+        <input type="text">
+        <label>Soin effectué :</label>
+        <textarea></textarea>
+      </div>
+
+      <div id="form11" class="form-box">
+        <h3>Fiche Trousse médicale</h3>
+        <label>Matériel utilisé :</label>
+        <textarea></textarea>
+      </div>
+
+      <div id="form12" class="form-box">
+        <h3>Fiche Patient hospitalisé</h3>
+        <label>Nom du patient :</label>
+        <input type="text">
+        <label>Chambre :</label>
         <input type="text">
       </div>
     </div>
