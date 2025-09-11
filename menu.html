@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interface type application</title>
-
-  <!-- Import des icônes Font Awesome -->
+  <title>Application avec formulaires</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
     body {
       margin: 0;
@@ -15,132 +12,154 @@
       background: #f0f0f0;
     }
 
-    /* Barre du haut */
     .topbar {
       background: #1976d2;
       color: white;
-      padding: 70px;       /* augmente la hauteur */
+      padding: 40px;
       text-align: center;
-      font-size: 22px;     /* texte plus grand */
+      font-size: 22px;
       font-weight: bold;
     }
 
-    /* Layout principal */
     .container {
       display: flex;
-      height: calc(100vh - 40px);
+      height: calc(100vh - 80px);
     }
 
-    /* Menu latéral */
     .sidebar {
-      width: 70px;
+      width: 80px;
       background: #1976d2;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding-top: 20px;
+      gap: 15px;
     }
 
     .sidebar i {
-      font-size: 28px;       /* taille de l’icône */
-      color: white;          /* couleur de l’icône */
-      background: #1565c0;   /* fond bleu foncé */
+      font-size: 26px;
+      color: white;
+      background: #1565c0;
       padding: 20px;
-      margin: 12px 0;
-      border-radius: 8px;
-      width: 70px;
-      height: 70px;
-      text-align: center;
-      line-height: 30px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
     }
 
-    /* Zone principale */
+    .sidebar i:hover {
+      background: #0d47a1;
+    }
+
     .content {
       flex: 1;
       padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
+      background: #f9f9f9;
       overflow-y: auto;
     }
 
-    .info-box {
+    .form-box {
+      display: none; /* caché par défaut */
       background: white;
-      padding: 15px;
-      border-radius: 8px;
+      padding: 20px;
+      border-radius: 10px;
       border: 1px solid #ddd;
-      font-size: 16px;
     }
 
-    /* Boutons bas */
+    .form-box.active {
+      display: block; /* visible quand actif */
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
     .bottombar {
       display: flex;
-      justify-content: center;   /* centre les boutons horizontalement */
-      align-items: center;
-      gap: 15px;                 /* espace entre les boutons */
-      position: fixed;           /* fixe la barre en bas */
-      bottom: 20px;              /* marge par rapport au bas */
+      justify-content: center;
+      gap: 15px;
+      position: fixed;
+      bottom: 20px;
       left: 0;
-      width: 100%;               /* prend toute la largeur */
+      width: 100%;
     }
 
     .btn {
-      padding: 10px 20px;        /* bouton plus petit */
-      font-size: 14px;           /* texte plus petit */
+      padding: 10px 20px;
+      font-size: 14px;
       border-radius: 8px;
       border: none;
       cursor: pointer;
       font-weight: bold;
-      color: white;              /* texte en blanc */
+      color: white;
     }
 
-    .btn-blue {
-      background: #1976d2;
-    }
-
-    .btn-orange {
-      background: #ff7043;
-    }
+    .btn-blue { background: #1976d2; }
+    .btn-orange { background: #ff7043; }
   </style>
 </head>
 <body>
 
-  <!-- Barre du haut -->
-  <div class="topbar">
-    Mon Application
-  </div>
+  <div class="topbar">Mon Application</div>
 
-  <!-- Layout -->
   <div class="container">
-    <!-- Menu latéral -->
+    <!-- Barre latérale avec icônes -->
     <div class="sidebar">
-      <i class="fas fa-home"></i>
-      <i class="fas fa-user-md"></i>
-      <i class="fas fa-ambulance"></i>
-      <i class="fas fa-hospital"></i>
-      <i class="fas fa-phone"></i>
-      <i class="fas fa-heartbeat"></i>
-      <i class="fas fa-stethoscope"></i>
-      <i class="fas fa-notes-medical"></i>
-      <i class="fas fa-syringe"></i>
-      <i class="fas fa-band-aid"></i>
-      <i class="fas fa-briefcase-medical"></i>
-      <i class="fas fa-procedures"></i>
+      <i class="fas fa-home" onclick="showForm('form1')"></i>
+      <i class="fas fa-user-md" onclick="showForm('form2')"></i>
+      <i class="fas fa-ambulance" onclick="showForm('form3')"></i>
+      <!-- 👉 continue jusqu’à 12 -->
     </div>
 
-    <!-- Contenu principal -->
+    <!-- Zone centrale -->
     <div class="content">
-      <div class="info-box">Bloc 1</div>
-      <div class="info-box">Bloc 2</div>
-      <div class="info-box">Bloc 3</div>
+      <div id="form1" class="form-box active">
+        <h3>Fiche Maison</h3>
+        <label>Adresse :</label>
+        <input type="text" placeholder="Entrer une adresse">
+        <label>Remarque :</label>
+        <textarea></textarea>
+      </div>
+
+      <div id="form2" class="form-box">
+        <h3>Fiche Médecin</h3>
+        <label>Nom du médecin :</label>
+        <input type="text">
+        <label>Spécialité :</label>
+        <input type="text">
+      </div>
+
+      <div id="form3" class="form-box">
+        <h3>Fiche Ambulance</h3>
+        <label>Numéro de véhicule :</label>
+        <input type="text">
+        <label>Équipe :</label>
+        <input type="text">
+      </div>
     </div>
   </div>
 
-  <!-- Boutons en bas -->
+  <!-- Boutons bas -->
   <div class="bottombar">
     <button class="btn btn-blue">Transmission</button>
     <button class="btn btn-orange">Surveillances</button>
   </div>
+
+  <script>
+    function showForm(formId) {
+      document.querySelectorAll(".form-box").forEach(f => f.classList.remove("active"));
+      document.getElementById(formId).classList.add("active");
+    }
+  </script>
 
 </body>
 </html>
