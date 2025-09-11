@@ -98,35 +98,17 @@
       border-radius: 6px;
     }
 
-    .save-btn {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background: #1976d2;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .save-btn:hover {
-      background: #0d47a1;
-    }
-
-    .bottombar {
+    .btn-container {
       display: flex;
       justify-content: center;
-      gap: 15px;
-      position: fixed;
-      bottom: 20px;
-      left: 0;
-      width: 100%;
+      gap: 30px;
+      margin-top: 20px;
     }
 
     .btn {
-      padding: 10px 20px;
-      font-size: 14px;
-      border-radius: 8px;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 10px;
       border: none;
       cursor: pointer;
       font-weight: bold;
@@ -170,7 +152,10 @@
         <input type="text" id="addr">
         <label>Remarque :</label>
         <textarea id="note1"></textarea>
-        <button class="save-btn" onclick="saveForm('form1')">Transmission</button>
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form1')">Transmission</button>
+          <button class="btn btn-orange">Surveillance</button>
+        </div>
       </div>
 
       <div id="form2" class="form-box">
@@ -179,7 +164,10 @@
         <input type="text" id="docName">
         <label>Spécialité :</label>
         <input type="text" id="docSpec">
-        <button class="save-btn" onclick="saveForm('form2')">Transmission</button>
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
+          <button class="btn btn-orange">Surveillance</button>
+        </div>
       </div>
 
       <div id="form3" class="form-box">
@@ -188,26 +176,23 @@
         <input type="text" id="veh">
         <label>Équipe :</label>
         <input type="text" id="team">
-        <button class="save-btn" onclick="saveForm('form3')">Transmission</button>
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form3')">Transmission</button>
+          <button class="btn btn-orange">Surveillance</button>
+        </div>
       </div>
 
-      <!-- 👉 Répète le même schéma jusqu’à form12 -->
-      <div id="form4" class="form-box"><h3>Fiche Hôpital</h3><label>Nom :</label><input type="text"><button class="save-btn" onclick="saveForm('form4')">Transmission</button></div>
-      <div id="form5" class="form-box"><h3>Fiche Téléphone</h3><label>Numéro :</label><input type="text"><button class="save-btn" onclick="saveForm('form5')">Transmission</button></div>
-      <div id="form6" class="form-box"><h3>Fiche Cœur</h3><label>Observation :</label><textarea></textarea><button class="save-btn" onclick="saveForm('form6')">Transmission</button></div>
-      <div id="form7" class="form-box"><h3>Fiche Stéthoscope</h3><label>Remarque :</label><textarea></textarea><button class="save-btn" onclick="saveForm('form7')">Transmission</button></div>
-      <div id="form8" class="form-box"><h3>Fiche Notes médicales</h3><label>Note :</label><textarea></textarea><button class="save-btn" onclick="saveForm('form8')">Transmission</button></div>
-      <div id="form9" class="form-box"><h3>Fiche Injection</h3><label>Médicament :</label><input type="text"><button class="save-btn" onclick="saveForm('form9')">Transmission</button></div>
-      <div id="form10" class="form-box"><h3>Fiche Pansement</h3><label>Soin :</label><textarea></textarea><button class="save-btn" onclick="saveForm('form10')">Transmission</button></div>
-      <div id="form11" class="form-box"><h3>Fiche Trousse médicale</h3><label>Matériel :</label><textarea></textarea><button class="save-btn" onclick="saveForm('form11')">Transmission</button></div>
-      <div id="form12" class="form-box"><h3>Fiche Patient hospitalisé</h3><label>Nom :</label><input type="text"><button class="save-btn" onclick="saveForm('form12')">Transmission</button></div>
+      <!-- 👉 Répète pour les fiches 4 à 12 -->
+      <div id="form4" class="form-box"><h3>Fiche Hôpital</h3><label>Nom :</label><input type="text"><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form4')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
+      <div id="form5" class="form-box"><h3>Fiche Téléphone</h3><label>Numéro :</label><input type="text"><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form5')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
+      <div id="form6" class="form-box"><h3>Fiche Cœur</h3><label>Observation :</label><textarea></textarea><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form6')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
+      <div id="form7" class="form-box"><h3>Fiche Stéthoscope</h3><label>Remarque :</label><textarea></textarea><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form7')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
+      <div id="form8" class="form-box"><h3>Fiche Notes médicales</h3><label>Note :</label><textarea></textarea><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form8')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
+      <div id="form9" class="form-box"><h3>Fiche Injection</h3><label>Médicament :</label><input type="text"><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form9')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
+      <div id="form10" class="form-box"><h3>Fiche Pansement</h3><label>Soin :</label><textarea></textarea><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form10')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
+      <div id="form11" class="form-box"><h3>Fiche Trousse médicale</h3><label>Matériel :</label><textarea></textarea><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form11')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
+      <div id="form12" class="form-box"><h3>Fiche Patient hospitalisé</h3><label>Nom :</label><input type="text"><div class="btn-container"><button class="btn btn-blue" onclick="saveForm('form12')">Transmission</button><button class="btn btn-orange">Surveillance</button></div></div>
     </div>
-  </div>
-
-  <!-- Boutons bas -->
-  <div class="bottombar">
-    <button class="btn btn-blue">Transmission</button>
-    <button class="btn btn-orange">Surveillances</button>
   </div>
 
   <script>
