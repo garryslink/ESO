@@ -15,15 +15,30 @@
     .topbar {
       background: #1976d2;
       color: white;
-      padding: 40px;
-      text-align: center;
+      padding: 20px;
+      display: flex;
+      align-items: center;
       font-size: 22px;
+      font-weight: bold;
+      position: relative;
+    }
+
+    .back-btn {
+      position: absolute;
+      left: 20px;
+      font-size: 18px;
+      background: white;
+      color: #1976d2;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
       font-weight: bold;
     }
 
     .container {
       display: flex;
-      height: calc(100vh - 80px);
+      height: calc(100vh - 70px);
     }
 
     .sidebar {
@@ -58,7 +73,7 @@
     }
 
     .form-box {
-      display: none; /* caché par défaut */
+      display: none;
       background: white;
       padding: 20px;
       border-radius: 10px;
@@ -66,7 +81,7 @@
     }
 
     .form-box.active {
-      display: block; /* visible quand actif */
+      display: block;
     }
 
     label {
@@ -81,6 +96,21 @@
       margin-top: 5px;
       border: 1px solid #ccc;
       border-radius: 6px;
+    }
+
+    .save-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .save-btn:hover {
+      background: #0d47a1;
     }
 
     .bottombar {
@@ -109,7 +139,11 @@
 </head>
 <body>
 
-  <div class="topbar">Mon Application</div>
+  <!-- Barre du haut -->
+  <div class="topbar">
+    <button class="back-btn" onclick="goBack()">← Retour</button>
+    Mon Application
+  </div>
 
   <div class="container">
     <!-- Barre latérale avec 12 icônes -->
@@ -133,94 +167,40 @@
       <div id="form1" class="form-box active">
         <h3>Fiche Maison</h3>
         <label>Adresse :</label>
-        <input type="text">
+        <input type="text" id="addr">
         <label>Remarque :</label>
-        <textarea></textarea>
+        <textarea id="note1"></textarea>
+        <button class="save-btn" onclick="saveForm('form1')">Transmission</button>
       </div>
 
       <div id="form2" class="form-box">
         <h3>Fiche Médecin</h3>
         <label>Nom :</label>
-        <input type="text">
+        <input type="text" id="docName">
         <label>Spécialité :</label>
-        <input type="text">
+        <input type="text" id="docSpec">
+        <button class="save-btn" onclick="saveForm('form2')">Transmission</button>
       </div>
 
       <div id="form3" class="form-box">
         <h3>Fiche Ambulance</h3>
         <label>Numéro de véhicule :</label>
-        <input type="text">
+        <input type="text" id="veh">
         <label>Équipe :</label>
-        <input type="text">
+        <input type="text" id="team">
+        <button class="save-btn" onclick="saveForm('form3')">Transmission</button>
       </div>
 
-      <div id="form4" class="form-box">
-        <h3>Fiche Hôpital</h3>
-        <label>Nom :</label>
-        <input type="text">
-        <label>Service :</label>
-        <input type="text">
-      </div>
-
-      <div id="form5" class="form-box">
-        <h3>Fiche Téléphone</h3>
-        <label>Numéro :</label>
-        <input type="text">
-        <label>Contact :</label>
-        <input type="text">
-      </div>
-
-      <div id="form6" class="form-box">
-        <h3>Fiche Cœur</h3>
-        <label>Fréquence cardiaque :</label>
-        <input type="text">
-        <label>Observation :</label>
-        <textarea></textarea>
-      </div>
-
-      <div id="form7" class="form-box">
-        <h3>Fiche Stéthoscope</h3>
-        <label>Bruit respiratoire :</label>
-        <input type="text">
-        <label>Remarque :</label>
-        <textarea></textarea>
-      </div>
-
-      <div id="form8" class="form-box">
-        <h3>Fiche Notes médicales</h3>
-        <label>Note :</label>
-        <textarea></textarea>
-      </div>
-
-      <div id="form9" class="form-box">
-        <h3>Fiche Injection</h3>
-        <label>Médicament :</label>
-        <input type="text">
-        <label>Dosage :</label>
-        <input type="text">
-      </div>
-
-      <div id="form10" class="form-box">
-        <h3>Fiche Pansement</h3>
-        <label>Type de blessure :</label>
-        <input type="text">
-        <label>Soin effectué :</label>
-        <textarea></textarea>
-      </div>
-
-      <div id="form11" class="form-box">
-        <h3>Fiche Trousse médicale</h3>
-        <label>Matériel utilisé :</label>
-        <textarea></textarea>
-      </div>
-
-      <div id="form12" class="form-box">
-        <h3>Fiche Patient hospitalisé</h3>
-        <label>Nom du patient :</label>
-        <input type="text">
-        <label>Chambre :</label>
-        <input type="text">
-      </div>
+      <!-- 👉 Répète le même schéma jusqu’à form12 -->
+      <div id="form4" class="form-box"><h3>Fiche Hôpital</h3><label>Nom :</label><input type="text"><button class="save-btn" onclick="saveForm('form4')">Transmission</button></div>
+      <div id="form5" class="form-box"><h3>Fiche Téléphone</h3><label>Numéro :</label><input type="text"><button class="save-btn" onclick="saveForm('form5')">Transmission</button></div>
+      <div id="form6" class="form-box"><h3>Fiche Cœur</h3><label>Observation :</label><textarea></textarea><button class="save-btn" onclick="saveForm('form6')">Transmission</button></div>
+      <div id="form7" class="form-box"><h3>Fiche Stéthoscope</h3><label>Remarque :</label><textarea></textarea><button class="save-btn" onclick="saveForm('form7')">Transmission</button></div>
+      <div id="form8" class="form-box"><h3>Fiche Notes médicales</h3><label>Note :</label><textarea></textarea><button class="save-btn" onclick="saveForm('form8')">Transmission</button></div>
+      <div id="form9" class="form-box"><h3>Fiche Injection</h3><label>Médicament :</label><input type="text"><button class="save-btn" onclick="saveForm('form9')">Transmission</button></div>
+      <div id="form10" class="form-box"><h3>Fiche Pansement</h3><label>Soin :</label><textarea></textarea><button class="save-btn" onclick="saveForm('form10')">Transmission</button></div>
+      <div id="form11" class="form-box"><h3>Fiche Trousse médicale</h3><label>Matériel :</label><textarea></textarea><button class="save-btn" onclick="saveForm('form11')">Transmission</button></div>
+      <div id="form12" class="form-box"><h3>Fiche Patient hospitalisé</h3><label>Nom :</label><input type="text"><button class="save-btn" onclick="saveForm('form12')">Transmission</button></div>
     </div>
   </div>
 
@@ -234,6 +214,22 @@
     function showForm(formId) {
       document.querySelectorAll(".form-box").forEach(f => f.classList.remove("active"));
       document.getElementById(formId).classList.add("active");
+    }
+
+    function goBack() {
+      document.querySelectorAll(".form-box").forEach(f => f.classList.remove("active"));
+      document.getElementById("form1").classList.add("active"); // retour à la fiche "accueil"
+    }
+
+    function saveForm(formId) {
+      let form = document.getElementById(formId);
+      let inputs = form.querySelectorAll("input, textarea");
+      let data = {};
+      inputs.forEach(el => {
+        data[el.id || el.name] = el.value;
+      });
+      localStorage.setItem(formId, JSON.stringify(data));
+      alert("Fiche sauvegardée !");
     }
   </script>
 
