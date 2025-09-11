@@ -65,21 +65,21 @@
 
     /* Boutons bas */
     .bottombar {
-      display: flex;
-      justify-content: flex-end;
-      gap: 20px;
-      margin: 50px;
-    }
+       display: flex;
+  justify-content: center;   /* centre les boutons horizontalement */
+  align-items: center;
+  gap: 15px;                 /* espace entre les boutons */
+  position: fixed;           /* fixe la barre en bas */
+  bottom: 20px;              /* marge par rapport au bas */
+  left: 0;
+  width: 100%;               /* prend toute la largeur */
+}
 
     .btn {
-      padding: 4px 5px;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      color: white;
-      font-weight: bold;
-    }
+      padding: 10px 20px;        /* bouton plus petit */
+  font-size: 14px;           /* texte plus petit */
+  border-radius: 8px;
+}
 
     .btn-blue {
       background: #1976d2;
