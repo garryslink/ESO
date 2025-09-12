@@ -64,17 +64,12 @@
 <div id="form1" class="form-box active">
   <h3>Information complémentaire</h3>
 
-  <!-- Page 1 -->
-  <div class="subpage active" id="form1_page1">
     <label>Adresse de l'intervention :</label>
     <input id="form1_adresse" type="text" />
-
     <label>Num de l'intervention :</label>
     <input id="form1_num" type="text" />
-
     <label>Motif de l'intervention :</label>
     <input id="form1_motif" type="text" />
-
     <label for="etat">Lieux de l'intervention :</label>
     <select id="etat" name="etat">
       <option value="">-- Sélectionner --</option>
@@ -83,58 +78,26 @@
       <option value="travail">Travail</option>
       <option value="sport">Sport</option>
     </select>
-
     <label>Date :</label>
     <input id="form1_date" type="date" />
-
     <label>Bilan circonstanciel :</label>
     <textarea id="form1_bilan"></textarea>
 
-    <div class="btn-container">
-      <button class="btn btn-orange" onclick="nextPage('form1',1)">Suivant →</button>
-    </div>
-  </div>
-
-  <!-- Page 2 -->
-  <div class="subpage" id="form1_page2">
     <h4>Horaires d’arrivée</h4>
     <label>Heure de départ :</label>
     <input id="form1_depart" type="time" />
-
     <label>Heure d’arrivée sur place :</label>
     <input id="form1_arrivee" type="time" />
-
     <label>Heure de départ du lieu :</label>
     <input id="form1_quitte" type="time" />
 
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="prevPage('form1',2)">← Précédent</button>
-      <button class="btn btn-orange" onclick="nextPage('form1',2)">Suivant →</button>
-    </div>
-  </div>
-
-  <!-- Page 3 -->
-  <div class="subpage" id="form1_page3">
     <h4>Équipe en charge</h4>
     <label>Chef d’équipe :</label>
     <input id="form1_chef" type="text" />
-
     <label>Équipier 1 :</label>
     <input id="form1_eq1" type="text" />
-
-    <label>Équipier 2 :</label>
-    <input id="form1_eq2" type="text" />
-
     <label>Conducteur :</label>
     <input id="form1_cond" type="text" />
-
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="prevPage('form1',3)">← Précédent</button>
-      <button class="btn btn-orange" onclick="saveForm('form1')">Transmission</button>
-      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-    </div>
-  </div>
-</div>
 
       <!-- Form 2 -->
       <div id="form2" class="form-box">
