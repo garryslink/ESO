@@ -1,213 +1,254 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Application avec formulaires</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f0f0f0;
-    }
-
+    body { margin:0; font-family:Arial, sans-serif; background:#f0f0f0; }
     .topbar {
-      background: #1976d2;
-      color: white;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      font-size: 22px;
-      font-weight: bold;
-      position: relative;
+      background:#1976d2; color:white; padding:20px; display:flex; align-items:center;
+      font-size:22px; font-weight:700; position:relative;
     }
-
     .back-btn {
-      position: absolute;
-      left: 20px;
-      font-size: 18px;
-      background: white;
-      color: #1976d2;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      border: none;
-      font-weight: bold;
+      position:absolute; left:16px; font-size:16px; background:white; color:#1976d2;
+      padding:6px 10px; border-radius:6px; cursor:pointer; border:none; font-weight:700;
     }
-
-    .container {
-      display: flex;
-      height: calc(100vh - 70px);
-    }
-
+    .container { display:flex; height:calc(100vh - 70px); }
     .sidebar {
-      width: 80px;
-      background: #1976d2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 20px;
-      gap: 15px;
+      width:80px; background:#1976d2; display:flex; flex-direction:column; align-items:center;
+      padding-top:20px; gap:14px; overflow:auto;
     }
-
     .sidebar i {
-      font-size: 26px;
-      color: white;
-      background: #1565c0;
-      padding: 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
+      font-size:26px; color:white; background:#1565c0; padding:16px; border-radius:10px;
+      cursor:pointer; width:56px; height:56px; display:flex; align-items:center; justify-content:center;
+      transition:background .15s;
     }
-
-    .sidebar i:hover {
-      background: #0d47a1;
-    }
-
-    .content {
-      flex: 1;
-      padding: 20px;
-      background: #f9f9f9;
-      overflow-y: auto;
-    }
-
-    .form-box {
-      display: none;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-    }
-
-    .form-box.active {
-      display: block;
-    }
-
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    .btn-container {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 20px;
-    }
-
-    .btn {
-      padding: 15px 30px;
-      font-size: 18px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      color: white;
-    }
-
-    .btn-blue { background: #1976d2; }
-    .btn-orange { background: #ff7043; }
+    .sidebar i:hover { background:#0d47a1; }
+    .content { flex:1; padding:20px; background:#f9f9f9; overflow:auto; }
+    .form-box { display:none; background:white; padding:18px; border-radius:10px; border:1px solid #ddd; }
+    .form-box.active { display:block; }
+    label { display:block; margin-top:10px; font-weight:700; }
+    input, textarea { width:100%; padding:8px; margin-top:6px; border:1px solid #ccc; border-radius:6px; }
+    .btn-container { display:flex; justify-content:center; gap:30px; margin-top:18px; }
+    .btn { padding:14px 28px; font-size:18px; border-radius:10px; border:none; cursor:pointer; font-weight:700; color:white; }
+    .btn-blue { background:#1976d2; }
+    .btn-orange { background:#ff7043; }
   </style>
 </head>
 <body>
 
-  <!-- Barre du haut -->
   <div class="topbar">
     <button class="back-btn" onclick="goBack()">← Retour</button>
-    Mon Application
+    Mon Application (index.html)
   </div>
 
   <div class="container">
-    <!-- Barre latérale avec 12 icônes -->
     <div class="sidebar">
-      <i class="fas fa-home" onclick="showForm('form1')"></i>
-      <i class="fas fa-user-md" onclick="showForm('form2')"></i>
-      <i class="fas fa-ambulance" onclick="showForm('form3')"></i>
-      <i class="fas fa-hospital" onclick="showForm('form4')"></i>
-      <i class="fas fa-phone" onclick="showForm('form5')"></i>
-      <i class="fas fa-heartbeat" onclick="showForm('form6')"></i>
-      <i class="fas fa-stethoscope" onclick="showForm('form7')"></i>
-      <i class="fas fa-notes-medical" onclick="showForm('form8')"></i>
-      <i class="fas fa-syringe" onclick="showForm('form9')"></i>
-      <i class="fas fa-band-aid" onclick="showForm('form10')"></i>
-      <i class="fas fa-briefcase-medical" onclick="showForm('form11')"></i>
-      <i class="fas fa-procedures" onclick="showForm('form12')"></i>
+      <!-- 12 icônes : chaque clic ouvre une fiche -->
+      <i class="fas fa-home"      title="Accueil"       onclick="showForm('form1')"></i>
+      <i class="fas fa-user-md"   title="Médecin"        onclick="showForm('form2')"></i>
+      <i class="fas fa-ambulance" title="Ambulance"      onclick="showForm('form3')"></i>
+      <i class="fas fa-hospital"  title="Hôpital"        onclick="showForm('form4')"></i>
+      <i class="fas fa-phone"     title="Téléphone"      onclick="showForm('form5')"></i>
+      <i class="fas fa-heartbeat" title="Cœur"           onclick="showForm('form6')"></i>
+      <i class="fas fa-stethoscope" title="Stéthoscope"  onclick="showForm('form7')"></i>
+      <i class="fas fa-notes-medical" title="Notes"      onclick="showForm('form8')"></i>
+      <i class="fas fa-syringe"   title="Injection"      onclick="showForm('form9')"></i>
+      <i class="fas fa-band-aid"  title="Pansement"      onclick="showForm('form10')"></i>
+      <i class="fas fa-briefcase-medical" title="Trousse" onclick="showForm('form11')"></i>
+      <i class="fas fa-procedures" title="Hospitalisé"   onclick="showForm('form12')"></i>
     </div>
 
-    <!-- Zone centrale avec formulaires -->
     <div class="content">
       <!-- Accueil -->
       <div id="form1" class="form-box active">
         <h3>Accueil</h3>
-        <p>Choisissez une icône dans le menu de gauche pour ouvrir une fiche.</p>
+        <p>Bienvenue — choisissez une icône à gauche pour ouvrir la fiche correspondante.</p>
       </div>
 
-      <!-- Exemple fiche -->
+      <!-- Form 2 -->
       <div id="form2" class="form-box">
         <h3>Fiche Médecin</h3>
         <label>Nom :</label>
-        <input type="text" id="docName">
+        <input id="form2_nom" type="text" />
         <label>Spécialité :</label>
-        <input type="text" id="docSpec">
+        <input id="form2_spec" type="text" />
         <div class="btn-container">
           <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
           <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
         </div>
       </div>
 
-      <!-- ... autres fiches 3 à 12 (même structure que form2) -->
+      <!-- Form 3 -->
+      <div id="form3" class="form-box">
+        <h3>Fiche Ambulance</h3>
+        <label>Numéro véhicule :</label><input id="form3_veh" type="text" />
+        <label>Équipe :</label><input id="form3_team" type="text" />
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form3')">Transmission</button>
+          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+        </div>
+      </div>
 
-      <!-- Fiche Surveillance (constantes) -->
+      <!-- Form 4 -->
+      <div id="form4" class="form-box">
+        <h3>Fiche Hôpital</h3>
+        <label>Nom :</label><input id="form4_nom" type="text" />
+        <label>Service :</label><input id="form4_service" type="text" />
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form4')">Transmission</button>
+          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+        </div>
+      </div>
+
+      <!-- Form 5 -->
+      <div id="form5" class="form-box">
+        <h3>Fiche Téléphone</h3>
+        <label>Numéro :</label><input id="form5_num" type="text" />
+        <label>Contact :</label><input id="form5_contact" type="text" />
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form5')">Transmission</button>
+          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+        </div>
+      </div>
+
+      <!-- Form 6 -->
+      <div id="form6" class="form-box">
+        <h3>Fiche Cœur</h3>
+        <label>Observation :</label><textarea id="form6_obs"></textarea>
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form6')">Transmission</button>
+          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+        </div>
+      </div>
+
+      <!-- Form 7 -->
+      <div id="form7" class="form-box">
+        <h3>Fiche Stéthoscope</h3>
+        <label>Observation :</label><textarea id="form7_obs"></textarea>
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form7')">Transmission</button>
+          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+        </div>
+      </div>
+
+      <!-- Form 8 -->
+      <div id="form8" class="form-box">
+        <h3>Fiche Notes médicales</h3>
+        <label>Note :</label><textarea id="form8_note"></textarea>
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form8')">Transmission</button>
+          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+        </div>
+      </div>
+
+      <!-- Form 9 -->
+      <div id="form9" class="form-box">
+        <h3>Fiche Injection</h3>
+        <label>Médicament :</label><input id="form9_med" type="text" />
+        <label>Dosage :</label><input id="form9_dose" type="text" />
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form9')">Transmission</button>
+          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+        </div>
+      </div>
+
+      <!-- Form 10 -->
+      <div id="form10" class="form-box">
+        <h3>Fiche Pansement</h3>
+        <label>Soin :</label><textarea id="form10_soin"></textarea>
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form10')">Transmission</button>
+          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+        </div>
+      </div>
+
+      <!-- Form 11 -->
+      <div id="form11" class="form-box">
+        <h3>Fiche Trousse médicale</h3>
+        <label>Matériel :</label><textarea id="form11_mat"></textarea>
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form11')">Transmission</button>
+          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+        </div>
+      </div>
+
+      <!-- Form 12 -->
+      <div id="form12" class="form-box">
+        <h3>Fiche Patient hospitalisé</h3>
+        <label>Nom :</label><input id="form12_nom" type="text" />
+        <label>Chambre :</label><input id="form12_chambre" type="text" />
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form12')">Transmission</button>
+          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+        </div>
+      </div>
+
+      <!-- Surveillance (constantes) -->
       <div id="surveillance" class="form-box">
         <h3>Fiche Surveillance - Constantes</h3>
-        <label>Tension artérielle :</label>
-        <input type="text" id="tension">
-        <label>Pouls :</label>
-        <input type="text" id="pouls">
-        <label>Température :</label>
-        <input type="text" id="temperature">
-        <label>Saturation O₂ :</label>
-        <input type="text" id="saturation">
-        <label>Fréquence respiratoire :</label>
-        <input type="text" id="freqResp">
+        <label>Tension artérielle :</label><input id="surv_tension" type="text" />
+        <label>Pouls :</label><input id="surv_pouls" type="text" />
+        <label>Température :</label><input id="surv_temp" type="text" />
+        <label>Saturation O₂ :</label><input id="surv_sat" type="text" />
+        <label>Fréquence respiratoire :</label><input id="surv_freq" type="text" />
         <div class="btn-container">
           <button class="btn btn-blue" onclick="saveForm('surveillance')">Transmission</button>
         </div>
       </div>
+
     </div>
   </div>
 
   <script>
+    // affiche la fiche et charge les données enregistrées si présentes
     function showForm(formId) {
-      document.querySelectorAll(".form-box").forEach(f => f.classList.remove("active"));
-      document.getElementById(formId).classList.add("active");
+      document.querySelectorAll('.form-box').forEach(f => f.classList.remove('active'));
+      const el = document.getElementById(formId);
+      if (!el) return console.warn('Formulaire introuvable:', formId);
+      el.classList.add('active');
+      loadFormData(formId);
     }
 
+    // retour accueil
     function goBack() {
-      document.querySelectorAll(".form-box").forEach(f => f.classList.remove("active"));
-      document.getElementById("form1").classList.add("active"); // retour à l'accueil
+      showForm('form1');
     }
 
+    // sauvegarde les champs (inputs & textarea) du formulaire dans localStorage
     function saveForm(formId) {
-      let form = document.getElementById(formId);
-      let inputs = form.querySelectorAll("input, textarea");
-      let data = {};
+      const form = document.getElementById(formId);
+      if (!form) { alert('Formulaire introuvable'); return; }
+      const inputs = form.querySelectorAll('input, textarea');
+      const data = {};
       inputs.forEach(el => {
-        data[el.id || el.name] = el.value;
+        if (el.id) data[el.id] = el.value;
       });
       localStorage.setItem(formId, JSON.stringify(data));
-      alert("Fiche sauvegardée !");
+      alert('Fiche sauvegardée !');
     }
+
+    // charge les données sauvegardées et les place dans les champs (si existantes)
+    function loadFormData(formId) {
+      const raw = localStorage.getItem(formId);
+      if (!raw) return;
+      try {
+        const data = JSON.parse(raw);
+        Object.keys(data).forEach(key => {
+          const el = document.getElementById(key);
+          if (el) el.value = data[key];
+        });
+      } catch (e) {
+        console.error('Erreur lecture données', e);
+      }
+    }
+
+    // Au chargement, s'assurer que l'accueil est visible et charger son état
+    document.addEventListener('DOMContentLoaded', () => {
+      showForm('form1');
+    });
   </script>
 
 </body>
