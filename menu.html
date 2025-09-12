@@ -62,12 +62,23 @@
     <div class="content">
       <!-- Form 1 (maintenant une fiche comme les autres) -->
       <div id="form1" class="form-box active">
-        <h3>Fiche Accueil (1)</h3>
-        <label>Nom du patient :</label>
-        <input id="form1_nom" type="text" />
+        <h3>Information complémentaire</h3>
+        <label>Adresse de l'intervention :</label>
+        <input id="form2_nom" type="text" />
+        <label>Num de l'intervention :</label>
+        <input id="form2_nom" type="text" />
+        <label>Motive de l'intervention :</label>
+        <input id="form2_nom" type="text" /><label for="etat">Lieux de l'intervention :</label>
+<select id="etat" name="etat">
+  <option value="">-- Sélectionner --</option>
+  <option value="domicile">Domicile</option>
+  <option value="voie publique">Voie Publique</option>
+  <option value="travail">Travail</option>
+  <option value="sport">Sport</option>
+</select>
         <label>Date :</label>
         <input id="form1_date" type="date" />
-        <label>Remarque :</label>
+        <label>Bilan circonstanciel :</label>
         <textarea id="form1_rem"></textarea>
         <div class="btn-container">
           <button class="btn btn-blue" onclick="saveForm('form1')">Transmission</button>
