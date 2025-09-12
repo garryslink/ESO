@@ -41,36 +41,44 @@
 
   <div class="topbar">
     <button class="back-btn" onclick="goBack()">← Retour</button>
-    Mon Application (index.html)
+    Mon Application (éditeur de fiches)
   </div>
 
   <div class="container">
     <div class="sidebar">
-      <!-- 12 icônes : chaque clic ouvre une fiche -->
-      <i class="fas fa-home"      title="Accueil"       onclick="showForm('form1')"></i>
-      <i class="fas fa-user-md"   title="Médecin"        onclick="showForm('form2')"></i>
-      <i class="fas fa-ambulance" title="Ambulance"      onclick="showForm('form3')"></i>
-      <i class="fas fa-hospital"  title="Hôpital"        onclick="showForm('form4')"></i>
-      <i class="fas fa-phone"     title="Téléphone"      onclick="showForm('form5')"></i>
-      <i class="fas fa-heartbeat" title="Cœur"           onclick="showForm('form6')"></i>
-      <i class="fas fa-stethoscope" title="Stéthoscope"  onclick="showForm('form7')"></i>
-      <i class="fas fa-notes-medical" title="Notes"      onclick="showForm('form8')"></i>
-      <i class="fas fa-syringe"   title="Injection"      onclick="showForm('form9')"></i>
-      <i class="fas fa-band-aid"  title="Pansement"      onclick="showForm('form10')"></i>
-      <i class="fas fa-briefcase-medical" title="Trousse" onclick="showForm('form11')"></i>
-      <i class="fas fa-procedures" title="Hospitalisé"   onclick="showForm('form12')"></i>
+      <i class="fas fa-home"      title="Accueil / Fiche 1"       onclick="showForm('form1')"></i>
+      <i class="fas fa-user-md"   title="Fiche 2 - Médecin"       onclick="showForm('form2')"></i>
+      <i class="fas fa-ambulance" title="Fiche 3 - Ambulance"     onclick="showForm('form3')"></i>
+      <i class="fas fa-hospital"  title="Fiche 4 - Hôpital"       onclick="showForm('form4')"></i>
+      <i class="fas fa-phone"     title="Fiche 5 - Téléphone"     onclick="showForm('form5')"></i>
+      <i class="fas fa-heartbeat" title="Fiche 6 - Cœur"          onclick="showForm('form6')"></i>
+      <i class="fas fa-stethoscope" title="Fiche 7 - Stétho"      onclick="showForm('form7')"></i>
+      <i class="fas fa-notes-medical" title="Fiche 8 - Notes"     onclick="showForm('form8')"></i>
+      <i class="fas fa-syringe"   title="Fiche 9 - Injection"     onclick="showForm('form9')"></i>
+      <i class="fas fa-band-aid"  title="Fiche 10 - Pansement"    onclick="showForm('form10')"></i>
+      <i class="fas fa-briefcase-medical" title="Fiche 11 - Trousse" onclick="showForm('form11')"></i>
+      <i class="fas fa-procedures" title="Fiche 12 - Hospitalisé" onclick="showForm('form12')"></i>
     </div>
 
     <div class="content">
-      <!-- Accueil -->
+      <!-- Form 1 (maintenant une fiche comme les autres) -->
       <div id="form1" class="form-box active">
-        <h3>Accueil</h3>
-        <p>Bienvenue — choisissez une icône à gauche pour ouvrir la fiche correspondante.</p>
+        <h3>Fiche Accueil (1)</h3>
+        <label>Nom du patient :</label>
+        <input id="form1_nom" type="text" />
+        <label>Date :</label>
+        <input id="form1_date" type="date" />
+        <label>Remarque :</label>
+        <textarea id="form1_rem"></textarea>
+        <div class="btn-container">
+          <button class="btn btn-blue" onclick="saveForm('form1')">Transmission</button>
+          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+        </div>
       </div>
 
       <!-- Form 2 -->
       <div id="form2" class="form-box">
-        <h3>Fiche Médecin</h3>
+        <h3>Fiche Médecin (2)</h3>
         <label>Nom :</label>
         <input id="form2_nom" type="text" />
         <label>Spécialité :</label>
@@ -83,7 +91,7 @@
 
       <!-- Form 3 -->
       <div id="form3" class="form-box">
-        <h3>Fiche Ambulance</h3>
+        <h3>Fiche Ambulance (3)</h3>
         <label>Numéro véhicule :</label><input id="form3_veh" type="text" />
         <label>Équipe :</label><input id="form3_team" type="text" />
         <div class="btn-container">
@@ -94,7 +102,7 @@
 
       <!-- Form 4 -->
       <div id="form4" class="form-box">
-        <h3>Fiche Hôpital</h3>
+        <h3>Fiche Hôpital (4)</h3>
         <label>Nom :</label><input id="form4_nom" type="text" />
         <label>Service :</label><input id="form4_service" type="text" />
         <div class="btn-container">
@@ -105,7 +113,7 @@
 
       <!-- Form 5 -->
       <div id="form5" class="form-box">
-        <h3>Fiche Téléphone</h3>
+        <h3>Fiche Téléphone (5)</h3>
         <label>Numéro :</label><input id="form5_num" type="text" />
         <label>Contact :</label><input id="form5_contact" type="text" />
         <div class="btn-container">
@@ -116,7 +124,7 @@
 
       <!-- Form 6 -->
       <div id="form6" class="form-box">
-        <h3>Fiche Cœur</h3>
+        <h3>Fiche Cœur (6)</h3>
         <label>Observation :</label><textarea id="form6_obs"></textarea>
         <div class="btn-container">
           <button class="btn btn-blue" onclick="saveForm('form6')">Transmission</button>
@@ -126,7 +134,7 @@
 
       <!-- Form 7 -->
       <div id="form7" class="form-box">
-        <h3>Fiche Stéthoscope</h3>
+        <h3>Fiche Stéthoscope (7)</h3>
         <label>Observation :</label><textarea id="form7_obs"></textarea>
         <div class="btn-container">
           <button class="btn btn-blue" onclick="saveForm('form7')">Transmission</button>
@@ -136,7 +144,7 @@
 
       <!-- Form 8 -->
       <div id="form8" class="form-box">
-        <h3>Fiche Notes médicales</h3>
+        <h3>Fiche Notes (8)</h3>
         <label>Note :</label><textarea id="form8_note"></textarea>
         <div class="btn-container">
           <button class="btn btn-blue" onclick="saveForm('form8')">Transmission</button>
@@ -146,7 +154,7 @@
 
       <!-- Form 9 -->
       <div id="form9" class="form-box">
-        <h3>Fiche Injection</h3>
+        <h3>Fiche Injection (9)</h3>
         <label>Médicament :</label><input id="form9_med" type="text" />
         <label>Dosage :</label><input id="form9_dose" type="text" />
         <div class="btn-container">
@@ -157,7 +165,7 @@
 
       <!-- Form 10 -->
       <div id="form10" class="form-box">
-        <h3>Fiche Pansement</h3>
+        <h3>Fiche Pansement (10)</h3>
         <label>Soin :</label><textarea id="form10_soin"></textarea>
         <div class="btn-container">
           <button class="btn btn-blue" onclick="saveForm('form10')">Transmission</button>
@@ -167,7 +175,7 @@
 
       <!-- Form 11 -->
       <div id="form11" class="form-box">
-        <h3>Fiche Trousse médicale</h3>
+        <h3>Fiche Trousse (11)</h3>
         <label>Matériel :</label><textarea id="form11_mat"></textarea>
         <div class="btn-container">
           <button class="btn btn-blue" onclick="saveForm('form11')">Transmission</button>
@@ -177,7 +185,7 @@
 
       <!-- Form 12 -->
       <div id="form12" class="form-box">
-        <h3>Fiche Patient hospitalisé</h3>
+        <h3>Fiche Patient (12)</h3>
         <label>Nom :</label><input id="form12_nom" type="text" />
         <label>Chambre :</label><input id="form12_chambre" type="text" />
         <div class="btn-container">
@@ -212,9 +220,10 @@
       loadFormData(formId);
     }
 
-    // retour accueil
+    // retour vers la page d'accueil réelle (index.html)
     function goBack() {
-      showForm('form1');
+      // changez 'index.html' si votre page d'accueil a un autre chemin
+      window.location.href = 'index.html';
     }
 
     // sauvegarde les champs (inputs & textarea) du formulaire dans localStorage
@@ -227,13 +236,25 @@
         if (el.id) data[el.id] = el.value;
       });
       localStorage.setItem(formId, JSON.stringify(data));
-      alert('Fiche sauvegardée !');
+      // petit feedback non intrusif
+      const previous = document.querySelector('#' + formId + ' .save-feedback');
+      if (previous) previous.remove();
+      const fb = document.createElement('div');
+      fb.className = 'save-feedback';
+      fb.style.marginTop = '10px';
+      fb.style.color = '#1976d2';
+      fb.textContent = 'Fiche "' + formId + '" sauvegardée';
+      form.appendChild(fb);
+      setTimeout(()=> fb.remove(), 2000);
     }
 
     // charge les données sauvegardées et les place dans les champs (si existantes)
     function loadFormData(formId) {
       const raw = localStorage.getItem(formId);
-      if (!raw) return;
+      if (!raw) {
+        // si aucun enregistrement, on ne touche pas aux champs
+        return;
+      }
       try {
         const data = JSON.parse(raw);
         Object.keys(data).forEach(key => {
@@ -245,7 +266,7 @@
       }
     }
 
-    // Au chargement, s'assurer que l'accueil est visible et charger son état
+    // Au chargement, afficher la fiche 1 (maintenant une vraie fiche)
     document.addEventListener('DOMContentLoaded', () => {
       showForm('form1');
     });
