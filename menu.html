@@ -165,49 +165,68 @@ input.invalid {
 </div>
 
       <!-- Fiche 2 -->
+<!-- Fiche 2 -->
 <div id="form2" class="form-box">
   <h3>Victime</h3>
   <div class="tabs">
     <button class="tab-btn active" onclick="openPage('form2',1)">Identité</button>
     <button class="tab-btn" onclick="openPage('form2',2)">PQSRT</button>
     <button class="tab-btn" onclick="openPage('form2',3)">MHTA</button>
-    <button class="tab-btn" onclick="openPage('form2',4)">Information complémentaire</button>
-  <label>Nom :</label>
-  <input type="text" id="form1_c3" required>
-  <label>Prénom:</label>
-  <input type="text" id="form1_c3" required>
+    <button class="tab-btn" onclick="openPage('form2',4)">Informations complémentaires</button>
+  </div>
+
+  <!-- Page 1 : Identité -->
   <div id="form2_page1" class="subpage active">
-    <label for="etat">Sexe :</label>
-    <select id="etat" name="etat" required>
-     <option value="">-- Sélectionner --</option>
-     <option value="Homme">Homme</option>
-     <option value="Femme">Femme</option></label>
-     <option value="Autre">Autre</option></label>
-     <label>Date de naissance :</label>
-     <input id="form1_date" type="date" /> 
-     <label>Nationalité :</label>
-     <input type="text" id="form1_c3" required>
-     <label>Telephone :</label>
-     <input type="text" id="form1_c3" required>
-    <label for="form1_c1">Adresse :</label>
-    <input type="text" id="form1_c1">
-  </div> 
- <div id="form2_page2" class="subpage">
-    <label>Champ 2 :</label>
+    <label for="form2_nom">Nom :</label>
+    <input type="text" id="form2_nom" required>
+
+    <label for="form2_prenom">Prénom :</label>
+    <input type="text" id="form2_prenom" required>
+
+    <label for="form2_sexe">Sexe :</label>
+    <select id="form2_sexe" name="form2_sexe" required>
+      <option value="">-- Sélectionner --</option>
+      <option value="Homme">Homme</option>
+      <option value="Femme">Femme</option>
+      <option value="Autre">Autre</option>
+    </select>
+
+    <label for="form2_date_naissance">Date de naissance :</label>
+    <input id="form2_date_naissance" type="date" required> 
+
+    <label for="form2_nationalite">Nationalité :</label>
+    <input type="text" id="form2_nationalite" required>
+
+    <label for="form2_tel">Téléphone :</label>
+    <input type="text" id="form2_tel" required>
+
+    <label for="form2_adresse">Adresse :</label>
+    <input type="text" id="form2_adresse">
+  </div>
+
+  <!-- Page 2 : PQSRT -->
+  <div id="form2_page2" class="subpage">
+    <label for="form2_c2">Champ 2 :</label>
     <input type="text" id="form2_c2" required>
     <div class="btn-container">
       <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
       <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
     </div>
+  </div>
+
+  <!-- Page 3 : MHTA -->
   <div id="form2_page3" class="subpage">
-    <label>Champ 3 :</label>
+    <label for="form2_c3">Champ 3 :</label>
     <input type="text" id="form2_c3" required>
     <div class="btn-container">
       <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
       <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
     </div>
-   <div id="form2_page4" class="subpage">
-    <label>Champ 4 :</label>
+  </div>
+
+  <!-- Page 4 : Informations complémentaires -->
+  <div id="form2_page4" class="subpage">
+    <label for="form2_c4">Champ 4 :</label>
     <input type="text" id="form2_c4" required>
     <div class="btn-container">
       <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
@@ -215,6 +234,7 @@ input.invalid {
     </div>
   </div>
 </div>
+
 
       <!-- Fiche 3 -->
 <div id="form3" class="form-box">
