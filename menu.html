@@ -88,63 +88,81 @@ input.invalid {
       <div onclick="showForm('form12')"><i class="fas fa-briefcase-medical"></i><div id="dot_form12" class="status-dot"></div></div>
     </div>
 
-    <div class="content">
-      <div id="form1" class="form-box active">
-        <h3>Départ</h3>
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form1',1)">Ticket de départ</button>
-          <button class="tab-btn" onclick="openPage('form1',2)">Horraire</button>
-          <button class="tab-btn" onclick="openPage('form1',3)">Équipe</button>
-        </div>
-        <div id="form1_page1" class="subpage active">
-          <label>Adresse de l'intervention :</label>
-          <input type="text" id="form1_c1" required>
-          <label>Date :</label>
-          <input id="form1_date" type="date" />  
-          <label for="choix">État de la victime :</label>
-          <select id="choix" name="choix" required> 
-           <option value="">-- Sélectionner --</option> 
-           <option value="option1">Impliquée</option>
-           <option value="option2">Urgence Relative</option> 
-           <option value="option3">Urgence Absolue</option> 
-           <option value="option4">Victime décédée</option>
-          </select> 
-          <label for="etat">Lieux de l'intervention :</label>
-          <select id="etat" name="etat" required>
-           <option value="">-- Sélectionner --</option>
-           <option value="domicile">Domicile</option>
-           <option value="voie publique">Voie Publique</option>
-           <option value="travail">Travail</option>
-           <option value="sport">Sport</option>
-          </select>
-          <label>Bilan circonstanciel :</label>
-          <textarea id="form1_rem" required></textarea>
-        </div>
-        <div id="form1_page2" class="subpage">
-          <label>Heure de départ :</label>
-          <input id="form1_depart1" type="time" />
-          <label>Heure de arrivée sur les lieux :</label>
-          <input id="form1_arrivée1" type="time" />
-          <label>Heure de transport :</label>
-          <input id="form1_transport1" type="time" />
-          <label>Heure de arrivée au CH :</label>
-          <input id="form1_arrivée_CH1" type="time" />
-          <label>Heure de remise disponible :</label>
-          <input id="form1_disponible1" type="time" />
-        </div>
-        <div id="form1_page3" class="subpage">
-          <label>Ambulance Commander:</label>
-          <input type="text" id="form1_c3" required>
-          <label>Conduteur:</label>
-          <input type="text" id="form1_c3" required>
-          <label>Équipier :</label>
-          <input type="text" id="form1_c3" required>
-          <div class="btn-container">
-            <button class="btn btn-blue" onclick="saveForm('form1')">Transmission</button>
-            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-          </div>
-        </div>
+  <div class="content">
+  <div id="form1" class="form-box active">
+    <h3>Départ</h3>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="openPage('form1',1)">Ticket de départ</button>
+      <button class="tab-btn" onclick="openPage('form1',2)">Horaire</button>
+      <button class="tab-btn" onclick="openPage('form1',3)">Équipe</button>
+    </div>
+
+    <!-- Page 1 -->
+    <div id="form1_page1" class="subpage active">
+      <label for="form1_c1">Adresse de l'intervention :</label>
+      <input type="text" id="form1_c1" required>
+
+      <label for="form1_date">Date :</label>
+      <input id="form1_date" type="date" />
+
+      <label for="choix">État de la victime :</label>
+      <select id="choix" name="choix" required>
+        <option value="">-- Sélectionner --</option>
+        <option value="option1">Impliquée</option>
+        <option value="option2">Urgence Relative</option>
+        <option value="option3">Urgence Absolue</option>
+        <option value="option4">Victime décédée</option>
+      </select>
+
+      <label for="etat">Lieux de l'intervention :</label>
+      <select id="etat" name="etat" required>
+        <option value="">-- Sélectionner --</option>
+        <option value="domicile">Domicile</option>
+        <option value="voie_publique">Voie Publique</option>
+        <option value="travail">Travail</option>
+        <option value="sport">Sport</option>
+      </select>
+
+      <label for="form1_rem">Bilan circonstanciel :</label>
+      <textarea id="form1_rem" required></textarea>
+    </div>
+
+    <!-- Page 2 -->
+    <div id="form1_page2" class="subpage">
+      <label for="form1_depart1">Heure de départ :</label>
+      <input id="form1_depart1" type="time" />
+
+      <label for="form1_arrivee1">Heure d'arrivée sur les lieux :</label>
+      <input id="form1_arrivee1" type="time" />
+
+      <label for="form1_transport1">Heure de transport :</label>
+      <input id="form1_transport1" type="time" />
+
+      <label for="form1_arrivee_CH1">Heure d'arrivée au CH :</label>
+      <input id="form1_arrivee_CH1" type="time" />
+
+      <label for="form1_disponible1">Heure de remise disponible :</label>
+      <input id="form1_disponible1" type="time" />
+    </div>
+
+    <!-- Page 3 -->
+    <div id="form1_page3" class="subpage">
+      <label for="form1_c3_1">Ambulance Commandant :</label>
+      <input type="text" id="form1_c3_1" required>
+
+      <label for="form1_c3_2">Conducteur :</label>
+      <input type="text" id="form1_c3_2" required>
+
+      <label for="form1_c3_3">Équipier :</label>
+      <input type="text" id="form1_c3_3" required>
+
+      <div class="btn-container">
+        <button class="btn btn-blue" onclick="saveForm('form1')">Transmission</button>
+        <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
       </div>
+    </div>
+  </div>
+</div>
 
       <!-- Fiche 2 -->
 <div id="form2" class="form-box">
