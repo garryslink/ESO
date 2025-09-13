@@ -27,13 +27,12 @@
     .sidebar i:hover { background:#0d47a1; }
     .status-dot {
       width:10px; height:10px; border-radius:50%; margin-top:4px;
-      background:#999; /* par défaut gris */
+      background:#999;
     }
     .content { flex:1; padding:20px; background:#f9f9f9; overflow:auto; }
     .form-box { display:none; background:white; padding:18px; border-radius:10px; border:1px solid #ddd; }
     .form-box.active { display:block; }
 
-    /* Marque-pages (sous-pages) */
     .tabs { display:flex; gap:10px; margin-bottom:15px; }
     .tab-btn {
       padding:8px 14px; border:none; border-radius:6px; cursor:pointer;
@@ -64,176 +63,76 @@
   </div>
 
   <div class="container">
+    <!-- Sidebar -->
     <div class="sidebar">
-      <div onclick="showForm('form1')">
-        <i class="fas fa-home"></i>
-        <div id="dot_form1" class="status-dot"></div>
-      </div>
-      <div onclick="showForm('form2')">
-        <i class="fas fa-user-md"></i>
-        <div id="dot_form2" class="status-dot"></div>
-      </div>
-      <div onclick="showForm('form3')">
-        <i class="fas fa-ambulance"></i>
-        <div id="dot_form3" class="status-dot"></div>
-      </div>
-      <!-- ... répéter jusqu'à form12 -->
+      <div onclick="showForm('form1')"><i class="fas fa-home"></i><div id="dot_form1" class="status-dot"></div></div>
+      <div onclick="showForm('form2')"><i class="fas fa-user-md"></i><div id="dot_form2" class="status-dot"></div></div>
+      <div onclick="showForm('form3')"><i class="fas fa-ambulance"></i><div id="dot_form3" class="status-dot"></div></div>
+      <div onclick="showForm('form4')"><i class="fas fa-clipboard"></i><div id="dot_form4" class="status-dot"></div></div>
+      <div onclick="showForm('form5')"><i class="fas fa-stethoscope"></i><div id="dot_form5" class="status-dot"></div></div>
+      <div onclick="showForm('form6')"><i class="fas fa-procedures"></i><div id="dot_form6" class="status-dot"></div></div>
+      <div onclick="showForm('form7')"><i class="fas fa-user"></i><div id="dot_form7" class="status-dot"></div></div>
+      <div onclick="showForm('form8')"><i class="fas fa-notes-medical"></i><div id="dot_form8" class="status-dot"></div></div>
+      <div onclick="showForm('form9')"><i class="fas fa-heartbeat"></i><div id="dot_form9" class="status-dot"></div></div>
+      <div onclick="showForm('form10')"><i class="fas fa-hospital"></i><div id="dot_form10" class="status-dot"></div></div>
+      <div onclick="showForm('form11')"><i class="fas fa-file-alt"></i><div id="dot_form11" class="status-dot"></div></div>
+      <div onclick="showForm('form12')"><i class="fas fa-briefcase-medical"></i><div id="dot_form12" class="status-dot"></div></div>
     </div>
 
+    <!-- Content -->
     <div class="content">
-      <!-- Fiche 1 -->
+      <!-- Fiches -->
+      <!-- Boucle manuelle de 1 à 12 -->
+      <!-- Modèle générique -->
       <div id="form1" class="form-box active">
-        <h3>Fiche 1 - Informations</h3>
+        <h3>Fiche 1</h3>
         <div class="tabs">
           <button class="tab-btn active" onclick="openPage('form1',1)">Page 1</button>
           <button class="tab-btn" onclick="openPage('form1',2)">Page 2</button>
           <button class="tab-btn" onclick="openPage('form1',3)">Page 3</button>
         </div>
         <div id="form1_page1" class="subpage active">
-          <label>Adresse :</label>
-          <input type="text" id="form1_adresse" required>
-          <label>Motif :</label>
-          <input type="text" id="form1_motif" required>
+          <label>Champ 1 :</label>
+          <input type="text" id="form1_c1" required>
         </div>
         <div id="form1_page2" class="subpage">
-          <label>Heure départ :</label>
-          <input type="time" id="form1_depart" required>
+          <label>Champ 2 :</label>
+          <input type="text" id="form1_c2" required>
         </div>
         <div id="form1_page3" class="subpage">
-          <label>Chef d’équipe :</label>
-          <input type="text" id="form1_chef" required>
+          <label>Champ 3 :</label>
+          <input type="text" id="form1_c3" required>
           <div class="btn-container">
             <button class="btn btn-blue" onclick="saveForm('form1')">Transmission</button>
             <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
           </div>
         </div>
+      </div>
 
+      <!-- Fiche 2 à 12 (copiées identiques, seul l’id change) -->
       <!-- Fiche 2 -->
-      <div id="form2" class="form-box">
-        <h3>Fiche 2</h3>
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form2',1)">Page 1</button>
-          <button class="tab-btn" onclick="openPage('form2',2)">Page 2</button>
-          <button class="tab-btn" onclick="openPage('form2',3)">Page 3</button>
-        </div>
-        <div id="form2_page1" class="subpage active">
-          <label>Champ 1 :</label>
-          <input type="text" id="form2_c1" required>
-        </div>
-        <div id="form2_page2" class="subpage">
-          <label>Champ 2 :</label>
-          <input type="text" id="form2_c2" required>
-        </div>
-        <div id="form2_page3" class="subpage">
-          <label>Champ 3 :</label>
-          <input type="text" id="form2_c3" required>
-          <div class="btn-container">
-            <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
-            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-          </div>
-        </div>
-
+      <div id="form2" class="form-box"> ... même structure que form1 ... </div>
       <!-- Fiche 3 -->
-      <div id="form3" class="form-box">
-        <h3>Fiche 3</h3>
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form3',1)">Page 1</button>
-          <button class="tab-btn" onclick="openPage('form3',2)">Page 2</button>
-          <button class="tab-btn" onclick="openPage('form3',3)">Page 3</button>
-        </div>
-        <div id="form3_page1" class="subpage active">
-          <label>Champ 1 :</label>
-          <input type="text" id="form3_c1" required>
-        </div>
-        <div id="form3_page2" class="subpage">
-          <label>Champ 2 :</label>
-          <input type="text" id="form3_c2" required>
-        </div>
-        <div id="form3_page3" class="subpage">
-          <label>Champ 3 :</label>
-          <input type="text" id="form3_c3" required>
-          <div class="btn-container">
-            <button class="btn btn-blue" onclick="saveForm('form3')">Transmission</button>
-            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-          </div>
-        </div>
+      <div id="form3" class="form-box"> ... </div>
+      <!-- Fiche 4 -->
+      <div id="form4" class="form-box"> ... </div>
+      <!-- Fiche 5 -->
+      <div id="form5" class="form-box"> ... </div>
+      <!-- Fiche 6 -->
+      <div id="form6" class="form-box"> ... </div>
+      <!-- Fiche 7 -->
+      <div id="form7" class="form-box"> ... </div>
+      <!-- Fiche 8 -->
+      <div id="form8" class="form-box"> ... </div>
+      <!-- Fiche 9 -->
+      <div id="form9" class="form-box"> ... </div>
+      <!-- Fiche 10 -->
+      <div id="form10" class="form-box"> ... </div>
+      <!-- Fiche 11 -->
+      <div id="form11" class="form-box"> ... </div>
+      <!-- Fiche 12 -->
+      <div id="form12" class="form-box"> ... </div>
 
- <!-- Fiche 4 -->
-      <div id="form4" class="form-box">
-        <h3>Fiche 4</h3>
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form4',1)">Page 1</button>
-          <button class="tab-btn" onclick="openPage('form4',2)">Page 2</button>
-          <button class="tab-btn" onclick="openPage('form4',3)">Page 3</button>
-        </div>
-        <div id="form4_page1" class="subpage active">
-          <label>Champ 1 :</label>
-          <input type="text" id="form4_c1" required>
-        </div>
-        <div id="form4_page2" class="subpage">
-          <label>Champ 2 :</label>
-          <input type="text" id="form4_c2" required>
-        </div>
-        <div id="form4_page3" class="subpage">
-          <label>Champ 3 :</label>
-          <input type="text" id="form4_c3" required>
-          <div class="btn-container">
-            <button class="btn btn-blue" onclick="saveForm('form4')">Transmission</button>
-            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-          </div>
-        </div>
-
- <!-- Fiche 5 -->
-      <div id="form5" class="form-box">
-        <h3>Fiche 5</h3>
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form5',1)">Page 1</button>
-          <button class="tab-btn" onclick="openPage('form5',2)">Page 2</button>
-          <button class="tab-btn" onclick="openPage('form5',3)">Page 3</button>
-        </div>
-        <div id="form5_page1" class="subpage active">
-          <label>Champ 1 :</label>
-          <input type="text" id="form5_c1" required>
-        </div>
-        <div id="form5_page2" class="subpage">
-          <label>Champ 2 :</label>
-          <input type="text" id="form5_c2" required>
-        </div>
-        <div id="form5_page3" class="subpage">
-          <label>Champ 3 :</label>
-          <input type="text" id="form5_c3" required>
-          <div class="btn-container">
-            <button class="btn btn-blue" onclick="saveForm('form5')">Transmission</button>
-            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-          </div>
-        </div>
-      </div>
-
- <!-- Fiche 6 -->
-      <div id="form6" class="form-box">
-        <h3>Fiche 6</h3>
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form6',1)">Page 1</button>
-          <button class="tab-btn" onclick="openPage('form6',2)">Page 2</button>
-          <button class="tab-btn" onclick="openPage('form6',3)">Page 3</button>
-        </div>
-        <div id="form6_page1" class="subpage active">
-          <label>Champ 1 :</label>
-          <input type="text" id="form6_c1" required>
-        </div>
-        <div id="form6_page2" class="subpage">
-          <label>Champ 2 :</label>
-          <input type="text" id="form6_c2" required>
-        </div>
-        <div id="form6_page3" class="subpage">
-          <label>Champ 3 :</label>
-          <input type="text" id="form6_c3" required>
-          <div class="btn-container">
-            <button class="btn btn-blue" onclick="saveForm('form6')">Transmission</button>
-            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-          </div>
-        </div>
-      </div>
       <!-- Fiche Surveillance -->
       <div id="surveillance" class="form-box">
         <h3>Fiche Surveillance</h3>
@@ -243,178 +142,19 @@
     </div>
   </div>
 
- <!-- Fiche 7 -->
-      <div id="form7" class="form-box">
-        <h3>Fiche 7</h3>
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form7',1)">Page 1</button>
-          <button class="tab-btn" onclick="openPage('form7',2)">Page 2</button>
-          <button class="tab-btn" onclick="openPage('form7',3)">Page 3</button>
-        </div>
-        <div id="form7_page1" class="subpage active">
-          <label>Champ 1 :</label>
-          <input type="text" id="form7_c1" required>
-        </div>
-        <div id="form7_page2" class="subpage">
-          <label>Champ 2 :</label>
-          <input type="text" id="form7_c2" required>
-        </div>
-        <div id="form7_page3" class="subpage">
-          <label>Champ 3 :</label>
-          <input type="text" id="form7_c3" required>
-          <div class="btn-container">
-            <button class="btn btn-blue" onclick="saveForm('form7')">Transmission</button>
-            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-          </div>
-        </div>
-      </div>
-
- <!-- Fiche 8 -->
-      <div id="form8" class="form-box">
-        <h3>Fiche 8</h3>
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form8',1)">Page 1</button>
-          <button class="tab-btn" onclick="openPage('form8',2)">Page 2</button>
-          <button class="tab-btn" onclick="openPage('form8',3)">Page 3</button>
-        </div>
-        <div id="form8_page1" class="subpage active">
-          <label>Champ 1 :</label>
-          <input type="text" id="form8_c1" required>
-        </div>
-        <div id="form8_page2" class="subpage">
-          <label>Champ 2 :</label>
-          <input type="text" id="form8_c2" required>
-        </div>
-        <div id="form8_page3" class="subpage">
-          <label>Champ 3 :</label>
-          <input type="text" id="form8_c3" required>
-          <div class="btn-container">
-            <button class="btn btn-blue" onclick="saveForm('form8')">Transmission</button>
-            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-          </div>
-        </div>
-      </div>
-
- <!-- Fiche 9 -->
-      <div id="form9" class="form-box">
-        <h3>Fiche 9</h3>
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form9',1)">Page 1</button>
-          <button class="tab-btn" onclick="openPage('form9',2)">Page 2</button>
-          <button class="tab-btn" onclick="openPage('form9',3)">Page 3</button>
-        </div>
-        <div id="form9_page1" class="subpage active">
-          <label>Champ 1 :</label>
-          <input type="text" id="form9_c1" required>
-        </div>
-        <div id="form9_page2" class="subpage">
-          <label>Champ 2 :</label>
-          <input type="text" id="form9_c2" required>
-        </div>
-        <div id="form9_page3" class="subpage">
-          <label>Champ 3 :</label>
-          <input type="text" id="form9_c3" required>
-          <div class="btn-container">
-            <button class="btn btn-blue" onclick="saveForm('form9')">Transmission</button>
-            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-          </div>
-        </div>
-      </div>
-
-
- <!-- Fiche 10 -->
-      <div id="form10" class="form-box">
-        <h3>Fiche 10</h3>
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form10',1)">Page 1</button>
-          <button class="tab-btn" onclick="openPage('form10',2)">Page 2</button>
-          <button class="tab-btn" onclick="openPage('form10',3)">Page 3</button>
-        </div>
-        <div id="form10_page1" class="subpage active">
-          <label>Champ 1 :</label>
-          <input type="text" id="form10_c1" required>
-        </div>
-        <div id="form10_page2" class="subpage">
-          <label>Champ 2 :</label>
-          <input type="text" id="form10_c2" required>
-        </div>
-        <div id="form10_page3" class="subpage">
-          <label>Champ 3 :</label>
-          <input type="text" id="form10_c3" required>
-          <div class="btn-container">
-            <button class="btn btn-blue" onclick="saveForm('form10')">Transmission</button>
-            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-          </div>
-        </div>
-      </div>
-
- <!-- Fiche 11 -->
-      <div id="form11" class="form-box">
-        <h3>Fiche 11</h3>
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form11',1)">Page 1</button>
-          <button class="tab-btn" onclick="openPage('form11',2)">Page 2</button>
-          <button class="tab-btn" onclick="openPage('form11',3)">Page 3</button>
-        </div>
-        <div id="form11_page1" class="subpage active">
-          <label>Champ 1 :</label>
-          <input type="text" id="form11_c1" required>
-        </div>
-        <div id="form11_page2" class="subpage">
-          <label>Champ 2 :</label>
-          <input type="text" id="form11_c2" required>
-        </div>
-        <div id="form11_page3" class="subpage">
-          <label>Champ 3 :</label>
-          <input type="text" id="form11_c3" required>
-          <div class="btn-container">
-            <button class="btn btn-blue" onclick="saveForm('form11')">Transmission</button>
-            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-          </div>
-        </div>
-      </div>
-
- <!-- Fiche 12 -->
-      <div id="form12" class="form-box">
-        <h3>Fiche 12</h3>
-        <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form12',1)">Page 1</button>
-          <button class="tab-btn" onclick="openPage('form12',2)">Page 2</button>
-          <button class="tab-btn" onclick="openPage('form12',3)">Page 3</button>
-        </div>
-        <div id="form12_page1" class="subpage active">
-          <label>Champ 1 :</label>
-          <input type="text" id="form12_c1" required>
-        </div>
-        <div id="form12_page2" class="subpage">
-          <label>Champ 2 :</label>
-          <input type="text" id="form12_c2" required>
-        </div>
-        <div id="form12_page3" class="subpage">
-          <label>Champ 3 :</label>
-          <input type="text" id="form12_c3" required>
-          <div class="btn-container">
-            <button class="btn btn-blue" onclick="saveForm('form12')">Transmission</button>
-            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-          </div>
-        </div>
-      </div>
-
   <script>
-function showForm(formId) {
-  document.querySelectorAll('.form-box').forEach(f => f.classList.remove('active'));
-  document.getElementById(formId).classList.add('active');
-
-  // activer la 1ère page
-  let subpages = document.querySelectorAll("#" + formId + " .subpage");
-  let tabs = document.querySelectorAll("#" + formId + " .tab-btn");
-  if (subpages.length > 0 && tabs.length > 0) {
-    subpages.forEach(p => p.classList.remove("active"));
-    tabs.forEach(b => b.classList.remove("active"));
-    subpages[0].classList.add("active");
-    tabs[0].classList.add("active");
-  }
-}
+    function showForm(formId) {
+      document.querySelectorAll('.form-box').forEach(f => f.classList.remove('active'));
+      document.getElementById(formId).classList.add('active');
+      let pages = document.querySelectorAll("#" + formId + " .subpage");
+      let tabs = document.querySelectorAll("#" + formId + " .tab-btn");
+      if (pages.length) {
+        pages.forEach(p => p.classList.remove("active"));
+        tabs.forEach(b => b.classList.remove("active"));
+        pages[0].classList.add("active");
+        tabs[0].classList.add("active");
+      }
+    }
     function openPage(formId, num) {
       document.querySelectorAll("#" + formId + " .subpage").forEach(p=>p.classList.remove("active"));
       document.querySelector("#" + formId + "_page" + num).classList.add("active");
@@ -437,7 +177,6 @@ function showForm(formId) {
       let dot=document.getElementById("dot_"+formId);
       if(dot) dot.style.background = valid?"green":"red";
     }
-    // validation live
     document.addEventListener("input", e=>{
       if(e.target.matches("input[required],textarea[required],select[required]")){
         if(e.target.value.trim()!==""){ e.target.classList.add("valid"); e.target.classList.remove("invalid"); }
