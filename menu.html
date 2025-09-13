@@ -30,11 +30,13 @@
     .form-box { display:none; background:white; padding:18px; border-radius:10px; border:1px solid #ddd; }
     .form-box.active { display:block; }
     label { display:block; margin-top:10px; font-weight:700; }
-    input, textarea { width:100%; padding:8px; margin-top:6px; border:1px solid #ccc; border-radius:6px; }
+    input, textarea, select { width:100%; padding:8px; margin-top:6px; border:1px solid #ccc; border-radius:6px; }
     .btn-container { display:flex; justify-content:center; gap:30px; margin-top:18px; }
     .btn { padding:14px 28px; font-size:18px; border-radius:10px; border:none; cursor:pointer; font-weight:700; color:white; }
     .btn-blue { background:#1976d2; }
     .btn-orange { background:#ff7043; }
+    .subpage { display:none; }
+    .subpage.active { display:block; }
   </style>
 </head>
 <body>
@@ -60,378 +62,134 @@
     </div>
 
     <div class="content">
-<!-- Fiche 1 -->
-<div id="form1" class="form-box active">
-  <h3>Information complémentaire</h3>
+      <!-- Exemple fiche 1 -->
+      <div id="form1" class="form-box active">
+        <h3>Information complémentaire</h3>
 
-    <label>Adresse de l'intervention :</label>
-    <input id="form1_adresse" type="text" />
-    <label>Num de l'intervention :</label>
-    <input id="form1_num" type="text" />
-    <label>Motif de l'intervention :</label>
-    <input id="form1_motif" type="text" />
-    <label for="etat">Lieux de l'intervention :</label>
-    <select id="etat" name="etat">
-      <option value="">-- Sélectionner --</option>
-      <option value="domicile">Domicile</option>
-      <option value="voie publique">Voie Publique</option>
-      <option value="travail">Travail</option>
-      <option value="sport">Sport</option>
-    </select>
-    <label>Date :</label>
-    <input id="form1_date" type="date" />
-    <label>Bilan circonstanciel :</label>
-    <textarea id="form1_bilan"></textarea>
+        <div class="subpage active" id="form1_page1">
+          <label>Adresse de l'intervention :</label>
+          <input id="form1_adresse" type="text" />
+          <label>Num de l'intervention :</label>
+          <input id="form1_num" type="text" />
+          <label>Motif de l'intervention :</label>
+          <input id="form1_motif" type="text" />
+          <label for="etat">Lieux de l'intervention :</label>
+          <select id="etat" name="etat">
+            <option value="">-- Sélectionner --</option>
+            <option value="domicile">Domicile</option>
+            <option value="voie publique">Voie Publique</option>
+            <option value="travail">Travail</option>
+            <option value="sport">Sport</option>
+          </select>
+          <label>Date :</label>
+          <input id="form1_date" type="date" />
+          <label>Bilan circonstanciel :</label>
+          <textarea id="form1_bilan"></textarea>
+          <div class="btn-container">
+            <button class="btn btn-orange" onclick="nextPage('form1',1)">Suivant →</button>
+          </div>
+        </div>
 
-    <h4>Horaires d’arrivée</h4>
-    <label>Heure de départ :</label>
-    <input id="form1_depart" type="time" />
-    <label>Heure d’arrivée sur les lieux :</label>
-    <input id="form1_arrivee" type="time" />
-    <label>Heure début de transport :</label>
-    <input id="form1_quitte" type="time" />
-    <label>Heure arrivée au CH :</label>
-    <input id="form1_quitte" type="time" />
-    <label>Heure quitte le CH :</label>
-    <input id="form1_quitte" type="time" />
-    <label>Heure mise disponible :</label>
-    <input id="form1_quitte" type="time" />
+        <div class="subpage" id="form1_page2">
+          <h4>Horaires d’arrivée</h4>
+          <label>Heure de départ :</label>
+          <input id="form1_depart" type="time" />
+          <label>Heure d’arrivée sur place :</label>
+          <input id="form1_arrivee" type="time" />
+          <label>Heure de départ du lieu :</label>
+          <input id="form1_quitte" type="time" />
+          <div class="btn-container">
+            <button class="btn btn-blue" onclick="prevPage('form1',2)">← Précédent</button>
+            <button class="btn btn-orange" onclick="nextPage('form1',2)">Suivant →</button>
+          </div>
+        </div>
 
-    <h4>Équipe en charge</h4>
-    <label>Ambulance Commander :</label>
-    <input id="form1_chef" type="text" />
-    <label>Conducteur :</label>
-    <input id="form1_eq1" type="text" />
-    <label>Équipier :</label>
-    <input id="form1_cond" type="text" />
-
-<div class="content">
-  <!-- Fiche 1 (avec sous-pages) -->
-  <div id="form1" class="form-box active">
-    <h3>Information complémentaire</h3>
-
-    <!-- Page 1 -->
-    <div class="subpage active" id="form1_page1">
-      <label>Adresse de l'intervention :</label>
-      <input id="form1_adresse" type="text" />
-
-      <label>Num de l'intervention :</label>
-      <input id="form1_num" type="text" />
-
-      <label>Motif de l'intervention :</label>
-      <input id="form1_motif" type="text" />
-
-      <label for="etat">Lieux de l'intervention :</label>
-      <select id="etat" name="etat">
-        <option value="">-- Sélectionner --</option>
-        <option value="domicile">Domicile</option>
-        <option value="voie publique">Voie Publique</option>
-        <option value="travail">Travail</option>
-        <option value="sport">Sport</option>
-      </select>
-
-      <label>Date :</label>
-      <input id="form1_date" type="date" />
-
-      <label>Bilan circonstanciel :</label>
-      <textarea id="form1_bilan"></textarea>
-
-      <div class="btn-container">
-        <button class="btn btn-orange" onclick="nextPage('form1',1)">Suivant →</button>
+        <div class="subpage" id="form1_page3">
+          <h4>Équipe en charge</h4>
+          <label>Chef d’équipe :</label>
+          <input id="form1_chef" type="text" />
+          <label>Équipier 1 :</label>
+          <input id="form1_eq1" type="text" />
+          <label>Équipier 2 :</label>
+          <input id="form1_eq2" type="text" />
+          <label>Conducteur :</label>
+          <input id="form1_cond" type="text" />
+          <div class="btn-container">
+            <button class="btn btn-blue" onclick="prevPage('form1',3)">← Précédent</button>
+            <button class="btn btn-orange" onclick="saveForm('form1')">Transmission</button>
+            <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- Page 2 -->
-    <div class="subpage" id="form1_page2">
-      <h4>Horaires d’arrivée</h4>
-      <label>Heure de départ :</label>
-      <input id="form1_depart" type="time" />
+      <!-- Fiches 2 à 12 -->
+      <div id="form2" class="form-box"><h3>Fiche 2</h3><textarea id="form2_notes"></textarea></div>
+      <div id="form3" class="form-box"><h3>Fiche 3</h3><textarea id="form3_notes"></textarea></div>
+      <div id="form4" class="form-box"><h3>Fiche 4</h3><textarea id="form4_notes"></textarea></div>
+      <div id="form5" class="form-box"><h3>Fiche 5</h3><textarea id="form5_notes"></textarea></div>
+      <div id="form6" class="form-box"><h3>Fiche 6</h3><textarea id="form6_notes"></textarea></div>
+      <div id="form7" class="form-box"><h3>Fiche 7</h3><textarea id="form7_notes"></textarea></div>
+      <div id="form8" class="form-box"><h3>Fiche 8</h3><textarea id="form8_notes"></textarea></div>
+      <div id="form9" class="form-box"><h3>Fiche 9</h3><textarea id="form9_notes"></textarea></div>
+      <div id="form10" class="form-box"><h3>Fiche 10</h3><textarea id="form10_notes"></textarea></div>
+      <div id="form11" class="form-box"><h3>Fiche 11</h3><textarea id="form11_notes"></textarea></div>
+      <div id="form12" class="form-box"><h3>Fiche 12</h3><textarea id="form12_notes"></textarea></div>
 
-      <label>Heure d’arrivée sur place :</label>
-      <input id="form1_arrivee" type="time" />
-
-      <label>Heure de départ du lieu :</label>
-      <input id="form1_quitte" type="time" />
-
-      <div class="btn-container">
-        <button class="btn btn-blue" onclick="prevPage('form1',2)">← Précédent</button>
-        <button class="btn btn-orange" onclick="nextPage('form1',2)">Suivant →</button>
-      </div>
-    </div>
-
-    <!-- Page 3 -->
-    <div class="subpage" id="form1_page3">
-      <h4>Équipe en charge</h4>
-      <label>Chef d’équipe :</label>
-      <input id="form1_chef" type="text" />
-
-      <label>Équipier 1 :</label>
-      <input id="form1_eq1" type="text" />
-
-      <label>Équipier 2 :</label>
-      <input id="form1_eq2" type="text" />
-
-      <label>Conducteur :</label>
-      <input id="form1_cond" type="text" />
-
-      <div class="btn-container">
-        <button class="btn btn-blue" onclick="prevPage('form1',3)">← Précédent</button>
-        <button class="btn btn-orange" onclick="saveForm('form1')">Transmission</button>
-        <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+      <!-- Surveillance -->
+      <div id="surveillance" class="form-box">
+        <h3>Fiche Surveillance - Constantes</h3>
+        <label>Tension artérielle :</label><input type="text" id="tension">
+        <label>Pouls :</label><input type="text" id="pouls">
+        <label>Température :</label><input type="text" id="temperature">
+        <label>Saturation O₂ :</label><input type="text" id="saturation">
+        <label>Fréquence respiratoire :</label><input type="text" id="freqResp">
       </div>
     </div>
   </div>
-
-  <!-- Fiche 2 -->
-  <div id="form2" class="form-box">
-    <h3>Fiche 2</h3>
-    <label>Nom :</label>
-    <input type="text" id="form2_nom">
-    <label>Spécialité :</label>
-    <input type="text" id="form2_spec">
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
-      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-    </div>
-  </div>
-
-  <!-- Fiche 3 -->
-  <div id="form3" class="form-box">
-    <h3>Fiche 3</h3>
-    <label>Description :</label>
-    <textarea id="form3_desc"></textarea>
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="saveForm('form3')">Transmission</button>
-      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-    </div>
-  </div>
-
-  <!-- Fiches 4 à 12 (même modèle) -->
-  <div id="form4" class="form-box">
-    <h3>Fiche 4</h3>
-    <label>Notes :</label>
-    <textarea id="form4_notes"></textarea>
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="saveForm('form4')">Transmission</button>
-      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-    </div>
-  </div>
-
-  <div id="form5" class="form-box"><h3>Fiche 5</h3><textarea id="form5_notes"></textarea>
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="saveForm('form5')">Transmission</button>
-      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-    </div>
-  </div>
-
-  <div id="form6" class="form-box"><h3>Fiche 6</h3><textarea id="form6_notes"></textarea>
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="saveForm('form6')">Transmission</button>
-      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-    </div>
-  </div>
-
-  <div id="form7" class="form-box"><h3>Fiche 7</h3><textarea id="form7_notes"></textarea>
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="saveForm('form7')">Transmission</button>
-      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-    </div>
-  </div>
-
-  <div id="form8" class="form-box"><h3>Fiche 8</h3><textarea id="form8_notes"></textarea>
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="saveForm('form8')">Transmission</button>
-      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-    </div>
-  </div>
-
-  <div id="form9" class="form-box"><h3>Fiche 9</h3><textarea id="form9_notes"></textarea>
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="saveForm('form9')">Transmission</button>
-      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-    </div>
-  </div>
-
-  <div id="form10" class="form-box"><h3>Fiche 10</h3><textarea id="form10_notes"></textarea>
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="saveForm('form10')">Transmission</button>
-      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-    </div>
-  </div>
-
-  <div id="form11" class="form-box"><h3>Fiche 11</h3><textarea id="form11_notes"></textarea>
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="saveForm('form11')">Transmission</button>
-      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-    </div>
-  </div>
-
-  <div id="form12" class="form-box"><h3>Fiche 12</h3><textarea id="form12_notes"></textarea>
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="saveForm('form12')">Transmission</button>
-      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-    </div>
-  </div>
-
-  <!-- Fiche Surveillance -->
-  <div id="surveillance" class="form-box">
-    <h3>Fiche Surveillance - Constantes</h3>
-    <label>Tension artérielle :</label>
-    <input type="text" id="tension">
-    <label>Pouls :</label>
-    <input type="text" id="pouls">
-    <label>Température :</label>
-    <input type="text" id="temperature">
-    <label>Saturation O₂ :</label>
-    <input type="text" id="saturation">
-    <label>Fréquence respiratoire :</label>
-    <input type="text" id="freqResp">
-    <div class="btn-container">
-      <button class="btn btn-blue" onclick="saveForm('surveillance')">Transmission</button>
-    </div>
-  </div>
-</div>
 
   <script>
-    // affiche la fiche et charge les données enregistrées si présentes
+    // Affiche une fiche
     function showForm(formId) {
-      document.querySelectorAll('.form-box').forEach(f => f.classList.remove('active'));
-      const el = document.getElementById(formId);
-      if (!el) return console.warn('Formulaire introuvable:', formId);
-      el.classList.add('active');
-      loadFormData(formId);
+      document.querySelectorAll(".form-box").forEach(f => f.classList.remove("active"));
+      document.getElementById(formId).classList.add("active");
+      let firstPage = document.querySelector("#" + formId + " .subpage");
+      if (firstPage) {
+        document.querySelectorAll("#" + formId + " .subpage").forEach(p => p.classList.remove("active"));
+        firstPage.classList.add("active");
+      }
     }
 
-    // retour vers la page d'accueil réelle (index.html)
+    // Retour accueil
     function goBack() {
-      // changez 'index.html' si votre page d'accueil a un autre chemin
-      window.location.href = 'index.html';
+      window.location.href = "https://garryslink.github.io/ESO/";
     }
 
-    // sauvegarde les champs (inputs & textarea) du formulaire dans localStorage
+    // Sauvegarde formulaire
     function saveForm(formId) {
-      const form = document.getElementById(formId);
-      if (!form) { alert('Formulaire introuvable'); return; }
-      const inputs = form.querySelectorAll('input, textarea');
-      const data = {};
+      let form = document.getElementById(formId);
+      let inputs = form.querySelectorAll("input, textarea, select");
+      let data = {};
       inputs.forEach(el => {
-        if (el.id) data[el.id] = el.value;
+        data[el.id || el.name] = el.value;
       });
       localStorage.setItem(formId, JSON.stringify(data));
-      // petit feedback non intrusif
-      const previous = document.querySelector('#' + formId + ' .save-feedback');
-      if (previous) previous.remove();
-      const fb = document.createElement('div');
-      fb.className = 'save-feedback';
-      fb.style.marginTop = '10px';
-      fb.style.color = '#1976d2';
-      fb.textContent = 'Fiche "' + formId + '" sauvegardée';
-      form.appendChild(fb);
-      setTimeout(()=> fb.remove(), 2000);
+      alert("Fiche sauvegardée !");
     }
 
-    // charge les données sauvegardées et les place dans les champs (si existantes)
-    function loadFormData(formId) {
-      const raw = localStorage.getItem(formId);
-      if (!raw) {
-        // si aucun enregistrement, on ne touche pas aux champs
-        return;
-      }
-      try {
-        const data = JSON.parse(raw);
-        Object.keys(data).forEach(key => {
-          const el = document.getElementById(key);
-          if (el) el.value = data[key];
-        });
-      } catch (e) {
-        console.error('Erreur lecture données', e);
-      }
+    // Navigation sous-pages
+    function nextPage(formId, current) {
+      document.getElementById(formId + "_page" + current).classList.remove("active");
+      document.getElementById(formId + "_page" + (current + 1)).classList.add("active");
+    }
+    function prevPage(formId, current) {
+      document.getElementById(formId + "_page" + current).classList.remove("active");
+      document.getElementById(formId + "_page" + (current - 1)).classList.add("active");
     }
 
-    // Au chargement, afficher la fiche 1 (maintenant une vraie fiche)
-    document.addEventListener('DOMContentLoaded', () => {
-      showForm('form1');
+    document.addEventListener("DOMContentLoaded", () => {
+      showForm("form1");
     });
- <script>
-  // 👉 Affiche une fiche (onglet)
-  function showForm(formId) {
-    document.querySelectorAll(".form-box").forEach(f => f.classList.remove("active"));
-    document.getElementById(formId).classList.add("active");
-
-    // Toujours afficher la première sous-page si elle existe
-    let firstPage = document.querySelector("#" + formId + " .subpage");
-    if (firstPage) {
-      document.querySelectorAll("#" + formId + " .subpage").forEach(p => p.classList.remove("active"));
-      firstPage.classList.add("active");
-    }
-  }
-
-  // 👉 Bouton retour = renvoie vers la page d’accueil
-  function goBack() {
-    window.location.href = "https://garryslink.github.io/ESO/";
-  }
-
-  // 👉 Sauvegarde les champs d’un formulaire
-  function saveForm(formId) {
-    let form = document.getElementById(formId);
-    let inputs = form.querySelectorAll("input, textarea, select");
-    let data = {};
-    inputs.forEach(el => {
-      data[el.id || el.name] = el.value;
-    });
-    localStorage.setItem(formId, JSON.stringify(data));
-    alert("Fiche sauvegardée !");
-  }
-
-  // 👉 Navigation interne entre pages d’une même fiche
-  function nextPage(formId, current) {
-    document.getElementById(formId + "_page" + current).classList.remove("active");
-    document.getElementById(formId + "_page" + (current + 1)).classList.add("active");
-  }
-
-  function prevPage(formId, current) {
-    document.getElementById(formId + "_page" + current).classList.remove("active");
-    document.getElementById(formId + "_page" + (current - 1)).classList.add("active");
-  
-  function showForm(formId) {
-    document.querySelectorAll(".form-box").forEach(f => f.classList.remove("active"));
-    document.getElementById(formId).classList.add("active");
-
-    // Réinitialiser les sous-pages d'une fiche si elles existent
-    let firstPage = document.querySelector("#" + formId + " .subpage");
-    if (firstPage) {
-      document.querySelectorAll("#" + formId + " .subpage").forEach(p => p.classList.remove("active"));
-      firstPage.classList.add("active");
-    }
-  }
-
-  // Bouton retour → accueil
-  function goBack() {
-    window.location.href = "https://garryslink.github.io/ESO/";
-  }
-
-  function saveForm(formId) {
-    let form = document.getElementById(formId);
-    let inputs = form.querySelectorAll("input, textarea, select");
-    let data = {};
-    inputs.forEach(el => {
-      data[el.id || el.name] = el.value;
-    });
-    localStorage.setItem(formId, JSON.stringify(data));
-    alert("Fiche sauvegardée !");
-  }
-
-  // Navigation interne entre sous-pages
-  function nextPage(formId, current) {
-    document.getElementById(formId + "_page" + current).classList.remove("active");
-    document.getElementById(formId + "_page" + (current + 1)).classList.add("active");
-  }
-
-  function prevPage(formId, current) {
-    document.getElementById(formId + "_page" + current).classList.remove("active");
-    document.getElementById(formId + "_page" + (current - 1)).classList.add("active");
-  }
-</script>
+  </script>
 
 </body>
 </html>
