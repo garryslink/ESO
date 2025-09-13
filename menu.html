@@ -88,20 +88,34 @@ input.invalid {
       <div onclick="showForm('form12')"><i class="fas fa-briefcase-medical"></i><div id="dot_form12" class="status-dot"></div></div>
     </div>
 
-    <!-- Content -->
     <div class="content">
-      <!-- Fiches -->
-      <!-- Boucle manuelle de 1 à 12 -->
-      <!-- Modèle générique -->
       <div id="form1" class="form-box active">
         <h3>Fiche 1</h3>
         <div class="tabs">
-          <button class="tab-btn active" onclick="openPage('form1',1)">Page 1</button>
-          <button class="tab-btn" onclick="openPage('form1',2)">Page 2</button>
-          <button class="tab-btn" onclick="openPage('form1',3)">Page 3</button>
+          <button class="tab-btn active" onclick="openPage('form1',1)">Ticket de départ</button>
+          <button class="tab-btn" onclick="openPage('form1',2)">Horraire</button>
+          <button class="tab-btn" onclick="openPage('form1',3)">Équipe</button>
         </div>
         <div id="form1_page1" class="subpage active">
-          <label>Champ 1 :</label>
+          <label>Adresse de l'intervention :</label>
+          <input type="text" id="form1_c1" required>
+          <label for="choix">État de la victime :</label>
+          <select id="choix" name="choix" required>
+           <option value="">-- Sélectionner --</option>
+           <option value="option1">Impliquée</option>
+           <option value="option2">Urgence Relative</option>
+           <option value="option3">Urgence Absolue</option>
+           <option value="option4">Victime decèder</option>
+          </select>
+          <label for="etat">Lieux de l'intervention :</label>
+          <select id="etat" name="etat" required>
+           <option value="">-- Sélectionner --</option>
+           <option value="domicile">Domicile</option>
+           <option value="voie publique">Voie Publique</option>
+           <option value="travail">Travail</option>
+           <option value="sport">Sport</option>
+          </select>
+          <label>Bilan circonstanciel :</label>
           <input type="text" id="form1_c1" required>
         </div>
         <div id="form1_page2" class="subpage">
@@ -118,7 +132,6 @@ input.invalid {
         </div>
       </div>
 
-      <!-- Fiche 2 à 12 (copiées identiques, seul l’id change) -->
       <!-- Fiche 2 -->
 <div id="form2" class="form-box">
   <h3>Fiche 2</h3>
