@@ -103,7 +103,7 @@ input.invalid {
       <input type="text" id="form1_c1" required>
 
       <label for="form1_date">Date :</label>
-      <input id="form1_date" type="date" />
+      <input id="form1_date" type="date" required oninput="validateField(this)" />
 
       <label for="choix">État de la victime :</label>
       <select id="choix" name="choix" required>
@@ -114,35 +114,35 @@ input.invalid {
         <option value="option4">Victime décédée</option>
       </select>
 
-      <label for="etat">Lieux de l'intervention :</label>
-      <select id="etat" name="etat" required>
+       <label for="etat">Lieux de l'intervention :</label>
+       <select id="etat" name="etat" required oninput="validateField(this)">
         <option value="">-- Sélectionner --</option>
         <option value="domicile">Domicile</option>
         <option value="voie_publique">Voie Publique</option>
         <option value="travail">Travail</option>
         <option value="sport">Sport</option>
-      </select>
+       </select>
 
       <label for="form1_rem">Bilan circonstanciel :</label>
-      <textarea id="form1_rem" required></textarea>
+      <textarea id="form1_rem" required oninput="validateField(this)"></textarea>
     </div>
 
     <!-- Page 2 -->
     <div id="form1_page2" class="subpage">
-      <label for="form1_depart1">Heure de départ :</label>
-      <input id="form1_depart1" type="time" />
+     <label for="form1_depart1">Heure de départ :</label>
+     <input id="form1_depart1" type="time" required oninput="validateField(this)" />
 
-      <label for="form1_arrivee1">Heure d'arrivée sur les lieux :</label>
-      <input id="form1_arrivee1" type="time" />
+     <label for="form1_arrivee1">Heure d'arrivée sur les lieux :</label>
+     <input id="form1_arrivee1" type="time" required oninput="validateField(this)" />
 
-      <label for="form1_transport1">Heure de transport :</label>
-      <input id="form1_transport1" type="time" />
+     <label for="form1_transport1">Heure de transport :</label>
+     <input id="form1_transport1" type="time" required oninput="validateField(this)" />
 
-      <label for="form1_arrivee_CH1">Heure d'arrivée au CH :</label>
-      <input id="form1_arrivee_CH1" type="time" />
+     <label for="form1_arrivee_CH1">Heure d'arrivée au CH :</label>
+     <input id="form1_arrivee_CH1" type="time" required oninput="validateField(this)" />
 
-      <label for="form1_disponible1">Heure de remise disponible :</label>
-      <input id="form1_disponible1" type="time" />
+     <label for="form1_disponible1">Heure de remise disponible :</label>
+     <input id="form1_disponible1" type="time" required oninput="validateField(this)" />
     </div>
 
     <!-- Page 3 -->
