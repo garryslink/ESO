@@ -107,7 +107,6 @@
             <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
           </div>
         </div>
-      </div>
 
       <!-- Fiche 2 -->
       <div id="form2" class="form-box">
@@ -133,7 +132,6 @@
             <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
           </div>
         </div>
-      </div>
 
       <!-- Fiche 3 -->
       <div id="form3" class="form-box">
@@ -159,7 +157,6 @@
             <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
           </div>
         </div>
-      </div>
 
  <!-- Fiche 4 -->
       <div id="form4" class="form-box">
@@ -185,7 +182,6 @@
             <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
           </div>
         </div>
-      </div>
 
  <!-- Fiche 5 -->
       <div id="form5" class="form-box">
@@ -405,17 +401,20 @@
       </div>
 
   <script>
-    function showForm(formId) {
-      document.querySelectorAll('.form-box').forEach(f => f.classList.remove('active'));
-      document.getElementById(formId).classList.add('active');
-      // activer la 1ère page
-      let first = document.querySelector("#" + formId + " .subpage");
-      if (first) {
-        document.querySelectorAll("#" + formId + " .subpage").forEach(p=>p.classList.remove("active"));
-        document.querySelector("#" + formId + " .tabs .tab-btn").classList.add("active");
-        first.classList.add("active");
-      }
-    }
+function showForm(formId) {
+  document.querySelectorAll('.form-box').forEach(f => f.classList.remove('active'));
+  document.getElementById(formId).classList.add('active');
+
+  // activer la 1ère page
+  let subpages = document.querySelectorAll("#" + formId + " .subpage");
+  let tabs = document.querySelectorAll("#" + formId + " .tab-btn");
+  if (subpages.length > 0 && tabs.length > 0) {
+    subpages.forEach(p => p.classList.remove("active"));
+    tabs.forEach(b => b.classList.remove("active"));
+    subpages[0].classList.add("active");
+    tabs[0].classList.add("active");
+  }
+}
     function openPage(formId, num) {
       document.querySelectorAll("#" + formId + " .subpage").forEach(p=>p.classList.remove("active"));
       document.querySelector("#" + formId + "_page" + num).classList.add("active");
