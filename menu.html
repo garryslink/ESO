@@ -105,139 +105,192 @@
     <label>Équipier :</label>
     <input id="form1_cond" type="text" />
 
-      <!-- Form 2 -->
-      <div id="form2" class="form-box">
-        <h3>Fiche Médecin (2)</h3>
-        <label>Nom :</label>
-        <input id="form2_nom" type="text" />
-        <label>Spécialité :</label>
-        <input id="form2_spec" type="text" />
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
-          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-        </div>
-      </div>
+<div class="content">
+  <!-- Fiche 1 (avec sous-pages) -->
+  <div id="form1" class="form-box active">
+    <h3>Information complémentaire</h3>
 
-      <!-- Form 3 -->
-      <div id="form3" class="form-box">
-        <h3>Fiche Ambulance (3)</h3>
-        <label>Numéro véhicule :</label><input id="form3_veh" type="text" />
-        <label>Équipe :</label><input id="form3_team" type="text" />
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form3')">Transmission</button>
-          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-        </div>
-      </div>
+    <!-- Page 1 -->
+    <div class="subpage active" id="form1_page1">
+      <label>Adresse de l'intervention :</label>
+      <input id="form1_adresse" type="text" />
 
-      <!-- Form 4 -->
-      <div id="form4" class="form-box">
-        <h3>Fiche Hôpital (4)</h3>
-        <label>Nom :</label><input id="form4_nom" type="text" />
-        <label>Service :</label><input id="form4_service" type="text" />
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form4')">Transmission</button>
-          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-        </div>
-      </div>
+      <label>Num de l'intervention :</label>
+      <input id="form1_num" type="text" />
 
-      <!-- Form 5 -->
-      <div id="form5" class="form-box">
-        <h3>Fiche Téléphone (5)</h3>
-        <label>Numéro :</label><input id="form5_num" type="text" />
-        <label>Contact :</label><input id="form5_contact" type="text" />
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form5')">Transmission</button>
-          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-        </div>
-      </div>
+      <label>Motif de l'intervention :</label>
+      <input id="form1_motif" type="text" />
 
-      <!-- Form 6 -->
-      <div id="form6" class="form-box">
-        <h3>Fiche Cœur (6)</h3>
-        <label>Observation :</label><textarea id="form6_obs"></textarea>
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form6')">Transmission</button>
-          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-        </div>
-      </div>
+      <label for="etat">Lieux de l'intervention :</label>
+      <select id="etat" name="etat">
+        <option value="">-- Sélectionner --</option>
+        <option value="domicile">Domicile</option>
+        <option value="voie publique">Voie Publique</option>
+        <option value="travail">Travail</option>
+        <option value="sport">Sport</option>
+      </select>
 
-      <!-- Form 7 -->
-      <div id="form7" class="form-box">
-        <h3>Fiche Stéthoscope (7)</h3>
-        <label>Observation :</label><textarea id="form7_obs"></textarea>
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form7')">Transmission</button>
-          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-        </div>
-      </div>
+      <label>Date :</label>
+      <input id="form1_date" type="date" />
 
-      <!-- Form 8 -->
-      <div id="form8" class="form-box">
-        <h3>Fiche Notes (8)</h3>
-        <label>Note :</label><textarea id="form8_note"></textarea>
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form8')">Transmission</button>
-          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-        </div>
-      </div>
+      <label>Bilan circonstanciel :</label>
+      <textarea id="form1_bilan"></textarea>
 
-      <!-- Form 9 -->
-      <div id="form9" class="form-box">
-        <h3>Fiche Injection (9)</h3>
-        <label>Médicament :</label><input id="form9_med" type="text" />
-        <label>Dosage :</label><input id="form9_dose" type="text" />
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form9')">Transmission</button>
-          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-        </div>
+      <div class="btn-container">
+        <button class="btn btn-orange" onclick="nextPage('form1',1)">Suivant →</button>
       </div>
+    </div>
 
-      <!-- Form 10 -->
-      <div id="form10" class="form-box">
-        <h3>Fiche Pansement (10)</h3>
-        <label>Soin :</label><textarea id="form10_soin"></textarea>
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form10')">Transmission</button>
-          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-        </div>
+    <!-- Page 2 -->
+    <div class="subpage" id="form1_page2">
+      <h4>Horaires d’arrivée</h4>
+      <label>Heure de départ :</label>
+      <input id="form1_depart" type="time" />
+
+      <label>Heure d’arrivée sur place :</label>
+      <input id="form1_arrivee" type="time" />
+
+      <label>Heure de départ du lieu :</label>
+      <input id="form1_quitte" type="time" />
+
+      <div class="btn-container">
+        <button class="btn btn-blue" onclick="prevPage('form1',2)">← Précédent</button>
+        <button class="btn btn-orange" onclick="nextPage('form1',2)">Suivant →</button>
       </div>
+    </div>
 
-      <!-- Form 11 -->
-      <div id="form11" class="form-box">
-        <h3>Fiche Trousse (11)</h3>
-        <label>Matériel :</label><textarea id="form11_mat"></textarea>
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form11')">Transmission</button>
-          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-        </div>
+    <!-- Page 3 -->
+    <div class="subpage" id="form1_page3">
+      <h4>Équipe en charge</h4>
+      <label>Chef d’équipe :</label>
+      <input id="form1_chef" type="text" />
+
+      <label>Équipier 1 :</label>
+      <input id="form1_eq1" type="text" />
+
+      <label>Équipier 2 :</label>
+      <input id="form1_eq2" type="text" />
+
+      <label>Conducteur :</label>
+      <input id="form1_cond" type="text" />
+
+      <div class="btn-container">
+        <button class="btn btn-blue" onclick="prevPage('form1',3)">← Précédent</button>
+        <button class="btn btn-orange" onclick="saveForm('form1')">Transmission</button>
+        <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
       </div>
-
-      <!-- Form 12 -->
-      <div id="form12" class="form-box">
-        <h3>Fiche Patient (12)</h3>
-        <label>Nom :</label><input id="form12_nom" type="text" />
-        <label>Chambre :</label><input id="form12_chambre" type="text" />
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('form12')">Transmission</button>
-          <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
-        </div>
-      </div>
-
-      <!-- Surveillance (constantes) -->
-      <div id="surveillance" class="form-box">
-        <h3>Fiche Surveillance - Constantes</h3>
-        <label>Tension artérielle :</label><input id="surv_tension" type="text" />
-        <label>Pouls :</label><input id="surv_pouls" type="text" />
-        <label>Température :</label><input id="surv_temp" type="text" />
-        <label>Saturation O₂ :</label><input id="surv_sat" type="text" />
-        <label>Fréquence respiratoire :</label><input id="surv_freq" type="text" />
-        <div class="btn-container">
-          <button class="btn btn-blue" onclick="saveForm('surveillance')">Transmission</button>
-        </div>
-      </div>
-
     </div>
   </div>
+
+  <!-- Fiche 2 -->
+  <div id="form2" class="form-box">
+    <h3>Fiche 2</h3>
+    <label>Nom :</label>
+    <input type="text" id="form2_nom">
+    <label>Spécialité :</label>
+    <input type="text" id="form2_spec">
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+
+  <!-- Fiche 3 -->
+  <div id="form3" class="form-box">
+    <h3>Fiche 3</h3>
+    <label>Description :</label>
+    <textarea id="form3_desc"></textarea>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form3')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+
+  <!-- Fiches 4 à 12 (même modèle) -->
+  <div id="form4" class="form-box">
+    <h3>Fiche 4</h3>
+    <label>Notes :</label>
+    <textarea id="form4_notes"></textarea>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form4')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+
+  <div id="form5" class="form-box"><h3>Fiche 5</h3><textarea id="form5_notes"></textarea>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form5')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+
+  <div id="form6" class="form-box"><h3>Fiche 6</h3><textarea id="form6_notes"></textarea>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form6')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+
+  <div id="form7" class="form-box"><h3>Fiche 7</h3><textarea id="form7_notes"></textarea>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form7')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+
+  <div id="form8" class="form-box"><h3>Fiche 8</h3><textarea id="form8_notes"></textarea>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form8')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+
+  <div id="form9" class="form-box"><h3>Fiche 9</h3><textarea id="form9_notes"></textarea>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form9')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+
+  <div id="form10" class="form-box"><h3>Fiche 10</h3><textarea id="form10_notes"></textarea>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form10')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+
+  <div id="form11" class="form-box"><h3>Fiche 11</h3><textarea id="form11_notes"></textarea>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form11')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+
+  <div id="form12" class="form-box"><h3>Fiche 12</h3><textarea id="form12_notes"></textarea>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form12')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+
+  <!-- Fiche Surveillance -->
+  <div id="surveillance" class="form-box">
+    <h3>Fiche Surveillance - Constantes</h3>
+    <label>Tension artérielle :</label>
+    <input type="text" id="tension">
+    <label>Pouls :</label>
+    <input type="text" id="pouls">
+    <label>Température :</label>
+    <input type="text" id="temperature">
+    <label>Saturation O₂ :</label>
+    <input type="text" id="saturation">
+    <label>Fréquence respiratoire :</label>
+    <input type="text" id="freqResp">
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('surveillance')">Transmission</button>
+    </div>
+  </div>
+</div>
 
   <script>
     // affiche la fiche et charge les données enregistrées si présentes
@@ -339,9 +392,46 @@
   function prevPage(formId, current) {
     document.getElementById(formId + "_page" + current).classList.remove("active");
     document.getElementById(formId + "_page" + (current - 1)).classList.add("active");
+  
+  function showForm(formId) {
+    document.querySelectorAll(".form-box").forEach(f => f.classList.remove("active"));
+    document.getElementById(formId).classList.add("active");
+
+    // Réinitialiser les sous-pages d'une fiche si elles existent
+    let firstPage = document.querySelector("#" + formId + " .subpage");
+    if (firstPage) {
+      document.querySelectorAll("#" + formId + " .subpage").forEach(p => p.classList.remove("active"));
+      firstPage.classList.add("active");
+    }
+  }
+
+  // Bouton retour → accueil
+  function goBack() {
+    window.location.href = "https://garryslink.github.io/ESO/";
+  }
+
+  function saveForm(formId) {
+    let form = document.getElementById(formId);
+    let inputs = form.querySelectorAll("input, textarea, select");
+    let data = {};
+    inputs.forEach(el => {
+      data[el.id || el.name] = el.value;
+    });
+    localStorage.setItem(formId, JSON.stringify(data));
+    alert("Fiche sauvegardée !");
+  }
+
+  // Navigation interne entre sous-pages
+  function nextPage(formId, current) {
+    document.getElementById(formId + "_page" + current).classList.remove("active");
+    document.getElementById(formId + "_page" + (current + 1)).classList.add("active");
+  }
+
+  function prevPage(formId, current) {
+    document.getElementById(formId + "_page" + current).classList.remove("active");
+    document.getElementById(formId + "_page" + (current - 1)).classList.add("active");
   }
 </script>
-
 
 </body>
 </html>
