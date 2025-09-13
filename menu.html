@@ -111,9 +111,57 @@
 
       <!-- Fiche 2 à 12 (copiées identiques, seul l’id change) -->
       <!-- Fiche 2 -->
-      <div id="form2" class="form-box"> ... même structure que form1 ... </div>
+<div id="form2" class="form-box">
+  <h3>Fiche 2</h3>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openPage('form2',1)">Page 1</button>
+    <button class="tab-btn" onclick="openPage('form2',2)">Page 2</button>
+    <button class="tab-btn" onclick="openPage('form2',3)">Page 3</button>
+  </div>
+  <div id="form2_page1" class="subpage active">
+    <label>Champ 1 :</label>
+    <input type="text" id="form2_c1" required>
+  </div>
+  <div id="form2_page2" class="subpage">
+    <label>Champ 2 :</label>
+    <input type="text" id="form2_c2" required>
+  </div>
+  <div id="form2_page3" class="subpage">
+    <label>Champ 3 :</label>
+    <input type="text" id="form2_c3" required>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+</div>
+
       <!-- Fiche 3 -->
-      <div id="form3" class="form-box"> ... </div>
+<div id="form3" class="form-box">
+  <h3>Fiche 3</h3>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openPage('form3',1)">Page 1</button>
+    <button class="tab-btn" onclick="openPage('form3',2)">Page 2</button>
+    <button class="tab-btn" onclick="openPage('form3',3)">Page 3</button>
+  </div>
+  <div id="form3_page1" class="subpage active">
+    <label>Champ 1 :</label>
+    <input type="text" id="form3_c1" required>
+  </div>
+  <div id="form3_page2" class="subpage">
+    <label>Champ 2 :</label>
+    <input type="text" id="form3_c2" required>
+  </div>
+  <div id="form3_page3" class="subpage">
+    <label>Champ 3 :</label>
+    <input type="text" id="form3_c3" required>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form3')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+  </div>
+</div>
+
       <!-- Fiche 4 -->
       <div id="form4" class="form-box"> ... </div>
       <!-- Fiche 5 -->
