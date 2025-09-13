@@ -106,7 +106,7 @@ input.invalid {
       <input id="form1_date" type="date" required oninput="validateField(this)" />
 
       <label for="choix">État de la victime :</label>
-      <select id="choix" name="choix" required>
+      <select id="etat" name="etat" required oninput="validateField(this)">
         <option value="">-- Sélectionner --</option>
         <option value="option1">Impliquée</option>
         <option value="option2">Urgence Relative</option>
