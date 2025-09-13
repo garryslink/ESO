@@ -90,7 +90,7 @@ input.invalid {
 
     <div class="content">
       <div id="form1" class="form-box active">
-        <h3>Fiche 1</h3>
+        <h3>Départ</h3>
         <div class="tabs">
           <button class="tab-btn active" onclick="openPage('form1',1)">Ticket de départ</button>
           <button class="tab-btn" onclick="openPage('form1',2)">Horraire</button>
@@ -99,6 +99,8 @@ input.invalid {
         <div id="form1_page1" class="subpage active">
           <label>Adresse de l'intervention :</label>
           <input type="text" id="form1_c1" required>
+          <label>Date :</label>
+          <input id="form1_date" type="date" />
           <label for="choix">État de la victime :</label>
           <select id="choix" name="choix" required>
            <option value="">-- Sélectionner --</option>
@@ -146,23 +148,49 @@ input.invalid {
 
       <!-- Fiche 2 -->
 <div id="form2" class="form-box">
-  <h3>Fiche 2</h3>
+  <h3>Victime</h3>
   <div class="tabs">
-    <button class="tab-btn active" onclick="openPage('form2',1)">Page 1</button>
-    <button class="tab-btn" onclick="openPage('form2',2)">Page 2</button>
-    <button class="tab-btn" onclick="openPage('form2',3)">Page 3</button>
-  </div>
+    <button class="tab-btn active" onclick="openPage('form2',1)">Identité</button>
+    <button class="tab-btn" onclick="openPage('form2',2)">PQSRT</button>
+    <button class="tab-btn" onclick="openPage('form2',3)">MHTA</button>
+    <button class="tab-btn" onclick="openPage('form2',4)">Information complémentaire</button>
+  <label>Nom :</label>
+  <input type="text" id="form1_c3" required>
+  <label>Prénom:</label>
+  <input type="text" id="form1_c3" required>
   <div id="form2_page1" class="subpage active">
-    <label>Champ 1 :</label>
-    <input type="text" id="form2_c1" required>
-  </div>
-  <div id="form2_page2" class="subpage">
+    <label for="etat">Sexe :</label>
+    <select id="etat" name="etat" required>
+     <option value="">-- Sélectionner --</option>
+     <option value="Homme">Homme</option>
+     <option value="Femme">Femme</option></label>
+     <option value="Autre">Autre</option></label>
+     <label>Date de naissance :</label>
+     <input id="form1_date" type="date" /> 
+     <label>Nationalité :</label>
+     <input type="text" id="form1_c3" required>
+     <label>Telephone :</label>
+     <input type="text" id="form1_c3" required>
+     <label>Adresse :</label>
+     <input type="text" id="form1_c1" required>
+  </div> 
+ <div id="form2_page2" class="subpage">
     <label>Champ 2 :</label>
     <input type="text" id="form2_c2" required>
-  </div>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
   <div id="form2_page3" class="subpage">
     <label>Champ 3 :</label>
     <input type="text" id="form2_c3" required>
+    <div class="btn-container">
+      <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
+      <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
+    </div>
+   <div id="form2_page4" class="subpage">
+    <label>Champ 4 :</label>
+    <input type="text" id="form2_c4" required>
     <div class="btn-container">
       <button class="btn btn-blue" onclick="saveForm('form2')">Transmission</button>
       <button class="btn btn-orange" onclick="showForm('surveillance')">Surveillance</button>
